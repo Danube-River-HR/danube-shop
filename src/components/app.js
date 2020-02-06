@@ -1,13 +1,25 @@
 /* ----- DEPENDENCIES ----- */
 import React from "react";
-import {Header} from 'semantic-ui-react';
-import {connect} from "react-redux";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import RelatedProducts from "./RelatedProducts/RelatedProducts"
+import { Header } from "semantic-ui-react";
+import { connect } from "react-redux";
+import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
+
+/* ----- ACTIONS ----- */
+
+import {
+  getProductData,
+  getRelatedProducts,
+  getAverageRating,
+  getProductStyles
+} from "../redux/actions";
 
 /* ----- COMPONENTS ----- */
-import {getProductData, getRelatedProducts, getAverageRating, getProductStyles} from "../redux/actions";
-import Overview from './Overview/Overview.js'
+
+import Overview from "./Overview/Overview.js";
+import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviews";
+
+/***************************************************************************/
 
 class App extends React.Component {
   constructor() {
@@ -27,9 +39,12 @@ class App extends React.Component {
 
         <Router>
           <Overview />
-          <h2>RELATED ITEMS COMPONENT(Replace)</h2>
           <RelatedProducts />
-          <h3>RATING AND REVIEWS COMPONENT(Replace)</h3>
+          {Object.entries(this.props.currentProduct).length === 0 ? (
+            <div>LOADING</div>
+          ) : (
+            <RatingsAndReviews productData={this.props.currentProduct} />
+          )}
         </Router>
       </>
     );
@@ -37,7 +52,7 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log('THE STATE:', state);
+  console.log("THE STATE:", state);
   return {
     currentProduct: state.currentProduct,
     averageRating: state.averageRating,
@@ -46,4 +61,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {getProductData, getRelatedProducts, getProductStyles, getAverageRating})(App)
+export default connect(mapStateToProps, {
+  getProductData,
+  getRelatedProducts,
+  getProductStyles,
+  getAverageRating
+})(App);
