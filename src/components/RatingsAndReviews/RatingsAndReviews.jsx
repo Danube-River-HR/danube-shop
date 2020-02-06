@@ -7,14 +7,31 @@ import spinner from "./spinner.gif";
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { mainData: {} };
+    this.state = {
+      mainData: {},
+      count: 2
+    };
   }
 
-  componentDidMount() {
+  incrementCount = () => {
+    this.setState({ count: (this.state.count += 2) });
+  };
+
+  getReviews = () => {
     axios
-      .get(`http://3.134.102.30/reviews/${this.props.productData.id}/list`)
+      .get(
+        `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000`
+      )
       .then(response => this.setState({ mainData: response.data }));
+  };
+  /*******************************************************************************************/
+
+  componentDidMount() {
+    console.log("i running");
+    this.getReviews(this.state.count);
   }
+
+  /*******************************************************************************************/
   render() {
     return (
       <div>
@@ -25,7 +42,11 @@ class RatingsAndReviews extends React.Component {
         ) : (
           <div style={{ borderStyle: "solid", borderColor: "blue" }}>
             <Ratings />
-            <Reviews data={this.state.mainData} />
+            <Reviews
+              data={this.state.mainData}
+              count={this.state.count}
+              addTwo={this.incrementCount}
+            />
           </div>
         )}
       </div>
