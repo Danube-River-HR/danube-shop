@@ -28,7 +28,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.getProductData(1);
     this.props.getAverageRating(1);
-    this.props.getRelatedProducts(1);
+    this.props.getRelatedProducts(2);
     this.props.getProductStyles(1);
   }
 
