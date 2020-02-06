@@ -52,7 +52,7 @@ class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  console.log("THE STATE:", state);
+  // console.log("THE STATE:", state);
   return {
     currentProduct: state.currentProduct,
     averageRating: state.averageRating,
