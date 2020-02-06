@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Rating } from 'semantic-ui-react'
+import { Rating } from 'semantic-ui-react';
+
+import Styles from './Styles';
 
 class ProductCard extends React.Component {
     constructor(props) {
@@ -27,6 +29,8 @@ class ProductCard extends React.Component {
                 </div>
                 <div className="content">
                     STYLES GO HERE
+                    <Styles />
+
                 </div>
             </div>
         )
@@ -38,9 +42,7 @@ const mapStateToProps = (state) => {
     return {
         currentProduct: state.currentProduct,
         averageRating: state.averageRating,
-        relatedProducts: state.relatedProducts,
-        productStyles: state.productStyles,
-        currentProductEntries: Object.entries(state.currentProduct)
+        productStyles: state.productStyles
       };
 }
 
