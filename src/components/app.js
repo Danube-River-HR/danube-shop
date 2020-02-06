@@ -28,7 +28,7 @@ class App extends React.Component {
   componentDidMount() {
     this.props.getProductData(1);
     this.props.getAverageRating(1);
-    this.props.getRelatedProducts(1);
+    this.props.getRelatedProducts(2);
     this.props.getProductStyles(1);
   }
 
@@ -39,7 +39,7 @@ class App extends React.Component {
 
         <Router>
           <Overview />
-          <RelatedProducts />
+          <RelatedProducts productData={this.props.currentProduct} productStyle={this.props.productStyles}/>
           {Object.entries(this.props.currentProduct).length === 0 ? (
             <div>LOADING</div>
           ) : (
@@ -57,7 +57,9 @@ function mapStateToProps(state) {
     currentProduct: state.currentProduct,
     averageRating: state.averageRating,
     relatedProducts: state.relatedProducts,
-    currentProductEntries: Object.entries(state.currentProduct)
+    currentProductEntries: Object.entries(state.currentProduct),
+    productStyles: state.productStyles
+
   };
 }
 
