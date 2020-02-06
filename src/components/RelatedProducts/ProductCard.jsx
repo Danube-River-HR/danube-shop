@@ -1,20 +1,16 @@
 import React from "react";
 
 const Card = props => {
-  let outfit = {
-    data: props.data,
-    styles: props.style
-  }
   let containStyles = () => {
     return props.style ? (
-      <img src={props.style.photos[0].url} alt={"Missing Image"} />
+      <img src={props.style.photos[0].url} alt={"Missing"} />
     ) : (
       <div>Img Loading</div>
     );
   };
   return (
     <div className="productCard">
-      <button class="ui icon button" onClick={() => props.handleClick(outfit)}>
+      <button class="ui icon button" onClick={props.handleClick}>
         <i class="star outline icon"></i>
       </button>
       {containStyles()}

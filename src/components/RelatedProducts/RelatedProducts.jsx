@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import ProductCarousel from "./ProductCarousel";
-import OutfitCarousel from "./OutfitCarousel"
+import OutfitCarousel from "./OutfitCarousel";
 
 function mapStateToProps(state) {
   return {
@@ -11,12 +11,13 @@ function mapStateToProps(state) {
 }
 
 class RelatedProducts extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       relatedProductsIds: [],
       relatedProductData: [],
       relatedProductStyles: [],
+      currentProduct: [],
       outfit: []
     };
   }
@@ -55,12 +56,11 @@ class RelatedProducts extends Component {
         .get(`http://3.134.102.30/products/${productId}/styles`)
         .then(data => {
           let containsDefault = false;
-          data.data.results.map(result => {
+          data.data.results.forEach(result => {
             if (result["default?"] === 1) {
               relatedStyles.push(result);
               containsDefault = true;
             }
-            return;
           });
           if (!containsDefault) {
             relatedStyles.push(data.data.results[0]);
@@ -74,17 +74,21 @@ class RelatedProducts extends Component {
         );
     });
   };
-  handleClick = (props, e) => {
-    let outfit = [...this.state.outfit];
-    outfit.push(props);
-    this.setState(
-      {
+  handleOutfitAddClick = e => {
+    if (
+      this.state.outfit.every(product => {
+        return product.data.id !== this.props.productData.id;
+      })
+    ) {
+      let outfit = [...this.state.outfit];
+      outfit.push({
+        data: this.props.productData,
+        style: this.props.productStyle
+      });
+      this.setState({
         outfit: outfit
-      },
-      () => {
-        console.log(this.state.outfit);
-      }
-    );
+      });
+    }
   };
 
   componentDidUpdate(nextProps) {
@@ -101,13 +105,13 @@ class RelatedProducts extends Component {
             ids={this.state.relatedProductsIds}
             data={this.state.relatedProductData}
             styles={this.state.relatedProductStyles}
-            handleClick={this.handleClick}
           />
         </div>
         <div>
           YOUR OUTFIT
           <OutfitCarousel
             outfit={this.state.outfit}
+            handleOutfitAddClick={this.handleOutfitAddClick}
           />
         </div>
       </div>
