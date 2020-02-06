@@ -22,13 +22,15 @@ export const getRelatedProducts = id => {
 };
 export const getAverageRating = id => {
   return dispatch => {
-    axios.get(`http://3.134.102.30/reviews/${id}/list`).then(response => {
-      const reviewList = response.data.results;
+    axios.get(`http://3.134.102.30/reviews/${id}/meta`).then(response => {
+      const ratings = Object.entries(response.data.ratings);
       let count = 0;
-      reviewList.forEach(review => {
-        count += review.rating;
+      let ratingCount = 0;
+      ratings.forEach(review => {
+        count += review[0] * review[1];
+        ratingCount += review[1];
       });
-      dispatch({ type: AVERAGE_RATING, payload: count / reviewList.length });
+      dispatch({ type: AVERAGE_RATING, payload: parseFloat((count / ratingCount).toFixed(2)) });
     });
   };
 };

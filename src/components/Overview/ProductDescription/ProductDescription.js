@@ -8,7 +8,7 @@ const ProductDescription = ({description, features}) => {
         <div className="ui items">
             <div className="item">
                 <div className="content">
-                    <a className="header">Product Description</a>
+                    <h4 className="header">Product Description</h4>
                     <div className="description">
                         <p>{description}</p>
                     </div>

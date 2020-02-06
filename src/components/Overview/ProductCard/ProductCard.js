@@ -1,29 +1,32 @@
 import React from 'react';
 import {connect} from "react-redux";
+import { Rating } from 'semantic-ui-react'
 
 class ProductCard extends React.Component {
     constructor(props) {
         super(props)
 
-        this.state = {
-                 
-        }
+    }
+
+    renderRating = () => {
+        if (this.props.averageRating !== null) {return (<Rating defaultRating={Math.ceil(this.props.averageRating)} maxRating={5} disabled />)}
     }
 
     render() {
+        const productName = this.props.currentProduct.name;
+        const productCategory = this.props.currentProduct.category;
+        const productPrice = this.props.currentProduct.default_price;
+        
         return (
-            <div class="ui card">
-                
-                <div class="content">
-                    <div class="header">Matthew</div>
-                    <div class="meta"><span class="date">Joined in 2015</span></div>
-                    <div class="description">Matthew is a musician living in Nashville.</div>
+            <div className="ui card">
+                <div className="content">
+                    {this.renderRating()}
+                    <div className="meta"><span className="date">{productCategory}</span></div>
+                    <div className="header">{productName}</div>
+                    <div className="description">${productPrice}</div>
                 </div>
-                <div class="extra content">
-                    <a>
-                    <i aria-hidden="true" class="user icon"></i>
-                    22 Friends
-                    </a>
+                <div className="content">
+                    STYLES GO HERE
                 </div>
             </div>
         )
