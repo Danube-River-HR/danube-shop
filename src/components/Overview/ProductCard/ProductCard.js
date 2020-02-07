@@ -38,7 +38,7 @@ class ProductCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('PRODUCT CARD STATE:', state);
+    // console.log('PRODUCT CARD STATE:', state);
     return {
         currentProduct: state.currentProduct,
         averageRating: state.averageRating,
