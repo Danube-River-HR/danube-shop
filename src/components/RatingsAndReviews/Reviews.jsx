@@ -1,29 +1,36 @@
 import React from "react";
 import ReviewEntry from "./ReviewEntry";
+import DropdownInline from "./Dropdown";
 
-var Reviews = ({ data, addTwo, count }) => {
+var Reviews = ({ data, addTwo, count, markHelpful }) => {
   let items = [];
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
     items.push(
-      <ReviewEntry key={data.results[i].review_id} review={data.results[i]} />
+      <ReviewEntry
+        key={data.results[i].review_id}
+        review={data.results[i]}
+        addHelpful={markHelpful}
+      />
     );
   }
 
   return (
-    <div style={{ borderStyle: "solid", borderColor: "green" }}>
-      <h4>Reviews (seperate container)</h4>
-      <div style={{ backgroundColor: "pink" }}>
-        There's {data.count} Reviews, sorted by{" "}
+    <div
+      // style={{ borderStyle: "solid", borderColor: "green" }}
+      className="reviewsParent"
+    >
+      <div style={{ paddingLeft: "17px" }}>
+        There's {items.length} Reviews, <DropdownInline />
       </div>
-      <select>
-        <option>Relevance</option>
-        <option>Helpfulness</option>
-        <option>Newest</option>
-      </select>
+
       <div>{items}</div>
-      <div onClick={addTwo}>More Reviews</div>
-      <div>Add a Review</div>
+      <div className="reviewButtons">
+        <button onClick={addTwo} class="ui basic button">
+          More Reviews
+        </button>
+        <button class="ui basic button">Add a Review</button>
+      </div>
     </div>
   );
 };

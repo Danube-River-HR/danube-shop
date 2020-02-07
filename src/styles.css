@@ -78,6 +78,62 @@ h1 {
   justify-content: center;
 }
 .ratingsParent {
+  box-sizing: content-box;
   flex-basis: unset;
-  flex-grow: 4;
+  flex-grow: 1;
+  width: 500px;
+}
+.reviewsParent {
+  /* color: red; */
+  margin: 10px;
+  padding: 10px;
+  font-size: large;
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+}
+.reviewButtons {
+  display: flex;
+}
+.reviewEntryParent {
+  margin: 10px;
+  padding: 10px;
+  /* display: flex;
+  flex-direction: column; */
+  width: 800px;
+}
+.ratingAndUser {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 800px;
+}
+.reviewSummary {
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+.reviewBody {
+  padding-bottom: 20px;
+}
+.helpfulParent {
+  display: flex;
+  padding-bottom: 15px;
+}
+
+.helpfulWord {
+  padding-right: 10px;
+}
+.yesButton {
+  /* padding-left: 10px; */
+  padding-right: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.helpfulCount {
+  padding-right: 10px;
+}
+.reportButton {
+  cursor: pointer;
+  text-decoration: underline;
+  padding-left: 20px;
 }

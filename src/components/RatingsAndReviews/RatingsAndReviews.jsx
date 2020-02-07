@@ -17,7 +17,14 @@ class RatingsAndReviews extends React.Component {
     this.setState({ count: (this.state.count += 2) });
   };
 
+  markReviewHelpful = id => {
+    axios
+      .put(`http://3.134.102.30/reviews/helpful/${id}`)
+      .then(response => this.getReviews());
+  };
+
   getReviews = () => {
+    console.log("m firing");
     axios
       .get(
         `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000`
@@ -27,7 +34,6 @@ class RatingsAndReviews extends React.Component {
   /*******************************************************************************************/
 
   componentDidMount() {
-    console.log("i running");
     this.getReviews(this.state.count);
   }
 
@@ -49,6 +55,7 @@ class RatingsAndReviews extends React.Component {
               data={this.state.mainData}
               count={this.state.count}
               addTwo={this.incrementCount}
+              markHelpful={this.markReviewHelpful}
             />
           </div>
         )}
