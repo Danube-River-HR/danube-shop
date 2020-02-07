@@ -30,7 +30,6 @@ class RatingsAndReviews extends React.Component {
   };
 
   getReviews = () => {
-    console.log("m firing");
     axios
       .get(
         `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000`
