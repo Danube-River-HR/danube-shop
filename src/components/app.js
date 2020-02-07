@@ -45,6 +45,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    // this.updateProduct(2);
     this.updateProduct(this.state.currentProductId);
   }
 
