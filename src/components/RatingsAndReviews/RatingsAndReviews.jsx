@@ -40,7 +40,10 @@ class RatingsAndReviews extends React.Component {
             <img src={spinner} />
           </div>
         ) : (
-          <div style={{ borderStyle: "solid", borderColor: "blue" }}>
+          <div
+            style={{ borderStyle: "solid", borderColor: "blue" }}
+            className="ratingsAndReviews"
+          >
             <Ratings />
             <Reviews
               data={this.state.mainData}
