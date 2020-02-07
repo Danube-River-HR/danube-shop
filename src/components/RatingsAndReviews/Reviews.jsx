@@ -2,7 +2,14 @@ import React from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 
-var Reviews = ({ data, addTwo, count, markHelpful, reportReview }) => {
+var Reviews = ({
+  data,
+  addTwo,
+  count,
+  markHelpful,
+  reportReview,
+  changeDropdown
+}) => {
   let items = [];
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
@@ -22,10 +29,11 @@ var Reviews = ({ data, addTwo, count, markHelpful, reportReview }) => {
       className="reviewsParent"
     >
       <div style={{ paddingLeft: "17px" }}>
-        There's {items.length} Reviews, <DropdownInline />
+        There are {data.results.length} Reviews,{" "}
+        <DropdownInline changeValue={changeDropdown} />
       </div>
 
-      <div>{items}</div>
+      <div className="reviewEntryContainer">{items}</div>
       <div className="reviewButtons">
         <button onClick={addTwo} class="ui basic button">
           More Reviews

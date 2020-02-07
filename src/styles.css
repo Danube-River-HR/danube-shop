@@ -84,7 +84,6 @@ h1 {
   width: 500px;
 }
 .reviewsParent {
-  /* color: red; */
   margin: 10px;
   padding: 10px;
   font-size: large;
@@ -95,11 +94,13 @@ h1 {
 .reviewButtons {
   display: flex;
 }
+.reviewEntryContainer {
+  overflow: auto;
+  height: 680px;
+}
 .reviewEntryParent {
   margin: 10px;
   padding: 10px;
-  /* display: flex;
-  flex-direction: column; */
   width: 800px;
 }
 .ratingAndUser {
@@ -124,7 +125,6 @@ h1 {
   padding-right: 10px;
 }
 .yesButton {
-  /* padding-left: 10px; */
   padding-right: 5px;
   text-decoration: underline;
   cursor: pointer;

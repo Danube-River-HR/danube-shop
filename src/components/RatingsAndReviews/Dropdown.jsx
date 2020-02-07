@@ -3,14 +3,14 @@ import { Dropdown } from "semantic-ui-react";
 
 const sortOptions = [
   {
-    key: "relevance",
+    key: "relevant",
     text: "Relevance",
-    value: "relevance"
+    value: "relevant"
   },
   {
-    key: "helpfulness",
+    key: "helpful",
     text: "Helpfulness",
-    value: "helpfulness"
+    value: "helpful"
   },
   {
     key: "newest",
@@ -19,7 +19,7 @@ const sortOptions = [
   }
 ];
 
-const DropdownInline = () => (
+const DropdownInline = ({ changeValue }) => (
   <span>
     {" "}
     sorted by{" "}
@@ -27,6 +27,7 @@ const DropdownInline = () => (
       inline
       options={sortOptions}
       defaultValue={sortOptions[0].value}
+      onChange={changeValue}
     />
   </span>
 );
