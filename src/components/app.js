@@ -24,12 +24,28 @@ import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviews";
 class App extends React.Component {
   constructor() {
     super();
+    this.state = {
+      currentProductId: 1
+    };
   }
+
+  handleCardClick = e => {
+    this.setState({
+      currentProductId: e
+    }, () => {
+      this.updateProduct(e)
+    });
+  };
+
+  updateProduct = id => {
+    this.props.getProductData(id);
+    this.props.getAverageRating(id);
+    this.props.getRelatedProducts(id);
+    this.props.getProductStyles(id);
+  };
+
   componentDidMount() {
-    this.props.getProductData(1);
-    this.props.getAverageRating(1);
-    this.props.getRelatedProducts(2);
-    this.props.getProductStyles(1);
+    this.updateProduct(this.state.currentProductId);
   }
 
   render() {
@@ -39,7 +55,11 @@ class App extends React.Component {
 
         <Router>
           <Overview />
-          <RelatedProducts productData={this.props.currentProduct} productStyle={this.props.productStyles}/>
+          <RelatedProducts
+            productData={this.props.currentProduct}
+            productStyle={this.props.productStyles}
+            handleCardClick={this.handleCardClick}
+          />
           {Object.entries(this.props.currentProduct).length === 0 ? (
             <div>LOADING</div>
           ) : (
@@ -59,7 +79,6 @@ function mapStateToProps(state) {
     relatedProducts: state.relatedProducts,
     currentProductEntries: Object.entries(state.currentProduct),
     productStyles: state.productStyles
-
   };
 }
 

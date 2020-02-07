@@ -3,13 +3,21 @@ import React from "react";
 const Card = props => {
   let containStyles = () => {
     return props.style ? (
-      <img src={props.style.photos[0].url} alt={"Missing"} />
+      <img src={props.style.photos[0].url} alt={"Missing img"} />
     ) : (
-      <div>Img Loading</div>
+      <img
+        src={
+          "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+        }
+        alt={"Loading"}
+      />
     );
   };
   return (
-    <div className="productCard">
+    <div
+      className="productCard"
+      onClick={() => props.handleCardClick(props.data.id)}
+    >
       <button class="ui icon button" onClick={props.handleClick}>
         <i class="star outline icon"></i>
       </button>
