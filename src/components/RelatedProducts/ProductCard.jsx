@@ -2,16 +2,23 @@ import React from "react";
 
 const Card = props => {
   let containStyles = () => {
-    return props.style ? (
-      <img src={props.style.photos[0].url} alt={"Missing img"} />
-    ) : (
-      <img
-        src={
-          "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
-        }
-        alt={"Loading"}
-      />
-    );
+    if (props.style !== undefined) {
+      return props.style.photos[0].url === null ? (
+        <img
+          src={
+            "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+          }
+          alt={"Loading"}
+        />
+      ) : (
+        <img
+          src={props.style.photos[0].url}
+          alt={
+            "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+          }
+        />
+      );
+    }
   };
   return (
     <div
