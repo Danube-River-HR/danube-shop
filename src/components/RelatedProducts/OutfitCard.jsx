@@ -1,7 +1,6 @@
 import React from "react";
 
 const OutfitCard = props => {
-  console.log('props', props.style)
   let containStyles = () => {
     return props.style ? (
       <img src={props.style.photos[0].url} alt={"Missing"} />
@@ -11,7 +10,7 @@ const OutfitCard = props => {
   };
   return (
     <div className="productCard">
-      <button class="ui icon button" onClick={props.handleClick}>
+      <button class="ui icon button" onClick={() => props.removeClick(props.data)}>
         <i class="times circle outline icon"></i>
       </button>
       {containStyles()}
