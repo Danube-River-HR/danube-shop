@@ -38,8 +38,8 @@ h1 {
 .cardInfo {
   position: relative;
   background-color: white;
+}
 
-=======
 /* ----- STYLE THUMBNAILS ----- */
 .ui.tiny.image, .ui.tiny.images .image, .ui.tiny.images img, .ui.tiny.images svg {
   width: 80px;
