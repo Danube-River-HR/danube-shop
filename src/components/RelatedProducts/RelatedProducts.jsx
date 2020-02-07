@@ -5,12 +5,15 @@ import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 
 function mapStateToProps(state) {
-  // console.log('outfit', JSON.parse(localStorage.getItem('outfit')))
   return {
     relatedProducts: state.relatedProducts
   };
 }
-// JSON.parse(localStorage.getItem('outfit') || "[]")
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  }
+}
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -101,6 +104,7 @@ class RelatedProducts extends Component {
     });
     localStorage.setItem("outfit", JSON.stringify(outfit));
   };
+  
 
   componentDidUpdate(nextProps) {
     if (nextProps.relatedProducts !== this.state.relatedProductsIds) {
@@ -124,6 +128,7 @@ class RelatedProducts extends Component {
             ids={this.state.relatedProductsIds}
             data={this.state.relatedProductData}
             styles={this.state.relatedProductStyles}
+            handleCardClick={this.props.handleCardClick}
           />
         </div>
         <div>
@@ -132,6 +137,7 @@ class RelatedProducts extends Component {
             outfit={this.state.outfit}
             handleOutfitAddClick={this.handleOutfitAddClick}
             handleOutfitRemoveClick={this.handleOutfitRemoveClick}
+            handleCardClick={this.props.handleCardClick}
           />
         </div>
       </div>
