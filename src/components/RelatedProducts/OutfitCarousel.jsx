@@ -27,7 +27,15 @@ const Carousel = props => {
     if (!hasDefault) {
       defaultStyle.push(card.style.results[0]);
     }
-    return <OutfitCard key={index} data={card.data} style={defaultStyle[0]} removeClick={props.handleOutfitRemoveClick} />;
+    return (
+      <OutfitCard
+        key={index}
+        data={card.data}
+        style={defaultStyle[0]}
+        removeClick={props.handleOutfitRemoveClick}
+        handleCardClick={props.handleCardClick}
+      />
+    );
   });
   return (
     <div className="productCarousel">
