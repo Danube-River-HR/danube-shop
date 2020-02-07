@@ -17,6 +17,12 @@ class RatingsAndReviews extends React.Component {
     this.setState({ count: (this.state.count += 2) });
   };
 
+  reportReview = id => {
+    axios
+      .put(`http://3.134.102.30/reviews/report/${id}`)
+      .then(response => this.getReviews());
+  };
+
   markReviewHelpful = id => {
     axios
       .put(`http://3.134.102.30/reviews/helpful/${id}`)
@@ -56,6 +62,7 @@ class RatingsAndReviews extends React.Component {
               count={this.state.count}
               addTwo={this.incrementCount}
               markHelpful={this.markReviewHelpful}
+              reportReview={this.reportReview}
             />
           </div>
         )}

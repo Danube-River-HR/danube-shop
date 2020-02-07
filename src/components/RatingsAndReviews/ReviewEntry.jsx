@@ -1,6 +1,6 @@
 import React from "react";
 
-var ReviewEntry = ({ review, addHelpful }) => (
+var ReviewEntry = ({ review, addHelpful, report }) => (
   <div style={{ borderStyle: "nothing" }} className="reviewEntryParent">
     <div className="ratingAndUser">
       <div>✯{review.rating}</div>
@@ -12,7 +12,10 @@ var ReviewEntry = ({ review, addHelpful }) => (
     <div className="reviewSummary">{review.summary}</div>
     <div className="reviewBody">{review.body}</div>
     {review.recommend > 0 ? (
-      <div style={{ paddingBottom: "20px" }}> ✓ I recommend this product</div>
+      <div style={{ paddingBottom: "20px", fontStyle: "italic" }}>
+        {" "}
+        ✓ I recommend this product
+      </div>
     ) : null}
     {review.response !== null ? <div>{review.response}</div> : null}
     <div className="helpfulParent">
@@ -22,10 +25,7 @@ var ReviewEntry = ({ review, addHelpful }) => (
       </div>
       <div className="helpfulCount">({review.helpfulness})</div>
       <div style={{ paddingLeft: "10px" }}>|</div>
-      <div
-        className="reportButton"
-        onClick={() => addHelpful(review.review_id)}
-      >
+      <div className="reportButton" onClick={() => report(review.review_id)}>
         Report
       </div>
     </div>

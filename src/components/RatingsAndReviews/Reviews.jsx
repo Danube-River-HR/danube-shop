@@ -2,7 +2,7 @@ import React from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 
-var Reviews = ({ data, addTwo, count, markHelpful }) => {
+var Reviews = ({ data, addTwo, count, markHelpful, reportReview }) => {
   let items = [];
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
@@ -11,6 +11,7 @@ var Reviews = ({ data, addTwo, count, markHelpful }) => {
         key={data.results[i].review_id}
         review={data.results[i]}
         addHelpful={markHelpful}
+        report={reportReview}
       />
     );
   }
