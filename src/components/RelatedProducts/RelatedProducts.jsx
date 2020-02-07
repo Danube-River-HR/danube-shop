@@ -5,11 +5,12 @@ import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 
 function mapStateToProps(state) {
+  // console.log('outfit', JSON.parse(localStorage.getItem('outfit')))
   return {
     relatedProducts: state.relatedProducts
   };
 }
-
+// JSON.parse(localStorage.getItem('outfit') || "[]")
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +89,17 @@ class RelatedProducts extends Component {
       this.setState({
         outfit: outfit
       });
+      localStorage.setItem("outfit", JSON.stringify(outfit));
     }
+  };
+  handleOutfitRemoveClick = e => {
+    let outfit = this.state.outfit.filter(product => {
+      return product.data.id !== e.id;
+    });
+    this.setState({
+      outfit: outfit
+    });
+    localStorage.setItem("outfit", JSON.stringify(outfit));
   };
 
   componentDidUpdate(nextProps) {
@@ -96,6 +107,14 @@ class RelatedProducts extends Component {
       this.getRelatedProductIds(this.props.relatedProducts);
     }
   }
+
+  componentDidMount() {
+    let outfit = JSON.parse(localStorage.getItem("outfit"));
+    this.setState({
+      outfit: outfit
+    });
+  }
+
   render() {
     return (
       <div>
@@ -112,6 +131,7 @@ class RelatedProducts extends Component {
           <OutfitCarousel
             outfit={this.state.outfit}
             handleOutfitAddClick={this.handleOutfitAddClick}
+            handleOutfitRemoveClick={this.handleOutfitRemoveClick}
           />
         </div>
       </div>
