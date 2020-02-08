@@ -2,8 +2,8 @@ import React from "react";
 
 var Ratings = () => (
   <div
-    style={{ borderStyle: "solid", borderColor: "coral" }}
-    classname="ratingsParent"
+    // style={{ borderStyle: "solid", borderColor: "coral" }}
+    className="ratingsParent"
   >
     Ratings (Seperate container)
   </div>
