@@ -21,12 +21,61 @@ class SizeAndStock extends Component {
     }
 
     render() {
-        // console.log('SIZE AND STOCK LOCAL STATE DATA:', this.state);
+        console.log('SIZE AND STOCK LOCAL STATE DATA:', this.state);
 
         let selectedItem = this.props.productStyles.results.filter(style => {
             return style.style_id === this.props.selectedStyleId;
         });
-        let sizeToStock = selectedItem[0].skus; // the 0 index is bc .filter returns an array of your filtered item.
+        // console.log('SELECTED ITEM:', selectedItem);
+        let sizeToStock;
+
+        if (selectedItem === undefined) {
+          
+            sizeToStock = {
+              "XS": 0,
+              "S": 0,
+              "M": 0,
+              "L": 0,
+              "XL": 0
+            }
+            
+            
+          }
+
+          // if (selectedItem) {
+          //   console.log('hey', selectedItem)
+          //   if (selectedItem[0].skus === null) {
+          //     sizeToStock = {
+          //       "XS": 0,
+          //       "S": 0,
+          //       "M": 0,
+          //       "L": 0,
+          //       "XL": 0
+          //     }
+          //   } else {
+          //     sizeToStock = selectedItem[0].skus; // the 0 index is bc .filter returns an array of your filtered item.
+
+          //   }
+
+          // }
+          if (selectedItem) {
+            console.log('hey', selectedItem)
+            if (selectedItem.length === 0) {
+              sizeToStock = {
+                "XS": 0,
+                "S": 0,
+                "M": 0,
+                "L": 0,
+                "XL": 0
+              }
+            } else {
+              sizeToStock = selectedItem[0].skus; // the 0 index is bc .filter returns an array of your filtered item.
+
+            }
+
+          }
+        
+
         let sizeOptions = Object.entries(sizeToStock).map((size, index) => {
             let option;
             if (size[1] === 0) {option = `${size[0]} - Out of stock`}
@@ -38,6 +87,7 @@ class SizeAndStock extends Component {
                 text: option
             });
         });
+
 
         let quantityOptions = [];
         if (this.state.selectedSize === null) {
