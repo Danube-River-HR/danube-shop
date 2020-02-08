@@ -9,11 +9,9 @@ function mapStateToProps(state) {
     relatedProducts: state.relatedProducts
   };
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-
-  }
-}
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +102,6 @@ class RelatedProducts extends Component {
     });
     localStorage.setItem("outfit", JSON.stringify(outfit));
   };
-  
 
   componentDidUpdate(nextProps) {
     if (nextProps.relatedProducts !== this.state.relatedProductsIds) {
@@ -114,9 +111,12 @@ class RelatedProducts extends Component {
 
   componentDidMount() {
     let outfit = JSON.parse(localStorage.getItem("outfit"));
-    this.setState({
-      outfit: outfit
-    });
+    console.log(outfit, "outfit");
+    if (outfit !== null) {
+      this.setState({
+        outfit: outfit
+      });
+    }
   }
 
   render() {
