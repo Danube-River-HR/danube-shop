@@ -58,9 +58,9 @@ export const fetchAllProductData = id => {
   return dispatch => {
     axios.get(`http://3.134.102.30/products/${id}`)
     .then(response => {
-      let productData = response.data;
+      let currentProduct = response.data;
       
-      return Object.assign({}, {productData: productData});
+      return Object.assign({}, {currentProduct: currentProduct});
     })
     .then(overallData => {
       return axios.get(`http://3.134.102.30/products/${id}/related`)
