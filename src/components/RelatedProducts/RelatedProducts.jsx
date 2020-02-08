@@ -29,49 +29,65 @@ class RelatedProducts extends Component {
 
   getRelatedProductData = () => {
     let relatedData = [];
+    let relatedStyles = [];
     this.state.relatedProductsIds.map(productId => {
       return axios
         .get(`http://3.134.102.30/products/${productId}`)
         .then(data => {
           relatedData.push(data.data);
         })
-        .then(() =>
-          this.setState(
-            {
-              relatedProductData: relatedData
-            },
-            () => {
-              this.getRelatedProductStyles();
-            }
-          )
-        );
-    });
-  };
-  getRelatedProductStyles = () => {
-    let relatedStyles = [];
-    this.state.relatedProductsIds.map(productId => {
-      return axios
-        .get(`http://3.134.102.30/products/${productId}/styles`)
-        .then(data => {
-          let containsDefault = false;
-          data.data.results.forEach(result => {
-            if (result["default?"] === 1) {
-              relatedStyles.push(result);
-              containsDefault = true;
-            }
+        .then(() => {
+          this.state.relatedProductsIds.map(productId => {
+            return axios
+              .get(`http://3.134.102.30/products/${productId}/styles`)
+              .then(data => {
+                let containsDefault = false;
+                data.data.results.forEach(result => {
+                  if (result["default?"] === 1) {
+                    relatedStyles.push(result);
+                    containsDefault = true;
+                  }
+                });
+                if (!containsDefault) {
+                  relatedStyles.push(data.data.results[0]);
+                }
+                return data;
+              })
+              .then(() =>
+                this.setState({
+                  relatedProductData: relatedData,
+                  relatedProductStyles: relatedStyles
+                })
+              );
           });
-          if (!containsDefault) {
-            relatedStyles.push(data.data.results[0]);
-          }
-          return data;
         })
-        .then(() =>
-          this.setState({
-            relatedProductStyles: relatedStyles
-          })
-        );
     });
   };
+  // getRelatedProductStyles = () => {
+  //   let relatedStyles = [];
+  //   this.state.relatedProductsIds.map(productId => {
+  //     return axios
+  //       .get(`http://3.134.102.30/products/${productId}/styles`)
+  //       .then(data => {
+  //         let containsDefault = false;
+  //         data.data.results.forEach(result => {
+  //           if (result["default?"] === 1) {
+  //             relatedStyles.push(result);
+  //             containsDefault = true;
+  //           }
+  //         });
+  //         if (!containsDefault) {
+  //           relatedStyles.push(data.data.results[0]);
+  //         }
+  //         return data;
+  //       })
+  //       .then(() =>
+  //         this.setState({
+  //           relatedProductStyles: relatedStyles
+  //         })
+  //       );
+  //   });
+  // };
   handleOutfitAddClick = e => {
     if (
       this.state.outfit.every(product => {
