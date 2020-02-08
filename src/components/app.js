@@ -11,7 +11,8 @@ import {
   getProductData,
   getRelatedProducts,
   getAverageRating,
-  getProductStyles
+  getProductStyles,
+  fetchAllProductData
 } from "../redux/actions";
 
 /* ----- COMPONENTS ----- */
@@ -47,6 +48,8 @@ class App extends React.Component {
   componentDidMount() {
     // this.updateProduct(2);
     this.updateProduct(this.state.currentProductId);
+    fetchAllProductData(1);
+
   }
 
   render() {
@@ -79,7 +82,9 @@ function mapStateToProps(state) {
     averageRating: state.averageRating,
     relatedProducts: state.relatedProducts,
     currentProductEntries: Object.entries(state.currentProduct),
-    productStyles: state.productStyles
+    productStyles: state.productStyles,
+
+    overallData: state.overallData
   };
 }
 
@@ -87,5 +92,6 @@ export default connect(mapStateToProps, {
   getProductData,
   getRelatedProducts,
   getProductStyles,
-  getAverageRating
+  getAverageRating,
+  fetchAllProductData
 })(App);

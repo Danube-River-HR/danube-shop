@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+// import {fetchAllProductData} from "../../../redux/actions/index";
+
 class ProductGallery extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-                 
+           
         }
+    }
+
+    componentDidMount() {
+        // fetchAllProductData(1);
     }
 
     render() {
@@ -22,8 +28,9 @@ class ProductGallery extends Component {
 const mapStateToProps = (state) => {
     console.log('PRODUCT GALLERY STATE:', state);
     return {
-        currentProduct: state.currentProduct,
-        productStyles: state.productStyles
+        // currentProduct: state.currentProduct,
+        // productStyles: state.productStyles,
+        // overallData: state.overallData
       };
 }
 
