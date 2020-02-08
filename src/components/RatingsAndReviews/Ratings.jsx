@@ -1,9 +1,12 @@
 import React from "react";
 
 var Ratings = () => (
-  <h4 style={{ borderStyle: "solid", borderColor: "coral" }}>
+  <div
+    // style={{ borderStyle: "solid", borderColor: "coral" }}
+    className="ratingsParent"
+  >
     Ratings (Seperate container)
-  </h4>
+  </div>
 );
 
 export default Ratings;
