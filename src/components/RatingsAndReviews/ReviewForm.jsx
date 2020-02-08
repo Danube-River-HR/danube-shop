@@ -63,7 +63,6 @@ class ReviewForm extends Component {
             name="header"
             maxLength="60"
             placeholder="(Max: 60 characters)  Example: Best purchase ever!"
-            required
             onChange={this.handleChangeForm}
           />
         </Form.Group>
@@ -73,16 +72,26 @@ class ReviewForm extends Component {
           name="body"
           maxLength="1000"
           placeholder="(Max: 1000 characters)  Why did you like the product or not?"
-          required
           onChange={this.handleChangeForm}
         />
         <ReactFilestack
           apikey={apikey}
-          buttonText="Upload Photo"
+          customText="Upload Photo"
           buttonClass="ui medium button gray"
           onSuccess={this.onSuccess}
           onError={this.onError}
         />
+        {/* <ReactFilestack
+          apikey={apikey}
+          // actionOptions={PickerOptions}
+          customRender={({ onPick }) => (
+            <div>
+              <strong>Find an avatar</strong>
+              <button onClick={onPick}>Pick</button>
+            </div>
+          )}
+          onSuccess={this.yourCallbackFunction}
+        /> */}
 
         {/* <input
           type="file"
@@ -97,7 +106,6 @@ class ReviewForm extends Component {
             label="What is your nickname"
             name="name"
             placeholder="Example: jackson11!"
-            required
             onChange={this.handleChangeForm}
           />
           <Form.Input
@@ -105,7 +113,6 @@ class ReviewForm extends Component {
             label="Your email"
             name="email"
             placeholder="Example: jackson11@email.com"
-            required
             onChange={this.handleChangeForm}
           />
         </Form.Group>

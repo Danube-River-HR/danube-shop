@@ -26,6 +26,7 @@ h1 {
   flex-shrink: 0;
   padding: 2px 10px;
   margin: 10px 20px;
+  cursor: pointer;
 }
 .productCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.726);
@@ -98,6 +99,8 @@ h1 {
 .ui.cards > .card {
   width: 425px;
 }
+
+/* ---------------------------------- Ratings and Reviews ------------------------------- */
 
 .ratingsAndReviews {
   display: flex;
