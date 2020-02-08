@@ -8,7 +8,19 @@ class ReviewModal extends Component {
   }
   state = { open: false };
   show = dimmer => () => this.setState({ dimmer, open: true });
-  close = () => this.setState({ open: false });
+
+  sendReview = (e, data) => {
+    console.log("gay");
+    console.log("not so gay");
+  };
+
+  handleSendReview = () => {
+    // console.log(data.value);
+    console.log("gay");
+    this.setState({ open: false });
+  };
+
+  //************************************************************************************************
 
   render() {
     const { open, dimmer } = this.state;
@@ -27,19 +39,23 @@ class ReviewModal extends Component {
           <Modal.Content image>
             <Modal.Description>
               <Header>{this.props.productName}</Header>
-              <ReviewForm />
+              <ReviewForm sendReview={this.sendReview} />
             </Modal.Description>
           </Modal.Content>
           <Modal.Actions>
-            <Button color="black" onClick={this.close}>
+            <Button
+              color="black"
+              onClick={() => this.setState({ open: false })}
+            >
               Cancel
             </Button>
             <Button
+              form="submit-form"
+              type="submit"
               positive
               icon="checkmark"
               labelPosition="right"
               content="Submit"
-              onClick={this.close}
             />
           </Modal.Actions>
         </Modal>

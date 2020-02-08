@@ -30,7 +30,10 @@ var Reviews = ({
       // style={{ borderStyle: "solid", borderColor: "green" }}
       className="reviewsParent"
     >
-      <div style={{ paddingLeft: "17px", paddingBottom: "1vh" }}>
+      <div
+        style={{ paddingLeft: "17px", paddingBottom: "1vh" }}
+        className="reviewHeader"
+      >
         There are {data.results.length} Reviews,{" "}
         <DropdownInline changeValue={changeDropdown} />
       </div>

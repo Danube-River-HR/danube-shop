@@ -86,7 +86,7 @@ h1 {
 .reviewsParent {
   margin: 10px;
   padding: 10px;
-  font-size: large;
+  font-size: medium;
   box-sizing: content-box;
   flex-basis: unset;
   flex-grow: 1;
@@ -94,31 +94,48 @@ h1 {
 .reviewButtons {
   padding-top: 2vh;
   padding-left: 2vh;
+  padding-bottom: 2vh;
   display: flex;
 }
 .reviewEntryContainer {
   overflow: auto;
+  margin: 10px;
+  padding: 10px;
+  max-width: 810px;
   max-height: 600px;
 }
-.reviewEntryParent {
+.reviewHeader {
+  font-size: larger;
+  font-weight: bold;
+  /* padding-left: 17px; */
+  padding-bottom: 1vh;
+}
+/* .reviewEntryParent {
   margin: 10px;
   padding: 10px;
   width: 800px;
-}
+} */
 .ratingAndUser {
+  padding-top: 20px;
   padding-bottom: 20px;
+  /* padding-right: ; */
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  font-size: medium;
 }
 .reviewSummary {
+  font-size: larger;
   font-weight: bold;
   padding-bottom: 20px;
+  padding-right: 2vh;
 }
 .reviewBody {
+  padding-right: 2vh;
   padding-bottom: 20px;
+  font-size: 90%;
 }
 .helpfulParent {
+  font-size: small;
   display: flex;
   padding-bottom: 15px;
 }
