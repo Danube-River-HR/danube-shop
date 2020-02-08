@@ -12,6 +12,10 @@ const ProductDescription = ({description, features}) => {
                     <div className="description">
                         <p>{description}</p>
                     </div>
+                    <h5 className="header">Features</h5>
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
         </div>

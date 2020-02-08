@@ -2,14 +2,29 @@ import React from "react";
 
 const Card = props => {
   let containStyles = () => {
-    return props.style ? (
-      <img src={props.style.photos[0].url} alt={"Missing"} />
-    ) : (
-      <div>Img Loading</div>
-    );
+    if (props.style !== undefined) {
+      return props.style.photos[0].url === null ? (
+        <img
+          src={
+            "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+          }
+          alt={"Loading"}
+        />
+      ) : (
+        <img
+          src={props.style.photos[0].url}
+          alt={
+            "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+          }
+        />
+      );
+    }
   };
   return (
-    <div className="productCard">
+    <div
+      className="productCard"
+      onClick={() => props.handleCardClick(props.data.id)}
+    >
       <button class="ui icon button" onClick={props.handleClick}>
         <i class="star outline icon"></i>
       </button>

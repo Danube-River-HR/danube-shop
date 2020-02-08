@@ -7,15 +7,8 @@ import SizeAndStock from "./SizeAndStock";
 class Styles extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            selectedStyleId: 1
-        }
     }
 
-    changeStyle = (id) => {
-        // console.log("WHAT STYLE AM I CLICKING:", id);
-        this.setState({selectedStyleId: id})
-    }
 
     renderStyleThumbnails = () => {
         if (this.props.productStyles.length !== 0) {
@@ -27,7 +20,7 @@ class Styles extends Component {
                             id={style.style_id} 
                             url={style.photos[0].thumbnail_url}
                             changeStyle={this.changeStyle}
-                            selectedStyleId={this.state.selectedStyleId}
+                            selectedStyleId={this.props.selectedStyle}
                             />
                     </>
                 )
@@ -36,12 +29,12 @@ class Styles extends Component {
             return (
                 <>
                     <div className="styles-container">
-                        <p>STYLE > {this.props.productStyles.results[0].name}</p>
+                        <p>STYLE > {this.props.productStyles.results[this.props.selectedStyle - 1].name}</p>
                         {thumbnails}
 
                     </div>
                     <div className="purchase-options-container">
-                        <SizeAndStock />
+                        <SizeAndStock selectedStyleId={this.props.selectedStyle}/>
                     </div>
                 </>
             )
@@ -49,7 +42,7 @@ class Styles extends Component {
     }
 
     render() {
-        // console.log('TESTING STYLES PROPS:', this.props);
+        console.log('TESTING STYLES PROPS:', this.props);
         
         return (
             <div className="styles-wrapper">
@@ -68,6 +61,7 @@ const mapStateToProps = (state) => {
         averageRating: state.averageRating,
         relatedProducts: state.relatedProducts,
         productStyles: state.productStyles,
+        selectedStyle: state.selectedStyle,
         currentProductEntries: Object.entries(state.currentProduct)
       };
 }

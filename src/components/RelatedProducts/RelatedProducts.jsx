@@ -9,7 +9,9 @@ function mapStateToProps(state) {
     relatedProducts: state.relatedProducts
   };
 }
-
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -88,7 +90,17 @@ class RelatedProducts extends Component {
       this.setState({
         outfit: outfit
       });
+      localStorage.setItem("outfit", JSON.stringify(outfit));
     }
+  };
+  handleOutfitRemoveClick = e => {
+    let outfit = this.state.outfit.filter(product => {
+      return product.data.id !== e.id;
+    });
+    this.setState({
+      outfit: outfit
+    });
+    localStorage.setItem("outfit", JSON.stringify(outfit));
   };
 
   componentDidUpdate(nextProps) {
@@ -96,6 +108,17 @@ class RelatedProducts extends Component {
       this.getRelatedProductIds(this.props.relatedProducts);
     }
   }
+
+  componentDidMount() {
+    let outfit = JSON.parse(localStorage.getItem("outfit"));
+    console.log(outfit, "outfit");
+    if (outfit !== null) {
+      this.setState({
+        outfit: outfit
+      });
+    }
+  }
+
   render() {
     return (
       <div>
@@ -105,6 +128,7 @@ class RelatedProducts extends Component {
             ids={this.state.relatedProductsIds}
             data={this.state.relatedProductData}
             styles={this.state.relatedProductStyles}
+            handleCardClick={this.props.handleCardClick}
           />
         </div>
         <div>
@@ -112,6 +136,8 @@ class RelatedProducts extends Component {
           <OutfitCarousel
             outfit={this.state.outfit}
             handleOutfitAddClick={this.handleOutfitAddClick}
+            handleOutfitRemoveClick={this.handleOutfitRemoveClick}
+            handleCardClick={this.props.handleCardClick}
           />
         </div>
       </div>

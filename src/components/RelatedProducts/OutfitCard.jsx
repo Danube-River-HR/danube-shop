@@ -1,17 +1,27 @@
 import React from "react";
 
 const OutfitCard = props => {
-  console.log('props', props.style)
   let containStyles = () => {
-    return props.style ? (
-      <img src={props.style.photos[0].url} alt={"Missing"} />
+    return props.style.photos[0].url !== null ? (
+      <img src={props.style.photos[0].url} alt={"Loading"} />
     ) : (
-      <div>Img Loading</div>
+      <img
+        src={
+          "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
+        }
+        alt={"Loading"}
+      />
     );
   };
   return (
-    <div className="productCard">
-      <button class="ui icon button" onClick={props.handleClick}>
+    <div
+      className="productCard"
+      onClick={() => props.handleCardClick(props.data.id)}
+    >
+      <button
+        class="ui icon button"
+        onClick={() => props.removeClick(props.data)}
+      >
         <i class="times circle outline icon"></i>
       </button>
       {containStyles()}

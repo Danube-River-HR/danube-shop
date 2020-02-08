@@ -3,7 +3,8 @@ import {
   LOAD_PRODUCT,
   RELATED_PRODUCTS,
   LOAD_STYLES,
-  AVERAGE_RATING
+  AVERAGE_RATING,
+  SELECT_STYLE
 } from "../constants/";
 
 export const getProductData = id => {
@@ -40,4 +41,10 @@ export const getProductStyles = id => {
       dispatch({ type: LOAD_STYLES, payload: response.data });
     });
   };
+};
+export const selectStyle = styleId => {
+  return {
+    type: SELECT_STYLE,
+    payload: styleId
+  }
 };
