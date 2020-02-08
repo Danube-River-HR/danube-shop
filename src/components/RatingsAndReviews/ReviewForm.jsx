@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
+import ReactFilestack from "filestack-react";
+import { apikey } from "./APIkey";
 
 class ReviewForm extends Component {
   constructor(props) {
@@ -10,13 +12,7 @@ class ReviewForm extends Component {
     header: "",
     body: "",
     name: "",
-    email: "",
-    savedimages: [],
-    savedlike: "",
-    savedheader: "",
-    savedbody: "",
-    savedname: "",
-    savedemail: ""
+    email: ""
   };
 
   handleChangeForm = (e, { name, value }) => {
@@ -31,19 +27,12 @@ class ReviewForm extends Component {
   handleSubmit = () => {
     const { value, header, body, name, email, images } = this.state;
     console.log(value, header, body, name, email, images);
-    this.setState({
-      savedliked: value,
-      savedheader: header,
-      savedbody: body,
-      savedname: name,
-      savedmail: email,
-      savedimages: images
-    });
   };
 
   toggleUpload = (e, data) => console.log(data);
 
   render() {
+    console.log(apikey);
     console.log(this.state);
     const { value } = this.state;
     return (
@@ -86,6 +75,13 @@ class ReviewForm extends Component {
           placeholder="(Max: 1000 characters)  Why did you like the product or not?"
           required
           onChange={this.handleChangeForm}
+        />
+        <ReactFilestack
+          apikey={apikey}
+          buttonText="Upload Photo"
+          buttonClass="ui medium button gray"
+          onSuccess={this.onSuccess}
+          onError={this.onError}
         />
 
         {/* <input
