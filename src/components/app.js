@@ -47,8 +47,8 @@ class App extends React.Component {
 
   componentDidMount() {
     // this.updateProduct(2);
+    this.props.fetchAllProductData(1);
     this.updateProduct(this.state.currentProductId);
-    fetchAllProductData(1);
 
   }
 
