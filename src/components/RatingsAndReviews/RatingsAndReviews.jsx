@@ -9,26 +9,46 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       mainData: {},
-      count: 2
+      count: 2,
+      sorting: "helpful"
     };
   }
-
+  // **************************************************************************************************
   incrementCount = () => {
     this.setState({ count: (this.state.count += 2) });
   };
 
-  getReviews = () => {
+  changeSorting = (e, data) => {
+    this.getReviews(data.value, 2);
+    this.setState({ count: 2 });
+  };
+
+  reportReview = id => {
+    axios
+      .put(`http://3.134.102.30/reviews/report/${id}`)
+      .then(response => this.getReviews());
+  };
+
+  markReviewHelpful = id => {
+    axios
+      .put(`http://3.134.102.30/reviews/helpful/${id}`)
+      .then(response => this.getReviews());
+  };
+
+  getReviews = (sort = this.state.sorting, count = this.state.count) => {
     axios
       .get(
-        `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000`
+        `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000&sort=${sort}`
       )
-      .then(response => this.setState({ mainData: response.data }));
+      .then(response =>
+        this.setState({ mainData: response.data, sorting: sort, count: count })
+      );
+    // .then(() => console.log(this.state.sorting));
   };
   /*******************************************************************************************/
 
   componentDidMount() {
-    console.log("i running");
-    this.getReviews(this.state.count);
+    this.getReviews(this.state.sorting);
   }
 
   /*******************************************************************************************/
@@ -40,12 +60,19 @@ class RatingsAndReviews extends React.Component {
             <img src={spinner} />
           </div>
         ) : (
-          <div style={{ borderStyle: "solid", borderColor: "blue" }}>
+          <div
+            style={{ borderStyle: "solid", borderColor: "blue" }}
+            className="ratingsAndReviews"
+          >
             <Ratings />
             <Reviews
+              productName={this.props.productData.name}
               data={this.state.mainData}
               count={this.state.count}
               addTwo={this.incrementCount}
+              markHelpful={this.markReviewHelpful}
+              reportReview={this.reportReview}
+              changeDropdown={this.changeSorting}
             />
           </div>
         )}

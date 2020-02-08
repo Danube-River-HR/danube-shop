@@ -3,7 +3,6 @@ h1 {
   background-color: slategray;
 }
 
-
 .productCarousel {
   display: flex;
   border: 2px solid red;
@@ -17,7 +16,7 @@ h1 {
 }
 
 .productCard {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 20vw;
   height: 30vw;
@@ -41,6 +40,13 @@ h1 {
 }
 
 /* ----- STYLE THUMBNAILS ----- */
+.ui.tiny.image,
+.ui.tiny.images .image,
+.ui.tiny.images img,
+.ui.tiny.images svg {
+  width: 80px;
+  height: 80px;
+}
 .styles-container {
   display: flex;
 }
@@ -49,12 +55,15 @@ h1 {
   width: 50px;
   height: 50px;
   margin: 5px;
-  font-size: .85714286rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  font-size: 0.85714286rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
 }
 
-.ui.tiny.image, .ui.tiny.images .image, .ui.tiny.images img, .ui.tiny.images svg:hover {
+.ui.tiny.image,
+.ui.tiny.images .image,
+.ui.tiny.images img,
+.ui.tiny.images svg:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.726);
 }
 
@@ -74,13 +83,102 @@ h1 {
 }
 
 /* ----- PRODUCT CARD TITLE ----- */
-.ui.card>.content>.header:not(.ui), .ui.cards>.card>.content>.header:not(.ui) {
+.ui.card > .content > .header:not(.ui),
+.ui.cards > .card > .content > .header:not(.ui) {
   font-weight: 900;
   font-size: 2em;
-  margin-top: -.21425em;
+  margin-top: -0.21425em;
   line-height: 1.28571429em;
 }
 
-.ui.card, .ui.cards>.card {
+.ui.card,
+.ui.cards > .card {
   width: 425px;
+}
+
+.ratingsAndReviews {
+  display: flex;
+  justify-content: center;
+}
+.ratingsParent {
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+  width: 500px;
+}
+.reviewsParent {
+  margin: 10px;
+  padding: 10px;
+  font-size: medium;
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+}
+.reviewButtons {
+  padding-top: 2vh;
+  padding-left: 2vh;
+  padding-bottom: 2vh;
+  display: flex;
+}
+.reviewEntryContainer {
+  overflow: auto;
+  margin: 10px;
+  padding: 10px;
+  max-width: 810px;
+  max-height: 600px;
+}
+.reviewHeader {
+  font-size: larger;
+  font-weight: bold;
+  /* padding-left: 17px; */
+  padding-bottom: 1vh;
+}
+/* .reviewEntryParent {
+  margin: 10px;
+  padding: 10px;
+  width: 800px;
+} */
+.ratingAndUser {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* padding-right: ; */
+  display: flex;
+  justify-content: space-between;
+  font-size: medium;
+}
+.reviewSummary {
+  font-size: larger;
+  font-weight: bold;
+  padding-bottom: 20px;
+  padding-right: 2vh;
+}
+.reviewBody {
+  padding-right: 2vh;
+  padding-bottom: 20px;
+  font-size: 90%;
+}
+.helpfulParent {
+  font-size: small;
+  display: flex;
+  padding-bottom: 15px;
+}
+
+.helpfulWord {
+  padding-right: 10px;
+}
+.yesButton {
+  padding-right: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.helpfulCount {
+  padding-right: 10px;
+}
+.reportButton {
+  cursor: pointer;
+  text-decoration: underline;
+  padding-left: 20px;
+}
+.radioButton {
+  color: red;
 }
