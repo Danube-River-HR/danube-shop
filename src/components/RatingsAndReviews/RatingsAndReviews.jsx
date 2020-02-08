@@ -20,7 +20,8 @@ class RatingsAndReviews extends React.Component {
 
   changeSorting = (e, data) => {
     // console.log(data.value);
-    this.getReviews(data.value);
+    this.getReviews(data.value, 2);
+    this.setState({ count: 2 });
   };
   // this.setState({ sorting: data.value }
   reportReview = id => {
@@ -35,20 +36,20 @@ class RatingsAndReviews extends React.Component {
       .then(response => this.getReviews());
   };
 
-  getReviews = (sort = this.state.sorting) => {
+  getReviews = (sort = this.state.sorting, count = this.state.count) => {
     // console.log(sort);
     // let count = this.state.count;
     // console.log(count);
     // if (sort === null) {
     //   sort = this.state.sorting;
-    //   count = 2;
+    // count = 2;
     // }
     axios
       .get(
         `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000&sort=${sort}`
       )
       .then(response =>
-        this.setState({ mainData: response.data, sorting: sort })
+        this.setState({ mainData: response.data, sorting: sort, count: count })
       );
     // .then(() => console.log(this.state.sorting));
   };
@@ -73,6 +74,7 @@ class RatingsAndReviews extends React.Component {
           >
             <Ratings />
             <Reviews
+              productName={this.props.productData.name}
               data={this.state.mainData}
               count={this.state.count}
               addTwo={this.incrementCount}

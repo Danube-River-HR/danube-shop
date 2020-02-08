@@ -1,6 +1,7 @@
 import React from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
+import ReviewModal from "./ReviewModal";
 
 var Reviews = ({
   data,
@@ -8,7 +9,8 @@ var Reviews = ({
   count,
   markHelpful,
   reportReview,
-  changeDropdown
+  changeDropdown,
+  productName
 }) => {
   let items = [];
   for (let i = 0; i < count; i++) {
@@ -28,17 +30,22 @@ var Reviews = ({
       // style={{ borderStyle: "solid", borderColor: "green" }}
       className="reviewsParent"
     >
-      <div style={{ paddingLeft: "17px" }}>
+      <div style={{ paddingLeft: "17px", paddingBottom: "1vh" }}>
         There are {data.results.length} Reviews,{" "}
         <DropdownInline changeValue={changeDropdown} />
       </div>
 
       <div className="reviewEntryContainer">{items}</div>
       <div className="reviewButtons">
-        <button onClick={addTwo} class="ui basic button">
-          More Reviews
-        </button>
-        <button class="ui basic button">Add a Review</button>
+        {count < data.results.length ? (
+          <button onClick={addTwo} class="ui secondary basic button">
+            More Reviews
+          </button>
+        ) : null}
+
+        <ReviewModal productName={productName} />
+
+        {/* <button class="ui basic button">Add a Review</button> */}
       </div>
     </div>
   );

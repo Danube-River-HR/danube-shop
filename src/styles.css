@@ -92,11 +92,13 @@ h1 {
   flex-grow: 1;
 }
 .reviewButtons {
+  padding-top: 2vh;
+  padding-left: 2vh;
   display: flex;
 }
 .reviewEntryContainer {
   overflow: auto;
-  height: 680px;
+  max-height: 600px;
 }
 .reviewEntryParent {
   margin: 10px;
@@ -136,4 +138,7 @@ h1 {
   cursor: pointer;
   text-decoration: underline;
   padding-left: 20px;
+}
+.radioButton {
+  color: red;
 }
