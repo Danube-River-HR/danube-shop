@@ -7,7 +7,6 @@ class ReviewForm extends Component {
   }
   state = {
     images: [],
-    like: "",
     header: "",
     body: "",
     name: "",
@@ -21,23 +20,23 @@ class ReviewForm extends Component {
   };
 
   handleChangeForm = (e, { name, value }) => {
-    console.log(value);
+    console.log(name);
     this.setState({ [name]: value });
   };
   handleChangeRadio = (e, { value }) => {
     console.log(value);
-    this.setState({ savedradio: value });
+    this.setState({ value });
   };
 
   handleSubmit = () => {
-    const { like, header, body, name, email, images } = this.state;
-
+    const { value, header, body, name, email, images } = this.state;
+    console.log(value, header, body, name, email, images);
     this.setState({
-      savedname: name,
-      savedmail: email,
+      savedliked: value,
       savedheader: header,
       savedbody: body,
-      savedliked: like,
+      savedname: name,
+      savedmail: email,
       savedimages: images
     });
   };
@@ -72,6 +71,7 @@ class ReviewForm extends Component {
           <Form.Input
             fluid
             label="Review Summary"
+            name="header"
             maxLength="60"
             placeholder="(Max: 60 characters)  Example: Best purchase ever!"
             required
@@ -81,6 +81,7 @@ class ReviewForm extends Component {
 
         <Form.TextArea
           label="Review Body"
+          name="body"
           maxLength="1000"
           placeholder="(Max: 1000 characters)  Why did you like the product or not?"
           required
@@ -98,6 +99,7 @@ class ReviewForm extends Component {
           <Form.Input
             fluid
             label="What is your nickname"
+            name="name"
             placeholder="Example: jackson11!"
             required
             onChange={this.handleChangeForm}
@@ -105,11 +107,13 @@ class ReviewForm extends Component {
           <Form.Input
             fluid
             label="Your email"
+            name="email"
             placeholder="Example: jackson11@email.com"
             required
             onChange={this.handleChangeForm}
           />
         </Form.Group>
+        <button onClick={() => console.log(this.state.header)}>check</button>
       </Form>
     );
   }
