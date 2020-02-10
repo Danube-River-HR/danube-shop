@@ -189,3 +189,11 @@ h1 {
 .radioButton {
   color: red;
 }
+#characteristics {
+  display: flex;
+  justify-content: space-evenly;
+  font: inherit;
+}
+.characteristicsLabel {
+  font: inherit;
+}
