@@ -31,11 +31,14 @@ class App extends React.Component {
   }
 
   handleCardClick = e => {
-    this.setState({
-      currentProductId: e
-    }, () => {
-      this.updateProduct(e)
-    });
+    this.setState(
+      {
+        currentProductId: e
+      },
+      () => {
+        this.updateProduct(e);
+      }
+    );
   };
 
   updateProduct = id => {
@@ -50,7 +53,6 @@ class App extends React.Component {
     // this.updateProduct(2);
     // this.props.fetchAllProductData(1);
     this.updateProduct(this.state.currentProductId);
-
   }
 
   render() {
@@ -67,10 +69,12 @@ class App extends React.Component {
             handleCardClick={this.handleCardClick}
           />
 
-          {Object.entries(this.props.currentProduct).length === 0 ? (
+          {Object.entries(this.props.overallData).length === 0 ? (
             <div>LOADING</div>
           ) : (
-            <RatingsAndReviews productData={this.props.currentProduct} />
+            <RatingsAndReviews
+              productData={this.props.overallData.currentProduct}
+            />
           )}
         </Router>
       </>
