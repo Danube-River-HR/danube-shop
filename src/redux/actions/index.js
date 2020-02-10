@@ -43,10 +43,10 @@ export const getProductStyles = id => {
     });
   };
 };
-export const selectStyle = styleId => {
+export const selectStyle = styleObj => {
   return {
     type: SELECT_STYLE,
-    payload: styleId
+    payload: styleObj
   }
 };
 

@@ -60,11 +60,13 @@ class App extends React.Component {
 
         <Router>
           <Overview />
+
           <RelatedProducts
-            // productData={this.props.overallData.currentProduct}
-            // productStyle={this.props.overallData.productStyles}
+            productData={this.props.overallData.currentProduct}
+            productStyle={this.props.overallData.productStyles}
             handleCardClick={this.handleCardClick}
           />
+
           {Object.entries(this.props.currentProduct).length === 0 ? (
             <div>LOADING</div>
           ) : (
