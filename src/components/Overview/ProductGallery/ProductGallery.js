@@ -26,7 +26,7 @@ class ProductGallery extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('PRODUCT GALLERY STATE:', state);
+    // console.log('PRODUCT GALLERY STATE:', state);
     return {
         // currentProduct: state.currentProduct,
         // productStyles: state.productStyles,
