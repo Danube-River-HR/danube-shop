@@ -1,5 +1,6 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
+import PictureModal from "./PictureModal";
 
 var ReviewEntry = ({ review, addHelpful, report }) => (
   <div style={{ borderStyle: "nothing" }} className="reviewEntryParent">
@@ -15,7 +16,7 @@ var ReviewEntry = ({ review, addHelpful, report }) => (
     {review.photos.length > 0 ? (
       <Image.Group size="small">
         {review.photos.map(pic => (
-          <Image src={pic.url} />
+          <PictureModal url={pic.url} />
         ))}
       </Image.Group>
     ) : null}
