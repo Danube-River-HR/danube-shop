@@ -11,7 +11,8 @@ import {
   getProductData,
   getRelatedProducts,
   getAverageRating,
-  getProductStyles
+  getProductStyles,
+  fetchAllProductData
 } from "../redux/actions";
 
 /* ----- COMPONENTS ----- */
@@ -42,11 +43,14 @@ class App extends React.Component {
     this.props.getAverageRating(id);
     this.props.getRelatedProducts(id);
     this.props.getProductStyles(id);
+    this.props.fetchAllProductData(id);
   };
 
   componentDidMount() {
-    // this.updateProduct(2);
+    this.updateProduct(2);
     this.updateProduct(this.state.currentProductId);
+    this.props.fetchAllProductData(1);
+
   }
 
   render() {
@@ -56,11 +60,13 @@ class App extends React.Component {
 
         <Router>
           <Overview />
+
           <RelatedProducts
             productData={this.props.currentProduct}
             productStyle={this.props.productStyles}
             handleCardClick={this.handleCardClick}
           />
+
           {Object.entries(this.props.currentProduct).length === 0 ? (
             <div>LOADING</div>
           ) : (
@@ -79,7 +85,9 @@ function mapStateToProps(state) {
     averageRating: state.averageRating,
     relatedProducts: state.relatedProducts,
     currentProductEntries: Object.entries(state.currentProduct),
-    productStyles: state.productStyles
+    productStyles: state.productStyles,
+
+    overallData: state.overallData
   };
 }
 
@@ -87,5 +95,6 @@ export default connect(mapStateToProps, {
   getProductData,
   getRelatedProducts,
   getProductStyles,
-  getAverageRating
+  getAverageRating,
+  fetchAllProductData
 })(App);
