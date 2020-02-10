@@ -1,17 +1,23 @@
 import React from 'react';
 import {connect} from "react-redux";
+import SocialMedia from './SocialMedia';
 
 const ProductDescription = ({overallData}) => {
     const renderDescription = () => {
-        if (!overallData.productData) {return "Loading"}
-        else {return overallData.productData.description}
+        if (!overallData.currentProduct) {return "Loading"}
+        else {return overallData.currentProduct.description}
+    }
+
+    const renderSlogan = () => {
+        if (!overallData.currentProduct) {return "Loading"}
+        else {return overallData.currentProduct.slogan}
     }
 
     return (
         <div className="ui items">
             <div className="item">
                 <div className="content">
-                    <h4 className="header">Product Description</h4>
+                    <h4 className="header">{renderSlogan()}</h4>
                     <div className="description">
                         <p>{renderDescription()}</p>
                     </div>
@@ -20,6 +26,9 @@ const ProductDescription = ({overallData}) => {
                         
                     </div>
                 </div>
+            </div>
+            <div className="social-media-container">
+                <SocialMedia />
             </div>
         </div>
     )
