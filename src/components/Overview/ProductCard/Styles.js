@@ -53,7 +53,8 @@ class Styles extends Component {
     renderStyleName = () => {
         let selectedStyle = this.props.selectedStyle;
         if (selectedStyle !== null) {
-            return <p>STYLE > {selectedStyle.name}</p>
+            let styleHeader = <p><b>STYLE ></b> {selectedStyle.name}</p>
+            return <div className="stylename">{styleHeader}</div>
         } else {
             return <p>Loading</p>
         }
@@ -63,13 +64,11 @@ class Styles extends Component {
 
         return (
             <div className="styles-wrapper">
+                {this.renderStyleName()}
+
                 <div className="styles-thumbnails-wrapper">
-                    {this.renderStyleName()}
                     {this.renderStyleThumbnails()}
-                    
-                    <div className="purchase-options-container">
-                        <SizeAndStock />
-                    </div>
+    
                 </div>
             </div>
         )
