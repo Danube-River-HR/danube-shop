@@ -136,7 +136,6 @@ class SizeAndStock extends Component {
 
 
     render() {
-        console.log('SELECTED SIZE AND STOCK STATE:', this.state);
         return (
             <>
                 <div className="size-wrapper">
