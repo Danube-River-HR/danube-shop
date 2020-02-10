@@ -10,7 +10,8 @@ class RatingsAndReviews extends React.Component {
     this.state = {
       mainData: {},
       count: 2,
-      sorting: "helpful"
+      sorting: "helpful",
+      markedHelpful: {}
     };
   }
   // **************************************************************************************************
@@ -30,9 +31,12 @@ class RatingsAndReviews extends React.Component {
   };
 
   markReviewHelpful = id => {
-    axios
-      .put(`http://3.134.102.30/reviews/helpful/${id}`)
-      .then(response => this.getReviews());
+    if (this.state.markedHelpful[id] !== 1) {
+      this.state.markedHelpful[id] = 1;
+      axios
+        .put(`http://3.134.102.30/reviews/helpful/${id}`)
+        .then(response => this.getReviews());
+    }
   };
 
   getReviews = (sort = this.state.sorting, count = this.state.count) => {
