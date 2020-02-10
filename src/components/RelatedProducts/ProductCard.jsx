@@ -1,4 +1,5 @@
 import React from "react";
+import ProductModal from "./ProductModal";
 
 const Card = props => {
   let containStyles = () => {
@@ -9,6 +10,7 @@ const Card = props => {
             "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
           }
           alt={"Loading"}
+          onClick={() => props.handleCardClick(props.data.id)}
         />
       ) : (
         <img
@@ -16,18 +18,17 @@ const Card = props => {
           alt={
             "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
           }
+          onClick={() => props.handleCardClick(props.data.id)}
         />
       );
     }
   };
   return (
-    <div
-      className="productCard"
-      onClick={() => props.handleCardClick(props.data.id)}
-    >
-      <button class="ui icon button" onClick={props.handleClick}>
+    <div className="productCard">
+      {/* <button class="ui icon button" onClick={props.handleClick}>
         <i class="star outline icon"></i>
-      </button>
+      </button> */}
+      <ProductModal cardData={props.data} currentProduct={props.currentProduct}/>
       {containStyles()}
       <div className="cardInfo">
         <div>{props.data.category}</div>

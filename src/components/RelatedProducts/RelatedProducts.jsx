@@ -19,7 +19,7 @@ class RelatedProducts extends Component {
   getRelatedProductData = () => {
     let relatedData = [];
     let relatedStyles = [];
-    console.log(this.state.relatedProductsIds,'related')
+    console.log(this.state.currentProduct, "current");
     this.state.relatedProductsIds.map(productId => {
       let one = `http://3.134.102.30/products/${productId}`;
       let two = `http://3.134.102.30/products/${productId}/styles`;
@@ -82,13 +82,22 @@ class RelatedProducts extends Component {
 
   componentDidUpdate(prevProps) {
     if (
-      prevProps.overallData.relatedProducts !== this.props.overallData.relatedProducts
+      prevProps.overallData.relatedProducts !==
+      this.props.overallData.relatedProducts
     ) {
-      this.setState({relatedProductsIds: this.props.overallData.relatedProducts}, () => {
-        this.getRelatedProductData()})
+      this.setState(
+        {
+          relatedProductsIds: this.props.overallData.relatedProducts,
+          currentProduct: this.props.productData
+        },
+        () => {
+          this.getRelatedProductData();
+        }
+      );
     }
   }
   componentDidMount() {
+    // this.setState({ currentProduct: this.props.productData });
     let outfit = JSON.parse(localStorage.getItem("outfit"));
     if (outfit !== null) {
       this.setState({
@@ -105,8 +114,10 @@ class RelatedProducts extends Component {
           <ProductCarousel
             ids={this.state.relatedProductsIds}
             data={this.state.relatedProductData}
+            currentProduct={this.state.currentProduct}
             styles={this.state.relatedProductStyles}
             handleCardClick={this.props.handleCardClick}
+            handleModalClick={this.handleModalClick}
           />
         </div>
         <div>
