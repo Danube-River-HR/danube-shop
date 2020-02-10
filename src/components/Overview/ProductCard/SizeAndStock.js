@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { Select } from 'semantic-ui-react';
+import { Select, Button } from 'semantic-ui-react';
+import localStorage from 'store';
 
 class SizeAndStock extends Component {
     constructor(props) {
@@ -8,9 +9,13 @@ class SizeAndStock extends Component {
         this.state = {
             selectedSize: null,
             currentProductId: null,
-            sizePlaceholder: "Size",
-            quantityPlaceholder: "Quantity"
+            displayWarning: false
         }
+    }
+
+    componentDidMount() {
+        localStorage.clearAll();
+        localStorage.set('cart', []);
     }
 
     componentDidUpdate() {
@@ -36,6 +41,22 @@ class SizeAndStock extends Component {
         }
     }
 
+    handleAddToCart = () => {
+        if (!this.state.selectedQuantity) {
+            this.setState({displayWarning: true})
+        } else {
+            let cart = localStorage.get('cart');
+
+            let newToCart = {
+                style: this.props.selectedStyle,
+                size: this.state.selectedSize,
+                quantity: this.state.selectedQuantity
+            };
+
+            localStorage.set('cart', [...cart, newToCart]);
+        }
+    }
+
     renderSizeAndQuantityDropdown = () => {
         let selectedStyle = this.props.selectedStyle;
         let sizeToStock;
@@ -56,6 +77,7 @@ class SizeAndStock extends Component {
             sizeToStock = selectedStyle.skus;
         }
 
+        // This needs to be an array for Select to work.
         let sizeOptions = Object.entries(sizeToStock).map((size, index) => {
             let option = size[0];
 
@@ -64,14 +86,32 @@ class SizeAndStock extends Component {
                 value: size[0],
                 text: option
             });
+
+            // if (option === "N/A") {
+            //     return ({
+            //         key: index,
+            //         value: size[0],
+            //         text: option
+            //     });
+            // } else {
+            //     if (size[1] !== 0) {
+            //         return ({
+            //             key: index,
+            //             value: size[0],
+            //             text: option
+            //         });
+            //     }
+            // }
+
         });
 
+        // This also needs to be an array for Select to work.
         let quantityOptions = [];
         
         if (this.state.selectedSize === null) {
             quantityOptions.push({key: 0, text: "---"});
         } else {
-            if (sizeToStock[this.state.selectedSize] === 0) {quantityOptions.push({key: 0, text: "N/A", value: "N/A"})}
+            if (sizeToStock[this.state.selectedSize] === 0) {quantityOptions.push({key: 0, text: "OUT OF STOCK", value: "N/A"})}
             else {
                 let stock = sizeToStock[this.state.selectedSize];
                 for (let i = 1; i <= stock; i++) {
@@ -88,23 +128,23 @@ class SizeAndStock extends Component {
 
         return (
             <div>
-                <Select placeholder={this.state.sizePlaceholder} options={sizeOptions} onChange={this.handleSizeSelect}/>
-                <Select placeholder={this.state.quantityPlaceholder} options={quantityOptions} onChange={this.handleQuantitySelect} />
+                <Select placeholder="Size" options={sizeOptions} onChange={this.handleSizeSelect}/>
+                <Select placeholder="Quantity" options={quantityOptions} onChange={this.handleQuantitySelect} />
             </div>
         )
     }
 
 
     render() {
-
+        console.log('SELECTED SIZE AND STOCK STATE:', this.state);
         return (
             <>
                 <div className="size-wrapper">
                     {this.renderSizeAndQuantityDropdown()}
                 </div>
-
                 <div className="cart-wrapper">
-
+                    {this.state.displayWarning ? <p>Please Pick a Size & Quantity</p> : null}
+                    <Button onClick={this.handleAddToCart}>Add To Cart</Button>
                 </div>
             </>
         )
@@ -112,7 +152,6 @@ class SizeAndStock extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('SIZE AND STOCK STATE:', state);
     return {
         overallData: state.overallData,
         selectedStyle: state.selectedStyle
