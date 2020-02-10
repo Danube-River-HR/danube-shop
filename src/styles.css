@@ -8,6 +8,7 @@ h1 {
   border: 2px solid red;
   box-sizing: border-box;
   margin: 10 10px;
+  cursor: pointer;
 }
 
 .productCarousel .productCardImg {

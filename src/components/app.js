@@ -39,17 +39,17 @@ class App extends React.Component {
   };
 
   updateProduct = id => {
-    this.props.getProductData(id);
-    this.props.getAverageRating(id);
-    this.props.getRelatedProducts(id);
-    this.props.getProductStyles(id);
-    this.props.fetchAllProductData(id);
+    // this.props.getProductData(id);
+    // this.props.getAverageRating(id);
+    // this.props.getRelatedProducts(id);
+    // this.props.getProductStyles(id);
+    this.props.fetchAllProductData(this.state.currentProductId);
   };
 
   componentDidMount() {
-    this.updateProduct(2);
+    // this.updateProduct(2);
+    // this.props.fetchAllProductData(1);
     this.updateProduct(this.state.currentProductId);
-    this.props.fetchAllProductData(1);
 
   }
 
@@ -62,8 +62,8 @@ class App extends React.Component {
           <Overview />
 
           <RelatedProducts
-            productData={this.props.currentProduct}
-            productStyle={this.props.productStyles}
+            productData={this.props.overallData.currentProduct}
+            productStyle={this.props.overallData.productStyles}
             handleCardClick={this.handleCardClick}
           />
 
@@ -86,7 +86,6 @@ function mapStateToProps(state) {
     relatedProducts: state.relatedProducts,
     currentProductEntries: Object.entries(state.currentProduct),
     productStyles: state.productStyles,
-
     overallData: state.overallData
   };
 }
