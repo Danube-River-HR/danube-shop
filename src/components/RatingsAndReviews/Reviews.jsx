@@ -10,9 +10,11 @@ var Reviews = ({
   markHelpful,
   reportReview,
   changeDropdown,
-  productName
+  productName,
+  metaData
 }) => {
   let items = [];
+
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
     items.push(
@@ -46,7 +48,11 @@ var Reviews = ({
           </button>
         ) : null}
 
-        <ReviewModal productName={productName} />
+        <ReviewModal
+          productName={productName}
+          productId={data.product}
+          metaData={metaData}
+        />
 
         {/* <button class="ui basic button">Add a Review</button> */}
       </div>

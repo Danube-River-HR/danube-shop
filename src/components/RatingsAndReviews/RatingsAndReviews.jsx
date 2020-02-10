@@ -44,9 +44,19 @@ class RatingsAndReviews extends React.Component {
       .get(
         `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000&sort=${sort}`
       )
-      .then(response =>
-        this.setState({ mainData: response.data, sorting: sort, count: count })
-      );
+      .then(response => {
+        axios
+          .get(`http://3.134.102.30/reviews/${this.props.productData.id}/meta`)
+          .then(response2 => {
+            this.setState({
+              mainData: response.data,
+              sorting: sort,
+              count: count,
+              metaData: response2.data
+            });
+          });
+      });
+
     // .then(() => console.log(this.state.sorting));
   };
   /*******************************************************************************************/
@@ -77,6 +87,7 @@ class RatingsAndReviews extends React.Component {
               markHelpful={this.markReviewHelpful}
               reportReview={this.reportReview}
               changeDropdown={this.changeSorting}
+              metaData={this.state.metaData}
             />
           </div>
         )}

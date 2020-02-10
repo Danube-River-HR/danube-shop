@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Form, Button, Image, FormRadio } from "semantic-ui-react";
+import { Form, Button, Image, FormRadio, Modal } from "semantic-ui-react";
 import ReactFilestack from "filestack-react";
 import { apikey } from "./APIkey";
+import axios from "axios";
 import placeholder from "./placeholder.jpg";
 
 const basicOptions = {
@@ -14,77 +15,171 @@ const basicOptions = {
 class ReviewForm extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      gaveReview: 0,
+      uploadCounter: 0,
+      placeholder: [
+        placeholder,
+        placeholder,
+        placeholder,
+        placeholder,
+        placeholder
+      ],
+      images: [],
+      rateValue: "",
+      recValue: "",
+      comfortValue: "",
+      qualityValue: "",
+      lengthValue: "",
+      fitValue: "",
+      header: "",
+      body: "",
+      name: "",
+      email: "",
+      showValid: false,
+      confirm: false
+    };
   }
-  state = {
-    uploadCounter: 0,
-    placeholder: [
-      placeholder,
-      placeholder,
-      placeholder,
-      placeholder,
-      placeholder
-    ],
-    images: [],
-    rateValue: "",
-    recValue: "",
-    sizeValue: "",
-    widthValue: "",
-    comfortValue: "",
-    qualityValue: "",
-    lengthValue: "",
-    fitValue: "",
-    header: "",
-    body: "",
-    name: "",
-    email: ""
-  };
 
   //************************************************************************************************
 
   handleChangeForm = (e, { name, value }) => {
-    console.log(name);
     this.setState({ [name]: value });
   };
 
-  handleChangeRadioRecommend = (e, { recValue }) => {
-    console.log(recValue);
-    this.setState({ recValue: recValue });
+  handleChangeFormBody = (e, { value }) => {
+    let count = this.state.bodyCount;
+    this.setState({ body: value, bodyCount: count - 1 });
   };
 
-  handleChangeRadioRecommend = () => {};
+  /*--------------- RADIO FORMS ---------------*/
+
+  handleChangeRadioRate = (e, { value }) => {
+    this.setState({ rateValue: value });
+  };
+
+  handleChangeRadioRecommend = (e, { value }) => {
+    value === "yes"
+      ? this.setState({ recValue: true })
+      : this.setState({ recValue: false });
+  };
+
+  handleChangeRadioComfort = (e, { value }) => {
+    this.setState({ comfortValue: value });
+  };
+
+  handleChangeRadioQuality = (e, { value }) => {
+    this.setState({ qualityValue: value });
+  };
+
+  handleChangeRadioLength = (e, { value }) => {
+    this.setState({ lengthValue: value });
+  };
+
+  handleChangeRadioFit = (e, { value }) => {
+    this.setState({ fitValue: value });
+  };
+
+  /*--------------- Handle Submission ---------------*/
+
+  validateEverything = () => {
+    let validCount = 0;
+
+    if (this.state.rateValue !== "") validCount++;
+    if (this.state.recValue !== "") validCount++;
+    if (this.state.qualityValue !== "") validCount++;
+    if (this.state.comfortValue !== "") validCount++;
+    if (this.state.lengthValue !== "") validCount++;
+    if (this.state.fitValue !== "") validCount++;
+    if (this.state.header !== "") validCount++;
+    if (this.state.body.length >= 50) validCount++;
+    if (this.state.name !== "") validCount++;
+    if (this.state.email !== "") validCount++;
+    if (validCount === 10) {
+      this.handleSubmit();
+    } else this.setState({ showValid: true });
+  };
 
   handleSubmit = () => {
-    const {
-      rateValue,
-      recValue,
-      header,
-      body,
-      name,
-      email,
-      images
-    } = this.state;
-    console.log(rateValue, recValue, header, body, name, email, images);
+    axios
+      .post(`http://3.134.102.30/reviews/${this.props.id}`, {
+        rating: Number(this.state.rateValue),
+        summary: this.state.header,
+        body: this.state.body,
+        recommend: this.state.recValue,
+        name: this.state.name,
+        email: this.state.email,
+        photos: this.state.images,
+        characteristics: {
+          [this.props.meta.characteristics.Fit.id]: Number(this.state.fitValue),
+          [this.props.meta.characteristics.Length.id]: Number(
+            this.state.lengthValue
+          ),
+          [this.props.meta.characteristics.Comfort.id]: Number(
+            this.state.comfortValue
+          ),
+          [this.props.meta.characteristics.Quality.id]: Number(
+            this.state.qualityValue
+          )
+        }
+      })
+      .then(response => {
+        this.props.closeModal(true);
+        this.setState({ showValid: false });
+      });
   };
 
-  uploadPhoto = data => this.setState({ images: data });
+  /*--------------- Upload photo ---------------*/
+
+  uploadPhoto = data => {
+    let images = [];
+
+    data.map(photo => images.push(photo.url));
+    this.setState({ images: images });
+  };
 
   //************************************************************************************************
   render() {
-    console.log(apikey);
-    console.log(this.state);
-    const { value } = this.state;
     return (
-      <Form id="submit-form" onSubmit={this.handleSubmit}>
+      <Form id="submit-form" onSubmit={this.validateEverything}>
         <Form.Group inline>
-          <label>Rate it</label>
-          <FormRadio label="1 star" value="1" />
-          <FormRadio label="2 star" value="2" />
-          <FormRadio label="3 star" value="3" />
-          <FormRadio label="4 star" value="4" />
-          <FormRadio label="5 star" value="5" />
+          <label>
+            Rate it <span style={{ color: "red" }}> *</span>
+          </label>
+          <FormRadio
+            label="1 star"
+            value="1"
+            checked={this.state.rateValue === "1"}
+            onChange={this.handleChangeRadioRate}
+          />
+          <FormRadio
+            label="2 star"
+            value="2"
+            checked={this.state.rateValue === "2"}
+            onChange={this.handleChangeRadioRate}
+          />
+          <FormRadio
+            label="3 star"
+            value="3"
+            checked={this.state.rateValue === "3"}
+            onChange={this.handleChangeRadioRate}
+          />
+          <FormRadio
+            label="4 star"
+            value="4"
+            checked={this.state.rateValue === "4"}
+            onChange={this.handleChangeRadioRate}
+          />
+          <FormRadio
+            label="5 star"
+            value="5"
+            checked={this.state.rateValue === "5"}
+            onChange={this.handleChangeRadioRate}
+          />
         </Form.Group>
+        <br />
         <Form.Group inline>
-          {/* <form> */}
           <label>
             Do you recommend this product?
             <span style={{ color: "red" }}> *</span>
@@ -92,70 +187,170 @@ class ReviewForm extends Component {
           <Form.Radio
             label="Yes"
             value="yes"
-            checked={this.state.recValue === "yes"}
+            checked={this.state.recValue === true}
             onChange={this.handleChangeRadioRecommend}
           />
 
           <Form.Radio
             label="No"
             value="no"
-            name="noRadio"
-            checked={this.state.recValue === "no"}
+            checked={this.state.recValue === false}
             onChange={this.handleChangeRadioRecommend}
           />
-          {/* </form> */}
         </Form.Group>
+        <br />
         <Form.Group inline id="characteristics">
-          <label>Characteristics: </label>
-          <div>
-            <label className="characteristicsLabel">Size</label>
-            <FormRadio label="A size too small" value="1" />
-            <FormRadio label="½ a size too small" value="2" />
-            <FormRadio label="Perfect" value="3" />
-            <FormRadio label="½ a size too big" value="4" />
-            <FormRadio label="A size too wide" value="5" />
-          </div>
-          <div>
-            <label className="characteristicsLabel">Width</label>
-            <FormRadio label="Too narrow" value="1" />
-            <FormRadio label="Slightly narrow" value="2" />
-            <FormRadio label="Perfect" value="3" />
-            <FormRadio label="Slightly wide" value="4" />
-            <FormRadio label="Too wide" value="5" />
-          </div>
+          <label>
+            Characteristics: <span style={{ color: "red" }}> *</span>
+          </label>
           <div>
             <label className="characteristicsLabel">Comfort</label>
-            <FormRadio label="Uncomfortable" value="1" />
-            <FormRadio label="Slightly uncomfortable" value="2" />
-            <FormRadio label="Ok" value="3" />
-            <FormRadio label="Comfortable" value="4" />
-            <FormRadio label="Perfect" value="5" />
+            <FormRadio
+              label="Uncomfortable"
+              value="1"
+              checked={this.state.comfortValue === "1"}
+              onChange={this.handleChangeRadioComfort}
+            />
+            <FormRadio
+              label="Slightly uncomfortable"
+              value="2"
+              checked={this.state.comfortValue === "2"}
+              onChange={this.handleChangeRadioComfort}
+            />
+            <FormRadio
+              label="Ok"
+              value="3"
+              checked={this.state.comfortValue === "3"}
+              onChange={this.handleChangeRadioComfort}
+            />
+            <FormRadio
+              label="Comfortable"
+              value="4"
+              checked={this.state.comfortValue === "4"}
+              onChange={this.handleChangeRadioComfort}
+            />
+            <FormRadio
+              label="Perfect"
+              value="5"
+              checked={this.state.comfortValue === "5"}
+              onChange={this.handleChangeRadioComfort}
+            />
           </div>
           <div>
             <label className="characteristicsLabel">Quality</label>
-            <FormRadio label="Poor" value="1" />
-            <FormRadio label="Below average" value="2" />
-            <FormRadio label="What I expected" value="3" />
-            <FormRadio label="Pretty great" value="4" />
-            <FormRadio label="Perfect" value="5" />
+            <FormRadio
+              label="Poor"
+              value="1"
+              checked={this.state.qualityValue === "1"}
+              onChange={this.handleChangeRadioQuality}
+            />
+            <FormRadio
+              label="Below average"
+              value="2"
+              checked={this.state.qualityValue === "2"}
+              onChange={this.handleChangeRadioQuality}
+            />
+            <FormRadio
+              label="What I expected"
+              value="3"
+              checked={this.state.qualityValue === "3"}
+              onChange={this.handleChangeRadioQuality}
+            />
+            <FormRadio
+              label="Pretty great"
+              value="4"
+              checked={this.state.qualityValue === "4"}
+              onChange={this.handleChangeRadioQuality}
+            />
+            <FormRadio
+              label="Perfect"
+              value="5"
+              checked={this.state.qualityValue === "5"}
+              onChange={this.handleChangeRadioQuality}
+            />
           </div>
           <div>
             <label className="characteristicsLabel">Length</label>
-            <FormRadio label="Runs Short" value="1" />
-            <FormRadio label="Runs slightly short" value="2" />
-            <FormRadio label="Perfect" value="3" />
-            <FormRadio label="Runs slightly long" value="4" />
-            <FormRadio label="Runs long" value="5" />
+            <FormRadio
+              label="Runs Short"
+              value="1"
+              checked={this.state.lengthValue === "1"}
+              onChange={this.handleChangeRadioLength}
+            />
+            <FormRadio
+              label="Runs slightly short"
+              value="2"
+              checked={this.state.lengthValue === "2"}
+              onChange={this.handleChangeRadioLength}
+            />
+            <FormRadio
+              label="Perfect"
+              value="3"
+              checked={this.state.lengthValue === "3"}
+              onChange={this.handleChangeRadioLength}
+            />
+            <FormRadio
+              label="Runs slightly long"
+              value="4"
+              checked={this.state.lengthValue === "4"}
+              onChange={this.handleChangeRadioLength}
+            />
+            <FormRadio
+              label="Runs long"
+              value="5"
+              checked={this.state.lengthValue === "5"}
+              onChange={this.handleChangeRadioLength}
+            />
           </div>
           <div>
             <label className="characteristicsLabel">Fit</label>
-            <FormRadio label="Runs tight" value="1" />
-            <FormRadio label="Runs slightly tight" value="2" />
-            <FormRadio label="Perfect" value="3" />
-            <FormRadio label="Runs slightly long" value="4" />
-            <FormRadio label="Runs long" value="5" />
+            <FormRadio
+              label="Runs tight"
+              value="1"
+              checked={this.state.fitValue === "1"}
+              onChange={this.handleChangeRadioFit}
+            />
+            <FormRadio
+              label="Runs slightly tight"
+              value="2"
+              checked={this.state.fitValue === "2"}
+              onChange={this.handleChangeRadioFit}
+            />
+            <FormRadio
+              label="Perfect"
+              value="3"
+              checked={this.state.fitValue === "3"}
+              onChange={this.handleChangeRadioFit}
+            />
+            <FormRadio
+              label="Runs slightly long"
+              value="4"
+              checked={this.state.fitValue === "4"}
+              onChange={this.handleChangeRadioFit}
+            />
+            <FormRadio
+              label="Runs long"
+              value="5"
+              checked={this.state.fitValue === "5"}
+              onChange={this.handleChangeRadioFit}
+            />
           </div>
         </Form.Group>
+
+        {this.state.showValid === true ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              color: "red",
+              font: "bold"
+            }}
+          >
+            Don't forget to rate our product! Take a moment and fill out the
+            options provided above. Your feedback helps us improve!
+          </div>
+        ) : null}
 
         <Form.Group widths="equal">
           <Form.Input
@@ -165,15 +360,21 @@ class ReviewForm extends Component {
             maxLength="60"
             placeholder="(Max: 60 characters)  Example: Best purchase ever!"
             onChange={this.handleChangeForm}
+            required
           />
         </Form.Group>
 
         <Form.TextArea
-          label="Review Body"
+          label={
+            this.state.body.length >= 50
+              ? "Review Body (min: ✓ )"
+              : `Review Body (min: ${50 - this.state.body.length})`
+          }
           name="body"
           maxLength="1000"
           placeholder="(Max: 1000 characters)  Why did you like the product or not?"
-          onChange={this.handleChangeForm}
+          onChange={this.handleChangeFormBody}
+          required
         />
 
         <ReactFilestack
@@ -200,8 +401,8 @@ class ReviewForm extends Component {
                     </Image.Group>
                   ) : (
                     <Image.Group size="tiny">
-                      {this.state.images.map(pic => (
-                        <Image src={pic.url} />
+                      {this.state.images.map(url => (
+                        <Image src={url} />
                       ))}
                     </Image.Group>
                   )}
@@ -220,6 +421,7 @@ class ReviewForm extends Component {
             name="name"
             placeholder="Example: jackson11!"
             onChange={this.handleChangeForm}
+            required
           />
           <Form.Input
             fluid
@@ -227,23 +429,14 @@ class ReviewForm extends Component {
             name="email"
             placeholder="Example: jackson11@email.com"
             onChange={this.handleChangeForm}
+            required
           />
         </Form.Group>
-        <button onClick={() => console.log(this.state.images)}>check</button>
       </Form>
     );
   }
 }
 
-export default ReviewForm;
+// const confirmModal = () => ()
 
-// filename: "sunflower.jpg"
-// handle: "njiaeaWHTbyb6ggIxU2T"
-// mimetype: "image/jpeg"
-// originalPath: "sunflower.jpg"
-// size: 38700
-// source: "local_file_system"
-// url: "https://cdn.filestackcontent.com/njiaeaWHTbyb6ggIxU2T"
-// uploadId: "5EPh2371f0o3ui6T"
-// originalFile: {name: "sunflower.jpg", type: "image/jpeg", size: 38700}
-// status: "Stored"
+export default ReviewForm;

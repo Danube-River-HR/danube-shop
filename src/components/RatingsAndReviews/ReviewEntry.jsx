@@ -1,4 +1,5 @@
 import React from "react";
+import { Image } from "semantic-ui-react";
 
 var ReviewEntry = ({ review, addHelpful, report }) => (
   <div style={{ borderStyle: "nothing" }} className="reviewEntryParent">
@@ -11,6 +12,13 @@ var ReviewEntry = ({ review, addHelpful, report }) => (
 
     <div className="reviewSummary">{review.summary}</div>
     <div className="reviewBody">{review.body}</div>
+    {review.photos.length > 0 ? (
+      <Image.Group size="small">
+        {review.photos.map(pic => (
+          <Image src={pic.url} />
+        ))}
+      </Image.Group>
+    ) : null}
     {review.recommend > 0 ? (
       <div style={{ paddingBottom: "20px", fontStyle: "italic" }}>
         {" "}
