@@ -3,52 +3,73 @@ import StyleThumbnail from './StyleThumbnail';
 import {connect} from "react-redux";
 
 import SizeAndStock from "./SizeAndStock";
+import {selectStyle} from '../../../redux/actions/index';
 
 class Styles extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            styleName: ''
+        }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.overallData.productStyles) {
+            if (this.props.selectedStyle === null) {
+                this.props.selectStyle(this.props.overallData.productStyles.results[0]);
+            } else if (this.props.overallData.productStyles.product_id !== prevProps.overallData.productStyles.product_id) {
+                this.props.selectStyle(this.props.overallData.productStyles.results[0]);
+            }
+        }
+        // console.log('SELECTED STYLE ID:', this.props.selectedStyle)
+        // console.log('SELECTED PREV STATE:', prevProps)
+    }
 
     renderStyleThumbnails = () => {
-        if (this.props.productStyles.length !== 0) {
-            let thumbnails = this.props.productStyles.results.map((style) => {
+        let productStyles = this.props.overallData.productStyles;
+        if (productStyles) {
+            let thumbnails = productStyles.results.map((style) => {
                 return (
                     <>
                         <StyleThumbnail 
                             key={style.style_id} 
                             id={style.style_id} 
                             url={style.photos[0].thumbnail_url}
-                            changeStyle={this.changeStyle}
-                            selectedStyleId={this.props.selectedStyle}
+                            selectedStyle={this.props.selectedStyle}
+                            style={style}
                             />
                     </>
                 )
-            })
+            });
 
             return (
-                <>
-                    <div className="styles-container">
-                        <p>STYLE > {this.props.productStyles.results[this.props.selectedStyle - 1].name}</p>
-                        {thumbnails}
-
-                    </div>
-                    <div className="purchase-options-container">
-                        <SizeAndStock selectedStyleId={this.props.selectedStyle}/>
-                    </div>
-                </>
+                <div className="styles-container">
+                    {thumbnails}
+                </div>  
             )
         }
     }
 
+    renderStyleName = () => {
+        let selectedStyle = this.props.selectedStyle;
+        if (selectedStyle !== null) {
+            return <p>STYLE > {selectedStyle.name}</p>
+        } else {
+            return <p>Loading</p>
+        }
+    }
+
     render() {
-        console.log('TESTING STYLES PROPS:', this.props);
-        
+
         return (
             <div className="styles-wrapper">
                 <div className="styles-thumbnails-wrapper">
-                    
+                    {this.renderStyleName()}
                     {this.renderStyleThumbnails()}
+                    
+                    <div className="purchase-options-container">
+                        <SizeAndStock />
+                    </div>
                 </div>
             </div>
         )
@@ -57,13 +78,9 @@ class Styles extends Component {
 
 const mapStateToProps = (state) => {
         return {
-        currentProduct: state.currentProduct,
-        averageRating: state.averageRating,
-        relatedProducts: state.relatedProducts,
-        productStyles: state.productStyles,
         selectedStyle: state.selectedStyle,
-        currentProductEntries: Object.entries(state.currentProduct)
+        overallData: state.overallData
       };
 }
 
-export default connect(mapStateToProps)(Styles);
+export default connect(mapStateToProps, {selectStyle})(Styles);

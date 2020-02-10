@@ -4,14 +4,6 @@ import axios from "axios";
 import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 
-function mapStateToProps(state) {
-  return {
-    relatedProducts: state.relatedProducts
-  };
-}
-const mapDispatchToProps = dispatch => {
-  return {};
-};
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -31,61 +23,81 @@ class RelatedProducts extends Component {
       },
       () => {
         this.getRelatedProductData();
-        this.getRelatedProductStyles();
       }
     );
   };
 
   getRelatedProductData = () => {
     let relatedData = [];
+    let relatedStyles = [];
     this.state.relatedProductsIds.map(productId => {
       return axios
         .get(`http://3.134.102.30/products/${productId}`)
         .then(data => {
           relatedData.push(data.data);
         })
-        .then(() =>
-          this.setState({
-            relatedProductData: relatedData
-          })
-        );
-    });
-  };
-  getRelatedProductStyles = () => {
-    let relatedStyles = [];
-    this.state.relatedProductsIds.map(productId => {
-      return axios
-        .get(`http://3.134.102.30/products/${productId}/styles`)
-        .then(data => {
-          let containsDefault = false;
-          data.data.results.forEach(result => {
-            if (result["default?"] === 1) {
-              relatedStyles.push(result);
-              containsDefault = true;
-            }
+        .then(() => {
+          this.state.relatedProductsIds.map(productId => {
+            return axios
+              .get(`http://3.134.102.30/products/${productId}/styles`)
+              .then(data => {
+                let containsDefault = false;
+                data.data.results.forEach(result => {
+                  if (result["default?"] === 1) {
+                    relatedStyles.push(result);
+                    containsDefault = true;
+                  }
+                });
+                if (!containsDefault) {
+                  relatedStyles.push(data.data.results[0]);
+                }
+                return data;
+              })
+              .then(() =>
+                this.setState({
+                  relatedProductData: relatedData,
+                  relatedProductStyles: relatedStyles
+                })
+              );
           });
-          if (!containsDefault) {
-            relatedStyles.push(data.data.results[0]);
-          }
-          return data;
         })
-        .then(() =>
-          this.setState({
-            relatedProductStyles: relatedStyles
-          })
-        );
     });
   };
+  // getRelatedProductStyles = () => {
+  //   let relatedStyles = [];
+  //   this.state.relatedProductsIds.map(productId => {
+  //     return axios
+  //       .get(`http://3.134.102.30/products/${productId}/styles`)
+  //       .then(data => {
+  //         let containsDefault = false;
+  //         data.data.results.forEach(result => {
+  //           if (result["default?"] === 1) {
+  //             relatedStyles.push(result);
+  //             containsDefault = true;
+  //           }
+  //         });
+  //         if (!containsDefault) {
+  //           relatedStyles.push(data.data.results[0]);
+  //         }
+  //         return data;
+  //       })
+  //       .then(() =>
+  //         this.setState({
+  //           relatedProductStyles: relatedStyles
+  //         })
+  //       );
+  //   });
+  // };
   handleOutfitAddClick = e => {
     if (
       this.state.outfit.every(product => {
-        return product.data.id !== this.props.productData.id;
+        return product.data.id !== this.props.overallData.currentProduct.id;
       })
     ) {
       let outfit = [...this.state.outfit];
       outfit.push({
-        data: this.props.productData,
-        style: this.props.productStyle
+        data: this.props.overallData.currentProduct,
+        style: this.props.overallData.productStyles
       });
       this.setState({
         outfit: outfit
@@ -103,15 +115,24 @@ class RelatedProducts extends Component {
     localStorage.setItem("outfit", JSON.stringify(outfit));
   };
 
-  componentDidUpdate(nextProps) {
-    if (nextProps.relatedProducts !== this.state.relatedProductsIds) {
-      this.getRelatedProductIds(this.props.relatedProducts);
-    }
-  }
+  // componentDidUpdate(nextProps) {
+  //   if (nextProps.overallData.relatedProducts) {
+  //     if (nextProps.relatedProducts !== this.state.relatedProductsIds) {
+  //       console.log(nextProps.overallData, "1");
+  //       console.log(this.state.relatedProductsIds, "2");
+  //       this.getRelatedProductIds(this.props.overallData.relatedProducts);
+  //       // this.getRelatedProductIds([1, 2]);
+  //     }
+  //   }
+  // }
 
+  componentWillReceiveProps({ overallData }) {
+    this.setState({ overallData }, () => {
+      this.getRelatedProductIds(this.state.overallData.relatedProducts);
+    });
+  }
   componentDidMount() {
     let outfit = JSON.parse(localStorage.getItem("outfit"));
-    console.log(outfit, "outfit");
     if (outfit !== null) {
       this.setState({
         outfit: outfit
@@ -143,6 +164,12 @@ class RelatedProducts extends Component {
       </div>
     );
   }
+}
+function mapStateToProps(state) {
+  return {
+    // relatedProducts: state.relatedProducts,
+    overallData: state.overallData
+  };
 }
 
 export default connect(mapStateToProps)(RelatedProducts);

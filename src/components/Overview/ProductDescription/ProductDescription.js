@@ -1,16 +1,19 @@
 import React from 'react';
 import {connect} from "react-redux";
 
-const ProductDescription = ({description, features}) => {
-    // console.log('PROD DESC PROPS:', description)
-    // console.log('PROD DESC PROPS:', features)
+const ProductDescription = ({overallData}) => {
+    const renderDescription = () => {
+        if (!overallData.productData) {return "Loading"}
+        else {return overallData.productData.description}
+    }
+
     return (
         <div className="ui items">
             <div className="item">
                 <div className="content">
                     <h4 className="header">Product Description</h4>
                     <div className="description">
-                        <p>{description}</p>
+                        <p>{renderDescription()}</p>
                     </div>
                     <h5 className="header">Features</h5>
                     <div>
@@ -22,11 +25,9 @@ const ProductDescription = ({description, features}) => {
     )
 }
 
-
 const mapStateToProps = (state) => {
     return {
-        description: state.currentProduct.description,
-        features: state.currentProduct.features
+        overallData: state.overallData
     }
 }
 
