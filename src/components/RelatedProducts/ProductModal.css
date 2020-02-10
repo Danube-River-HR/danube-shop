@@ -1,0 +1,6 @@
+.dimmed.dimmable>.ui.animating.dimmer, .dimmed.dimmable>.ui.visible.dimmer, .ui.active.dimmer {
+  background-color: rgba(34,36,38,.15);
+}
+ul {
+  list-style-type: none;
+}
