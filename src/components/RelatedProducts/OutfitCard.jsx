@@ -2,7 +2,7 @@ import React from "react";
 
 const OutfitCard = props => {
   let containStyles = () => {
-    console.log(props.style)
+    // console.log(props.style)
     return props.style.photos[0].url !== null ? (
       <img src={props.style.photos[0].url} alt={"Loading"} />
     ) : (

@@ -12,82 +12,47 @@ class RelatedProducts extends Component {
       relatedProductData: [],
       relatedProductStyles: [],
       currentProduct: [],
-      outfit: []
+      outfit: [],
+      overallData: {}
     };
   }
-
-  getRelatedProductIds = relatedProductIds => {
-    this.setState(
-      {
-        relatedProductsIds: relatedProductIds
-      },
-      () => {
-        this.getRelatedProductData();
-      }
-    );
-  };
-
   getRelatedProductData = () => {
     let relatedData = [];
     let relatedStyles = [];
+    console.log(this.state.relatedProductsIds,'related')
     this.state.relatedProductsIds.map(productId => {
+      let one = `http://3.134.102.30/products/${productId}`;
+      let two = `http://3.134.102.30/products/${productId}/styles`;
+      const requestOne = axios.get(one);
+      const requestTwo = axios.get(two);
       return axios
-        .get(`http://3.134.102.30/products/${productId}`)
-        .then(data => {
-          relatedData.push(data.data);
-        })
-        .then(() => {
-          this.state.relatedProductsIds.map(productId => {
-            return axios
-              .get(`http://3.134.102.30/products/${productId}/styles`)
-              .then(data => {
-                let containsDefault = false;
-                data.data.results.forEach(result => {
-                  if (result["default?"] === 1) {
-                    relatedStyles.push(result);
-                    containsDefault = true;
-                  }
-                });
-                if (!containsDefault) {
-                  relatedStyles.push(data.data.results[0]);
-                }
-                return data;
-              })
-              .then(() =>
-                this.setState({
-                  relatedProductData: relatedData,
-                  relatedProductStyles: relatedStyles
-                })
-              );
-          });
-        })
+        .all([requestOne, requestTwo])
+        .then(
+          axios.spread((...data) => {
+            const responseOne = data[0];
+            const responseTwo = data[1];
+            relatedData.push(responseOne.data);
+            let containsDefault = false;
+            responseTwo.data.results.forEach(result => {
+              if (result["default?"] === 1) {
+                relatedStyles.push(result);
+                containsDefault = true;
+              }
+            });
+            if (!containsDefault) {
+              relatedStyles.push(responseTwo.data.results[0]);
+            }
+            return data;
+          })
+        )
+        .then(() =>
+          this.setState({
+            relatedProductData: relatedData,
+            relatedProductStyles: relatedStyles
+          })
+        );
     });
   };
-  // getRelatedProductStyles = () => {
-  //   let relatedStyles = [];
-  //   this.state.relatedProductsIds.map(productId => {
-  //     return axios
-  //       .get(`http://3.134.102.30/products/${productId}/styles`)
-  //       .then(data => {
-  //         let containsDefault = false;
-  //         data.data.results.forEach(result => {
-  //           if (result["default?"] === 1) {
-  //             relatedStyles.push(result);
-  //             containsDefault = true;
-  //           }
-  //         });
-  //         if (!containsDefault) {
-  //           relatedStyles.push(data.data.results[0]);
-  //         }
-  //         return data;
-  //       })
-  //       .then(() =>
-  //         this.setState({
-  //           relatedProductStyles: relatedStyles
-  //         })
-  //       );
-  //   });
-  // };
   handleOutfitAddClick = e => {
     if (
       this.state.outfit.every(product => {
@@ -115,21 +80,13 @@ class RelatedProducts extends Component {
     localStorage.setItem("outfit", JSON.stringify(outfit));
   };
 
-  // componentDidUpdate(nextProps) {
-  //   if (nextProps.overallData.relatedProducts) {
-  //     if (nextProps.relatedProducts !== this.state.relatedProductsIds) {
-  //       console.log(nextProps.overallData, "1");
-  //       console.log(this.state.relatedProductsIds, "2");
-  //       this.getRelatedProductIds(this.props.overallData.relatedProducts);
-  //       // this.getRelatedProductIds([1, 2]);
-  //     }
-  //   }
-  // }
-
-  componentWillReceiveProps({ overallData }) {
-    this.setState({ overallData }, () => {
-      this.getRelatedProductIds(this.state.overallData.relatedProducts);
-    });
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.overallData.relatedProducts !== this.props.overallData.relatedProducts
+    ) {
+      this.setState({relatedProductsIds: this.props.overallData.relatedProducts}, () => {
+        this.getRelatedProductData()})
+    }
   }
   componentDidMount() {
     let outfit = JSON.parse(localStorage.getItem("outfit"));
@@ -167,7 +124,6 @@ class RelatedProducts extends Component {
 }
 function mapStateToProps(state) {
   return {
-    // relatedProducts: state.relatedProducts,
     overallData: state.overallData
   };
 }
