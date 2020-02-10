@@ -25,9 +25,9 @@ const Card = props => {
   };
   return (
     <div className="productCard">
-      <button class="ui icon button" onClick={props.handleClick}>
+      {/* <button class="ui icon button" onClick={props.handleClick}>
         <i class="star outline icon"></i>
-      </button>
+      </button> */}
       <ProductModal cardData={props.data} currentProduct={props.currentProduct}/>
       {containStyles()}
       <div className="cardInfo">

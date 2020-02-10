@@ -11,7 +11,7 @@ const ModalModalExample = props => {
   console.log(features,'features obj')
   console.log(Object.keys(features))
   return (
-    <Modal trigger={<Button>Show Modal</Button>}>
+    <Modal trigger={<Button id='product-modal'><i class="star outline icon"></i></Button>}>
       <Modal.Header>Comparing</Modal.Header>
       <Modal.Content image>
         <Modal.Description>

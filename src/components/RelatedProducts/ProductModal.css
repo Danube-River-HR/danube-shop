@@ -1,6 +1,32 @@
-.dimmed.dimmable>.ui.animating.dimmer, .dimmed.dimmable>.ui.visible.dimmer, .ui.active.dimmer {
-  background-color: rgba(34,36,38,.15);
+.dimmed.dimmable > .ui.animating.dimmer,
+.dimmed.dimmable > .ui.visible.dimmer,
+.ui.active.dimmer {
+  background-color: rgba(34, 36, 38, 0.15);
 }
 ul {
   list-style-type: none;
 }
+
+#product-modal{
+  font-size: 15px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
+}
+/* .ui.button,
+.ui.buttons .button,
+.ui.buttons .or {
+  font-size: 15px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.ui.button>.icon:not(.button) {
+  height: .85714286em;
+  opacity: .8;
+  margin: 0 .42857143em 0 -.21428571em;
+  transition: opacity .1s ease;
+  vertical-align: '';
+  font-size: 15px;
+  color: black;
+  background-color: rgba(255, 255, 255, 0);
+} */
