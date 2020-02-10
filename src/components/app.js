@@ -43,12 +43,13 @@ class App extends React.Component {
     this.props.getAverageRating(id);
     this.props.getRelatedProducts(id);
     this.props.getProductStyles(id);
+    this.props.fetchAllProductData(id);
   };
 
   componentDidMount() {
-    // this.updateProduct(2);
+    this.updateProduct(2);
     this.updateProduct(this.state.currentProductId);
-    fetchAllProductData(1);
+    this.props.fetchAllProductData(1);
 
   }
 
@@ -59,11 +60,13 @@ class App extends React.Component {
 
         <Router>
           <Overview />
+
           <RelatedProducts
             productData={this.props.currentProduct}
             productStyle={this.props.productStyles}
             handleCardClick={this.handleCardClick}
           />
+
           {Object.entries(this.props.currentProduct).length === 0 ? (
             <div>LOADING</div>
           ) : (

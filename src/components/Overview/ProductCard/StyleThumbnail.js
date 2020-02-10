@@ -10,9 +10,17 @@ class StyleThumbnail extends Component {
     }
 
     handleStyleClick = () => {
-        // this.props.changeStyle(this.props.id);
-        // console.log('TESTING STYLE CLICK:', this.props.selectStyle)
-        this.props.selectStyle(this.props.id);
+        this.props.selectStyle(this.props.style);
+    }
+
+    renderCheckmark = () => {
+        if (this.props.selectedStyle !== null) {
+            if (this.props.id === this.props.selectedStyle.style_id) {
+                return <Icon className="check circle outline"/>
+            } else {
+                return null;
+            }
+        } 
     }
 
     render() {
@@ -25,8 +33,8 @@ class StyleThumbnail extends Component {
                     circular
                     onClick={this.handleStyleClick}
                     />
-                
-                {this.props.id === this.props.selectedStyleId ? <Icon className="check circle outline"/> : null}
+                                
+                    {this.renderCheckmark()}
             </div>
            
         )

@@ -7,22 +7,28 @@ import Styles from './Styles';
 class ProductCard extends React.Component {
     constructor(props) {
         super(props)
-
-    }
-
-    renderRating = () => {
-        if (this.props.averageRating !== null) {return (<Rating defaultRating={Math.ceil(this.props.averageRating)} maxRating={5} disabled />)}
     }
 
     render() {
-        const productName = this.props.currentProduct.name;
-        const productCategory = this.props.currentProduct.category;
-        const productPrice = this.props.currentProduct.default_price;
+        let productName;
+        let productCategory;
+        let productPrice;
+        let averageRating;
+
+        if (!this.props.overallData.currentProduct) {
+            productName = "Loading";
+            productCategory = "Loading";
+            productPrice = "Loading";
+        } else {
+            productName = this.props.overallData.currentProduct.name;
+            productCategory = this.props.overallData.currentProduct.category;
+            productPrice = this.props.overallData.currentProduct.default_price;
+        } 
         
         return (
             <div className="ui card">
                 <div className="content">
-                    {this.renderRating()}
+                    {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"}
                     <div className="meta"><span className="date">{productCategory}</span></div>
                     <div className="header">{productName}</div>
                     <div className="description">${productPrice}</div>
@@ -38,11 +44,8 @@ class ProductCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log('PRODUCT CARD STATE:', state);
     return {
-        currentProduct: state.currentProduct,
-        averageRating: state.averageRating,
-        productStyles: state.productStyles
+        overallData: state.overallData
       };
 }
 

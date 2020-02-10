@@ -6,7 +6,23 @@ class SizeAndStock extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectedSize: null
+            selectedSize: null,
+            currentProductId: null,
+            sizePlaceholder: "Size",
+            quantityPlaceholder: "Quantity"
+        }
+    }
+
+    componentDidUpdate() {
+        // When overallData.currentProduct EXISTS and local state currentProductId is null, set the currentProdId
+        if (this.props.overallData.currentProduct !== undefined && this.state.currentProductId === null) {
+                this.setState({currentProductId: this.props.overallData.currentProduct.id})
+        } else if (this.state.currentProductId !== null) {
+
+            // When overallData.currentProduct CHANGES, RESET the localstate selectedSize and UPDATE currentProdId
+            if (this.props.overallData.currentProduct.id !== this.state.currentProductId) {
+                this.setState({selectedSize: null, currentProductId: this.props.overallData.currentProduct.id})
+            }
         }
     }
 
@@ -20,66 +36,28 @@ class SizeAndStock extends Component {
         }
     }
 
-    render() {
-        console.log('SIZE AND STOCK LOCAL STATE DATA:', this.state);
-
-        let selectedItem = this.props.productStyles.results.filter(style => {
-            return style.style_id === this.props.selectedStyleId;
-        });
-        // console.log('SELECTED ITEM:', selectedItem);
+    renderSizeAndQuantityDropdown = () => {
+        let selectedStyle = this.props.selectedStyle;
         let sizeToStock;
 
-        if (selectedItem === undefined) {
-          
+        if (selectedStyle === null) {
             sizeToStock = {
-              "XS": 0,
-              "S": 0,
-              "M": 0,
-              "L": 0,
-              "XL": 0
-            }
-            
-            
-          }
-
-          // if (selectedItem) {
-          //   console.log('hey', selectedItem)
-          //   if (selectedItem[0].skus === null) {
-          //     sizeToStock = {
-          //       "XS": 0,
-          //       "S": 0,
-          //       "M": 0,
-          //       "L": 0,
-          //       "XL": 0
-          //     }
-          //   } else {
-          //     sizeToStock = selectedItem[0].skus; // the 0 index is bc .filter returns an array of your filtered item.
-
-          //   }
-
-          // }
-          if (selectedItem) {
-            console.log('hey', selectedItem)
-            if (selectedItem.length === 0) {
-              sizeToStock = {
                 "XS": 0,
                 "S": 0,
                 "M": 0,
                 "L": 0,
                 "XL": 0
               }
-            } else {
-              sizeToStock = selectedItem[0].skus; // the 0 index is bc .filter returns an array of your filtered item.
-
+        } else if (selectedStyle.skus.null === null) {
+            sizeToStock = {
+                "N/A": 0
             }
-
-          }
-        
+        } else {
+            sizeToStock = selectedStyle.skus;
+        }
 
         let sizeOptions = Object.entries(sizeToStock).map((size, index) => {
-            let option;
-            if (size[1] === 0) {option = `${size[0]} - Out of stock`}
-            else {option = size[0]}
+            let option = size[0];
 
             return ({
                 key: index,
@@ -88,12 +66,12 @@ class SizeAndStock extends Component {
             });
         });
 
-
         let quantityOptions = [];
+        
         if (this.state.selectedSize === null) {
             quantityOptions.push({key: 0, text: "---"});
         } else {
-            if (sizeToStock[this.state.selectedSize] === 0) {quantityOptions.push({key: 0, text: "Not Available"})}
+            if (sizeToStock[this.state.selectedSize] === 0) {quantityOptions.push({key: 0, text: "N/A", value: "N/A"})}
             else {
                 let stock = sizeToStock[this.state.selectedSize];
                 for (let i = 1; i <= stock; i++) {
@@ -109,10 +87,20 @@ class SizeAndStock extends Component {
         }
 
         return (
+            <div>
+                <Select placeholder={this.state.sizePlaceholder} options={sizeOptions} onChange={this.handleSizeSelect}/>
+                <Select placeholder={this.state.quantityPlaceholder} options={quantityOptions} onChange={this.handleQuantitySelect} />
+            </div>
+        )
+    }
+
+
+    render() {
+
+        return (
             <>
                 <div className="size-wrapper">
-                    <Select placeholder="Size" options={sizeOptions} onChange={this.handleSizeSelect} simple item/>
-                    <Select placeholder="Quantity" options={quantityOptions} onChange={this.handleQuantitySelect} simple item />
+                    {this.renderSizeAndQuantityDropdown()}
                 </div>
 
                 <div className="cart-wrapper">
@@ -126,7 +114,8 @@ class SizeAndStock extends Component {
 const mapStateToProps = (state) => {
     console.log('SIZE AND STOCK STATE:', state);
     return {
-        productStyles: state.productStyles
+        overallData: state.overallData,
+        selectedStyle: state.selectedStyle
       };
 }
 
