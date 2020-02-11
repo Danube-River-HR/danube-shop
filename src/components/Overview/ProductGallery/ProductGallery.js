@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import MainImage from './MainImage';
 import GalleryThumbnails from './GalleryThumbnails';
+import ExpandedView from './ExpandedView';
 
 class ProductGallery extends Component {
     constructor(props) {
@@ -10,8 +11,17 @@ class ProductGallery extends Component {
 
         this.state = {
            thumbnails: [],
-           selectedThumbnailIndex: -1
+           selectedThumbnailIndex: -1,
+           expandView: false
         }
+    }
+
+    closeExpandedView = () => {
+        this.setState({expandView: false})
+    }
+
+    openExpandedView = () => {
+        this.setState({expandView: true})
     }
 
     changeCurrentImage = (thumbnailData) => {
@@ -36,20 +46,27 @@ class ProductGallery extends Component {
             this.setState({
                 thumbnails: this.props.selectedStyle.photos,
                 selectedThumbnailIndex: 0
-            })
+            });
         } else if (this.props.selectedStyle !== null && this.state.selectedThumbnailIndex !== -1) {
             if (this.props.selectedStyle.style_id !== prevProps.selectedStyle.style_id) {
                 this.setState({
-                    thumbnails: this.props.selectedStyle.photos
-                })
-            }
-        }
+                    thumbnails: this.props.selectedStyle.photos,
+                    selectedThumbnailIndex: 0
+                });
+            } 
+        } 
+        
+        // else if (this.props.overallData.currentData !== undefined) {
+        //     if (this.props.overallData.currentData.id !== prevProps.overallData.currentData.id) {
+        //         this.setState({
+        //             selectedThumbnailIndex: 0
+        //         });
+        //     }
+        // }
     }
 
 
     render() {
-        console.log('PRODUCT GALLERY PROPS:', this.props);
-
         return (
             <div className="gallery-container">
                 <GalleryThumbnails 
@@ -61,15 +78,22 @@ class ProductGallery extends Component {
                     changeByArrow={this.changeByArrow}
                     thumbnails={this.state.thumbnails}
                     selectedThumbnailIndex={this.state.selectedThumbnailIndex}
+                    openExpandedView={this.openExpandedView}
                     />
+                
+                {this.state.expandView ? 
+                <ExpandedView 
+                    thumbnails={this.state.thumbnails}
+                    selectedThumbnailIndex={this.state.selectedThumbnailIndex}
+                    closeExpandedView={this.closeExpandedView}
+                    changeByArrow={this.changeByArrow}
+                /> : null}
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    // console.log('PRODUCT GALLERY STATE:', state);
-
     return {
         overallData: state.overallData,
         selectedStyle: state.selectedStyle
