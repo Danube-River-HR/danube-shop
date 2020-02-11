@@ -10,12 +10,22 @@ h1 {
   padding-right: 20%;
 
 }
+.itemCarousel {
+  height: 350px;
+}
+#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig {
+  height: 350px;
+}
 
+#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig > div > div.sc-bxivhb.evPXcE > div{
+ background-color: transparent;
+
+}
 .productCarousel {
   display: flex;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   margin: 10 10px;
-  overflow: auto;
+  /* overflow: auto; */
   /* border: 1px;
   border-color: black;
   border-style: solid; */

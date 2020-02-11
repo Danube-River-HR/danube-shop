@@ -14,7 +14,7 @@ const ModalModalExample = props => {
   let productModal = () => {
     let table = [];
     for (let feature in features) {
-      console.log(features[feature].current,'current')
+      // console.log(features[feature].current,'current')
        table.push(
         <div class="modalContainer">
           <div>{features[feature].current}</div>
@@ -23,7 +23,7 @@ const ModalModalExample = props => {
         </div>
       );
     }
-    console.log(table)
+    // console.log(table)
     return table;
   };
 
