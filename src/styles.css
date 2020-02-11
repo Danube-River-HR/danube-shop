@@ -240,3 +240,7 @@ h1 {
 .characteristicsLabel {
   font: inherit;
 }
+#reviewEntryPic {
+  display: flex;
+  justify-content: center;
+}
