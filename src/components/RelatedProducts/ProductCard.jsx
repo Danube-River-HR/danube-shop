@@ -2,6 +2,9 @@ import React from "react";
 import ProductModal from "./ProductModal";
 
 const Card = props => {
+  let defaultImg =
+    "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg";
+
   let containStyles = () => {
     if (props.style !== undefined) {
       return props.style.photos[0].url === null ? (
@@ -25,11 +28,11 @@ const Card = props => {
   };
   return (
     <div className="productCard">
-      {/* <button class="ui icon button" onClick={props.handleClick}>
-        <i class="star outline icon"></i>
-      </button> */}
-      <ProductModal cardData={props.data} currentProduct={props.currentProduct}/>
       {containStyles()}
+      <ProductModal
+        cardData={props.data}
+        currentProduct={props.currentProduct}
+      />
       <div className="cardInfo">
         <div>{props.data.category}</div>
         <div>{props.data.name}</div>

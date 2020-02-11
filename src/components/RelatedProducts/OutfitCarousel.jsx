@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import OutfitCard from "./OutfitCard";
+import ItemsCarousel from "react-items-carousel";
 
 // {data: {…}, style: {…}}
 // data: {id: 1, name: "Camo Onesie", slogan: "Blend in to your crowd", description: "The So Fatigues will wake you up and fit you in. T…you blending in to even the wildest surroundings.", category: "Jackets", …}
@@ -15,6 +16,8 @@ import OutfitCard from "./OutfitCard";
 // length: 6
 
 const Carousel = props => {
+  const [activeItemIndex, setActiveItemIndex] = useState(0);
+  const chevronWidth = 30;
   let cards = props.outfit.map((card, index) => {
     let defaultStyle = [];
     let hasDefault = false;
@@ -38,14 +41,36 @@ const Carousel = props => {
     );
   });
   return (
-    <div className="productCarousel">
-      <div className="productCard">
-        <button class="ui icon button" onClick={props.handleOutfitAddClick}>
-          <i class="plus square outline icon"></i>
-        </button>
-        Add to outfit
-      </div>
-      {cards}
+    // <div className="productCarousel">
+    //   <div className="productCard">
+    //     <button class="ui icon button" onClick={props.handleOutfitAddClick}>
+    //       <i class="plus square outline icon"></i>
+    //     </button>
+    //     Add to outfit
+    //   </div>
+    //   {cards}
+    // </div>
+    <div class="itemCarousel" style={{}}>
+      <ItemsCarousel
+        requestToChangeActive={setActiveItemIndex}
+        activeItemIndex={activeItemIndex}
+        activePosition={"left"}
+        numberOfCards={3.5}
+        gutter={12}
+        showSlither={true}
+        leftChevron={<button>{"<"}</button>}
+        rightChevron={<button>{">"}</button>}
+        outsideChevron={true}
+        chevronWidth={chevronWidth}
+      >
+        <div className="productCard">
+          <button class="ui icon button" onClick={props.handleOutfitAddClick}>
+            <i class="plus square outline icon"></i>
+          </button>
+          Add to outfit
+        </div>
+        {cards}
+      </ItemsCarousel>
     </div>
   );
 };
