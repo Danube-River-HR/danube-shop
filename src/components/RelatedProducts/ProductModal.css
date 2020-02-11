@@ -7,15 +7,18 @@ ul {
   list-style-type: none;
 }
 
-#product-modal {
+#modal-button {
+  position: absolute;
   font-size: 15px;
   color: black;
   background-color: rgba(255, 255, 255, 0);
+  left: 75%
+
 }
 
 .modalContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .feature {

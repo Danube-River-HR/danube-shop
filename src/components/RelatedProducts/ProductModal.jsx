@@ -30,7 +30,7 @@ const ModalModalExample = props => {
   return (
     <Modal
       trigger={
-        <Button id="product-modal">
+        <Button id="modal-button">
           <i class="star outline icon"></i>
         </Button>
       }
