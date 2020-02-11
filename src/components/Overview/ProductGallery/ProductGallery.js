@@ -9,37 +9,43 @@ class ProductGallery extends Component {
         super(props)
 
         this.state = {
-           currentImage: '',
            thumbnails: [],
-           selectedThumbnailIndex: 0
+           selectedThumbnailIndex: -1
         }
     }
 
     changeCurrentImage = (thumbnailData) => {
         this.setState({
-            currentImage: thumbnailData.mainURL,
             selectedThumbnailIndex: thumbnailData.index
         })
     }
 
+    changeByArrow = (arrowChoice) => {
+        if (this.state.thumbnails.length !== 0) {
+            if (arrowChoice === "arrowLeft" && this.state.selectedThumbnailIndex > 0) {
+                this.setState({selectedThumbnailIndex: this.state.selectedThumbnailIndex - 1})
+            } else if (arrowChoice === "arrowRight" && this.state.selectedThumbnailIndex < this.state.thumbnails.length - 1) {
+                this.setState({selectedThumbnailIndex: this.state.selectedThumbnailIndex + 1})
+            }
+        }
+    }
+
     componentDidUpdate(prevProps) {
         // If our prop loads and currentImage is empty, set a new url there.
-        if (this.props.selectedStyle !== null && this.state.currentImage === '') {
+        if (this.props.selectedStyle !== null && this.state.selectedThumbnailIndex === -1) {
             this.setState({
-                currentImage: this.props.selectedStyle.photos[0].url,
-                thumbnails: this.props.selectedStyle.photos
+                thumbnails: this.props.selectedStyle.photos,
+                selectedThumbnailIndex: 0
             })
-        } else if (this.props.selectedStyle !== null && this.state.currentImage !== '') {
+        } else if (this.props.selectedStyle !== null && this.state.selectedThumbnailIndex !== -1) {
             if (this.props.selectedStyle.style_id !== prevProps.selectedStyle.style_id) {
                 this.setState({
-                    currentImage: this.props.selectedStyle.photos[0].url,
-                    thumbnails: this.props.selectedStyle.photos,
-                    selectedThumbnailIndex: 0
+                    thumbnails: this.props.selectedStyle.photos
                 })
             }
         }
-       
     }
+
 
     render() {
         console.log('PRODUCT GALLERY PROPS:', this.props);
@@ -51,7 +57,11 @@ class ProductGallery extends Component {
                     changeCurrentImage={this.changeCurrentImage}
                     selectedThumbnailIndex={this.state.selectedThumbnailIndex}
                     />
-                <MainImage imageURL={this.state.currentImage}/>
+                <MainImage 
+                    changeByArrow={this.changeByArrow}
+                    thumbnails={this.state.thumbnails}
+                    selectedThumbnailIndex={this.state.selectedThumbnailIndex}
+                    />
             </div>
         )
     }
