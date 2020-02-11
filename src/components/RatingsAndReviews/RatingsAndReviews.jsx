@@ -1,5 +1,5 @@
 import React from "react";
-import Ratings from "./Ratings";
+import Ratings from "./Ratings/Ratings";
 import Reviews from "./Reviews";
 import axios from "axios";
 import spinner from "./spinner.gif";
@@ -65,19 +65,25 @@ class RatingsAndReviews extends React.Component {
     this.getReviews(this.state.sorting);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.productData.id != this.props.productData.id) {
+      this.getReviews(this.state.sorting);
+    }
+  }
+
   /*******************************************************************************************/
   render() {
     return (
       <div>
+        <div>
+          <div className="ratingsAndReviewsName">Ratings & Reviews</div>
+        </div>
         {Object.entries(this.state.mainData).length === 0 ? (
           <div>
             <img src={spinner} />
           </div>
         ) : (
-          <div
-            style={{ borderStyle: "solid", borderColor: "blue" }}
-            className="ratingsAndReviews"
-          >
+          <div className="ratingsAndReviews">
             <Ratings
               avg={this.props.avgRating}
               metaData={this.state.metaData}
