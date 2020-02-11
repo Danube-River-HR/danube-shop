@@ -78,7 +78,10 @@ class RatingsAndReviews extends React.Component {
             style={{ borderStyle: "solid", borderColor: "blue" }}
             className="ratingsAndReviews"
           >
-            <Ratings />
+            <Ratings
+              avg={this.props.avgRating}
+              metaData={this.state.metaData}
+            />
             <Reviews
               productName={this.props.productData.name}
               data={this.state.mainData}

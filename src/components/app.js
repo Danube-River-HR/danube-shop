@@ -74,6 +74,7 @@ class App extends React.Component {
           ) : (
             <RatingsAndReviews
               productData={this.props.overallData.currentProduct}
+              avgRating={this.props.overallData.averageRating}
             />
           )}
         </Router>
