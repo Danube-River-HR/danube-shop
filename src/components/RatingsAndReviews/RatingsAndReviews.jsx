@@ -1,5 +1,5 @@
 import React from "react";
-import Ratings from "./Ratings";
+import Ratings from "./Ratings/Ratings";
 import Reviews from "./Reviews";
 import axios from "axios";
 import spinner from "./spinner.gif";
@@ -11,7 +11,8 @@ class RatingsAndReviews extends React.Component {
       mainData: {},
       count: 2,
       sorting: "helpful",
-      markedHelpful: {}
+      markedHelpful: {},
+      currentStarFilter: []
     };
   }
   // **************************************************************************************************
@@ -39,6 +40,18 @@ class RatingsAndReviews extends React.Component {
     }
   };
 
+  changeStarFilter = star => {
+    let arr = this.state.currentStarFilter;
+
+    if (this.state.currentStarFilter.indexOf(star) === -1) {
+      arr.push(star);
+      this.setState({ currentStarFilter: arr });
+    } else {
+      arr.splice(this.state.currentStarFilter.indexOf(star), 1);
+      this.setState({ currentStarFilter: arr });
+    }
+  };
+
   getReviews = (sort = this.state.sorting, count = this.state.count) => {
     axios
       .get(
@@ -52,7 +65,8 @@ class RatingsAndReviews extends React.Component {
               mainData: response.data,
               sorting: sort,
               count: count,
-              metaData: response2.data
+              metaData: response2.data,
+              currentStarFilter: []
             });
           });
       });
@@ -65,22 +79,32 @@ class RatingsAndReviews extends React.Component {
     this.getReviews(this.state.sorting);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.productData.id != this.props.productData.id) {
+      this.getReviews(this.state.sorting);
+    }
+  }
+
   /*******************************************************************************************/
   render() {
     return (
       <div>
+        <button onClick={() => console.log(this.state.currentStarFilter)}>
+          Check Array
+        </button>
+        <div>
+          <div className="ratingsAndReviewsName">Ratings & Reviews</div>
+        </div>
         {Object.entries(this.state.mainData).length === 0 ? (
           <div>
             <img src={spinner} />
           </div>
         ) : (
-          <div
-            style={{ borderStyle: "solid", borderColor: "blue" }}
-            className="ratingsAndReviews"
-          >
+          <div className="ratingsAndReviews">
             <Ratings
               avg={this.props.avgRating}
               metaData={this.state.metaData}
+              changeStarFilter={this.changeStarFilter}
             />
             <Reviews
               productName={this.props.productData.name}
@@ -91,6 +115,7 @@ class RatingsAndReviews extends React.Component {
               reportReview={this.reportReview}
               changeDropdown={this.changeSorting}
               metaData={this.state.metaData}
+              currentStarFilter={this.state.currentStarFilter}
             />
           </div>
         )}

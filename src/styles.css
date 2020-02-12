@@ -3,24 +3,6 @@ h1 {
   background-color: slategray;
 }
 
-/* ---------------------------------- Related Products ------------------------------- */
-
-.relatedProductContainer{
-  padding-left: 20%;
-  padding-right: 20%;
-
-}
-.itemCarousel {
-  height: 350px;
-}
-#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig {
-  height: 350px;
-}
-
-#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig > div > div.sc-bxivhb.evPXcE > div{
- background-color: transparent;
-
-}
 .productCarousel {
   display: flex;
   /* box-sizing: border-box; */
@@ -50,7 +32,6 @@ h1 {
   overflow: hidden;
   flex-shrink: 0;
   margin: 10px 20px;
-  
 }
 .productCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.726);
@@ -59,8 +40,6 @@ h1 {
   width: 100%;
   height: 75%;
   position: relative;
-  object-fit: cover;
-  z-index: 1;
 }
 .cardInfo {
   position: relative;
@@ -145,15 +124,15 @@ h1 {
 
 .image-viewer {
   width: 800px;
-  overflow:hidden;
+  overflow: hidden;
   display: flex;
   justify-content: center;
 }
 
 .image-child {
   height: 600px;
-  cursor: -moz-zoom-in; 
-  cursor: -webkit-zoom-in; 
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
 
@@ -167,12 +146,11 @@ h1 {
   display: flex;
   flex-direction: column;
   margin: 0 0 0 15px;
-  
 }
 
 .arrow-child {
   height: 25px;
-  width: 25px
+  width: 25px;
 }
 
 .arrow.left.large {
@@ -188,7 +166,7 @@ h1 {
 .expand.large.icon {
   position: absolute;
   right: 5%;
-  top: 0%
+  top: 0%;
 }
 
 /* ----- SIZE AND QUANTITY ----- */
@@ -197,24 +175,26 @@ h1 {
 } */
 
 /* ---------------------------------- Ratings and Reviews ------------------------------- */
-
+.ratingsAndReviewsName {
+  margin: 20px;
+  padding: 20px;
+  padding-top: 40px;
+  padding-bottom: 10px;
+  font-size: x-large;
+}
 .ratingsAndReviews {
   display: flex;
   justify-content: center;
 }
-.ratingsParent {
-  box-sizing: content-box;
-  flex-basis: unset;
-  flex-grow: 1;
-  width: 500px;
-}
+
 .reviewsParent {
   margin: 10px;
   padding: 10px;
   font-size: medium;
   box-sizing: content-box;
   flex-basis: unset;
-  flex-grow: 1;
+  flex-grow: 2;
+  width: 500px;
 }
 .reviewButtons {
   padding-top: 2vh;
@@ -295,4 +275,45 @@ h1 {
 #reviewEntryPic {
   display: flex;
   justify-content: center;
+}
+
+/*--------------------- Ratings --------------------*/
+
+.ratingsParent {
+  margin: 10px;
+  padding: 10px;
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.ratingsParentContainer {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+}
+.rating {
+  margin: 10px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 400%;
+  font-weight: bold;
+}
+.recommendPercent {
+  margin: 10px;
+  padding: 10px;
+}
+.ratingWrapper {
+}
+.ratingBreakdown {
+  text-decoration: underline;
+  margin: 2px;
+  padding: 2px;
+  padding-left: 10px;
+}
+.ratingBar {
+  cursor: pointer;
 }

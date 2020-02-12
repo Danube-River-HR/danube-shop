@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 import ReviewModal from "./ReviewModal";
@@ -11,20 +11,40 @@ var Reviews = ({
   reportReview,
   changeDropdown,
   productName,
-  metaData
+  metaData,
+  currentStarFilter
 }) => {
   let items = [];
+  let filter = currentStarFilter;
+
+  // useEffect(()=>{
+  //   filter =
+  // })
 
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
-    items.push(
-      <ReviewEntry
-        key={data.results[i].review_id}
-        review={data.results[i]}
-        addHelpful={markHelpful}
-        report={reportReview}
-      />
-    );
+    if (currentStarFilter.length > 0) {
+      if (currentStarFilter.includes(data.results[i].rating)) {
+        console.log("hello");
+        items.push(
+          <ReviewEntry
+            key={data.results[i].review_id}
+            review={data.results[i]}
+            addHelpful={markHelpful}
+            report={reportReview}
+          />
+        );
+      }
+    } else {
+      items.push(
+        <ReviewEntry
+          key={data.results[i].review_id}
+          review={data.results[i]}
+          addHelpful={markHelpful}
+          report={reportReview}
+        />
+      );
+    }
   }
 
   return (
