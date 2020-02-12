@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 import ReviewModal from "./ReviewModal";
@@ -15,6 +15,11 @@ var Reviews = ({
   currentStarFilter
 }) => {
   let items = [];
+  let filter = currentStarFilter;
+
+  // useEffect(()=>{
+  //   filter =
+  // })
 
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
