@@ -17,15 +17,23 @@ var Reviews = ({
   let items = [];
   let filter = currentStarFilter;
 
-  // useEffect(()=>{
-  //   filter =
-  // })
-
-  for (let i = 0; i < count; i++) {
-    if (data.results[i] === undefined) break;
-    if (currentStarFilter.length > 0) {
-      if (currentStarFilter.includes(data.results[i].rating)) {
-        console.log("hello");
+  useEffect(() => {
+    console.log("im running");
+    for (let i = 0; i < count; i++) {
+      if (data.results[i] === undefined) break;
+      if (currentStarFilter.length > 0) {
+        if (currentStarFilter.includes(data.results[i].rating)) {
+          console.log("hello");
+          items.push(
+            <ReviewEntry
+              key={data.results[i].review_id}
+              review={data.results[i]}
+              addHelpful={markHelpful}
+              report={reportReview}
+            />
+          );
+        }
+      } else {
         items.push(
           <ReviewEntry
             key={data.results[i].review_id}
@@ -35,17 +43,21 @@ var Reviews = ({
           />
         );
       }
-    } else {
-      items.push(
-        <ReviewEntry
-          key={data.results[i].review_id}
-          review={data.results[i]}
-          addHelpful={markHelpful}
-          report={reportReview}
-        />
-      );
     }
-  }
+  }, currentStarFilter);
+  console.group(items);
+  // for (let i = 0; i < count; i++) {
+  //   if (data.results[i] === undefined) break;
+
+  //   items.push(
+  //     <ReviewEntry
+  //       key={data.results[i].review_id}
+  //       review={data.results[i]}
+  //       addHelpful={markHelpful}
+  //       report={reportReview}
+  //     />
+  //   );
+  // }
 
   return (
     <div
