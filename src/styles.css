@@ -287,8 +287,6 @@ h1 {
   padding: 2px;
   padding-left: 10px;
 }
-
-/* .spaceHolder {
-  margin: 2px;
-  padding: 2px;
-} */
+.ratingBar {
+  cursor: pointer;
+}

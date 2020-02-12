@@ -11,20 +11,35 @@ var Reviews = ({
   reportReview,
   changeDropdown,
   productName,
-  metaData
+  metaData,
+  currentStarFilter
 }) => {
   let items = [];
 
   for (let i = 0; i < count; i++) {
     if (data.results[i] === undefined) break;
-    items.push(
-      <ReviewEntry
-        key={data.results[i].review_id}
-        review={data.results[i]}
-        addHelpful={markHelpful}
-        report={reportReview}
-      />
-    );
+    if (currentStarFilter.length > 0) {
+      if (currentStarFilter.includes(data.results[i].rating)) {
+        console.log("hello");
+        items.push(
+          <ReviewEntry
+            key={data.results[i].review_id}
+            review={data.results[i]}
+            addHelpful={markHelpful}
+            report={reportReview}
+          />
+        );
+      }
+    } else {
+      items.push(
+        <ReviewEntry
+          key={data.results[i].review_id}
+          review={data.results[i]}
+          addHelpful={markHelpful}
+          report={reportReview}
+        />
+      );
+    }
   }
 
   return (
