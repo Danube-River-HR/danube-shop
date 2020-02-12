@@ -25,6 +25,56 @@ ul {
 .feature {
   align-items: center;
 }
+
+div.blueTable {
+  font-family: "Courier New", Courier, monospace;
+  width: 100%;
+  text-align: center;
+  
+}
+.divTable.blueTable .divTableCell, .divTable.blueTable .divTableHead {
+  padding: 3px 1px;
+}
+.divTable.blueTable .divTableBody .divTableCell {
+  font-size: 16px;
+}
+.divTable.blueTable .divTableHeading .divTableHead {
+  font-size: 23px;
+  font-weight: bold;
+  text-align: center;
+}
+.blueTable .tableFootStyle {
+  font-size: 14px;
+}
+.blueTable .tableFootStyle .links {
+	 text-align: right;
+}
+.blueTable .tableFootStyle .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.blueTable.outerTableFooter {
+  border-top: none;
+}
+.blueTable.outerTableFooter .tableFootStyle {
+  padding: 3px 5px; 
+}
+.divTable{ display: table; }
+.divTableRow { display: table-row; }
+.divTableHeading { display: table-header-group;}
+.divTableCell, .divTableHead { display: table-cell;}
+.divTableHead {
+  max-width: 100px;
+}
+.divTableCell {
+  max-width: 175px;
+}
+.divTableHeading { display: table-header-group;}
+.divTableFoot { display: table-footer-group;}
+.divTableBody { display: table-row-group;}
 /* .ui.button,
 .ui.buttons .button,
 .ui.buttons .or {
