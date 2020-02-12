@@ -14,7 +14,7 @@ class SizeAndStock extends Component {
     }
 
     componentDidMount() {
-        localStorage.clearAll();
+        // localStorage.clearAll();
         localStorage.set('cart', []);
     }
 

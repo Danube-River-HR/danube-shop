@@ -46,11 +46,19 @@ class MainImage extends Component {
                 <div className="arrow-child" onClick={this.handleArrowClick}>
                     {this.renderLeftArrow()}
                 </div>
+                <div className="image-viewer">
                 <Img 
                     src={[this.renderCurrentImage(), `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]}
                     loader={Loader}
                     className="image-child"
+                    onClick={() => this.props.openExpandedView()}
                     />
+                </div>
+                <Icon 
+                    name="expand"
+                    size="large"
+                    onClick={() => this.props.openExpandedView()}
+                />
                 <div className="arrow-child" onClick={this.handleArrowClick}>
                     {this.renderRightArrow()}
                 </div>
