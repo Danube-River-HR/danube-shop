@@ -19,7 +19,7 @@ const OutfitCard = props => {
       className="productCard"
       onClick={() => props.handleCardClick(props.data.id)}
     >
-      <button
+      <button id="outfit-button"
         class="ui icon button"
         onClick={() => props.removeClick(props.data)}
       >
