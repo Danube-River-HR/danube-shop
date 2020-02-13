@@ -21,7 +21,7 @@ const Carousel = props => {
   let cards = props.outfit.map((card, index) => {
     let defaultStyle = [];
     let hasDefault = false;
-    card.style.results.forEach(style => {
+    card.style.results.forEach((style, index) => {
       if (style["default?"] === 1) {
         defaultStyle.push(style);
         hasDefault = true;
@@ -50,7 +50,7 @@ const Carousel = props => {
     //   </div>
     //   {cards}
     // </div>
-    <div class="itemCarousel" style={{}}>
+    <div class="itemCarousel">
       <ItemsCarousel
         requestToChangeActive={setActiveItemIndex}
         activeItemIndex={activeItemIndex}
