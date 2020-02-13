@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import { Select, Button } from 'semantic-ui-react';
+import { Select, Button, Icon } from 'semantic-ui-react';
 import localStorage from 'store';
 
 class SizeAndStock extends Component {
@@ -142,8 +142,9 @@ class SizeAndStock extends Component {
                     {this.renderSizeAndQuantityDropdown()}
                 </div>
                 <div className="cart-wrapper">
-                    {this.state.displayWarning ? <p>Please Pick a Size & Quantity</p> : null}
                     <Button onClick={this.handleAddToCart}>Add To Cart</Button>
+                    <Button icon><Icon name="star outline"/></Button>
+                    {this.state.displayWarning ? <p>Please Pick a Size & Quantity</p> : null}
                 </div>
             </>
         )

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Icon } from 'semantic-ui-react';
+import Img from 'react-image';
 
 import {selectStyle} from '../../../redux/actions/index';
 import {connect} from "react-redux";
@@ -26,11 +27,10 @@ class StyleThumbnail extends Component {
     render() {
         return (
             <div className="thumbnail-container">
-                <Image 
+                <Img 
                     className="style-thumbnail"
                     src={this.props.url} 
-                    size='tiny' 
-                    circular
+  
                     onClick={this.handleStyleClick}
                     />
                                 
