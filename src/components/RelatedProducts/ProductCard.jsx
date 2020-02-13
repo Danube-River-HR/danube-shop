@@ -45,7 +45,7 @@ const Card = props => {
 let renderRatings = () => {
   const starPercent = Math.round((props.review / 5) * 100);
   return (
-    <div className="star-ratings" style={{ fontSize: "200%" }}>
+    <div className="star-ratings" style={{ fontSize: "100%" }}>
       <div className="fill-ratings" style={{ width: `${starPercent}%` }}>
         <p className="starSpan">★★★★★</p>
       </div>
@@ -66,7 +66,7 @@ let renderRatings = () => {
       />
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div style={{fontWeight: "bold", fontSize: "larger"}}>{props.data.name}</div>
+        <div style={{fontWeight: "bold", fontSize: "larger", margin: "2px 0px 2px 0px"}}>{props.data.name}</div>
         {renderPrice()}
         {renderRatings()}
       </div>

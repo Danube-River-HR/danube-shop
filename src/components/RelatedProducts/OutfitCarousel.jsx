@@ -53,10 +53,10 @@ const Carousel = props => {
         chevronWidth={chevronWidth}
       >
         <div className="productCard">
-          <button class="ui icon button" onClick={props.handleOutfitAddClick}>
+          <button id="addOutfit" class="ui icon button" onClick={props.handleOutfitAddClick}>
             <i class="plus square outline icon"></i>
           </button>
-          Add to outfit
+          <div class="addOutfitText">Add to outfit</div>
         </div>
         {cards}
       </ItemsCarousel>

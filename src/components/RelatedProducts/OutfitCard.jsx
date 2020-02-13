@@ -43,7 +43,7 @@ const OutfitCard = props => {
   let renderRatings = () => {
     const starPercent = Math.round((props.rating / 5) * 100);
     return (
-      <div className="star-ratings" style={{ fontSize: "200%" }}>
+      <div className="star-ratings" style={{ fontSize: "100%" }}>
         <div className="fill-ratings" style={{ width: `${starPercent}%` }}>
           <p className="starSpan">★★★★★</p>
         </div>
@@ -61,14 +61,14 @@ const OutfitCard = props => {
       <button
         id="outfit-button"
         class="ui icon button"
-        // onClick={() => props.removeClick(props.data)}
+        onClick={() => props.removeClick(props.data)}
       >
         <i class="times circle outline icon"></i>
       </button>
       <Link to={`/${props.data.id}`}>{containStyles()}</Link>
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div style={{ fontWeight: "bold", fontSize: "larger" }}>
+        <div style={{ fontWeight: "bold", fontSize: "larger", margin: "2px 0px 2px 0px" }}>
           {props.data.name}
         </div>
         {/* <div>${props.data.default_price}</div> */}

@@ -3,9 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
-
-//John's Edits
 import { Header } from "semantic-ui-react";
+import "./RelatedProducts.css"
 
 class RelatedProducts extends Component {
   constructor(props) {
