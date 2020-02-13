@@ -19,7 +19,6 @@ class RelatedProducts extends Component {
   getRelatedProductData = () => {
     let relatedData = [];
     let relatedStyles = [];
-    console.log(this.state.currentProduct, "current");
     this.state.relatedProductsIds.map(productId => {
       let one = `http://3.134.102.30/products/${productId}`;
       let two = `http://3.134.102.30/products/${productId}/styles`;
@@ -129,6 +128,8 @@ class RelatedProducts extends Component {
           />
         </div>
       </div>
+      
+      
     );
   }
 }
