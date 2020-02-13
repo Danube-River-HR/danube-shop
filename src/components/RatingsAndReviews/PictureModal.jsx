@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Image, Modal } from "semantic-ui-react";
+import { Image, Modal } from "semantic-ui-react";
 
 const PictureModal = ({ url }) => (
   <Modal

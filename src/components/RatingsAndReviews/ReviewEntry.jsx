@@ -25,7 +25,7 @@ var ReviewEntry = ({ review, addHelpful, report }) => {
       <div className="reviewSummary">{review.summary}</div>
       <div className="reviewBody">{review.body}</div>
       {review.photos.length > 0 ? (
-        <Image.Group size="small">
+        <Image.Group size="small" style={{ cursor: "zoom-in" }}>
           {review.photos.map(pic => (
             <PictureModal url={pic.url} />
           ))}
