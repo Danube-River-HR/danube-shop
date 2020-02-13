@@ -5,7 +5,7 @@ import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 
 //John's Edits
-import {Header} from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 
 class RelatedProducts extends Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class RelatedProducts extends Component {
       relatedProductsIds: [],
       relatedProductData: [],
       relatedProductStyles: [],
+      relatedProductReviews: [],
       currentProduct: [],
       outfit: [],
       overallData: {}
@@ -22,17 +23,21 @@ class RelatedProducts extends Component {
   getRelatedProductData = () => {
     let relatedData = [];
     let relatedStyles = [];
+    let relatedReviews = [];
     this.state.relatedProductsIds.map(productId => {
       let one = `http://3.134.102.30/products/${productId}`;
       let two = `http://3.134.102.30/products/${productId}/styles`;
+      let three = `http://3.134.102.30/reviews/${productId}/meta`;
       const requestOne = axios.get(one);
       const requestTwo = axios.get(two);
+      const requestThree = axios.get(three);
       return axios
-        .all([requestOne, requestTwo])
+        .all([requestOne, requestTwo, requestThree])
         .then(
           axios.spread((...data) => {
             const responseOne = data[0];
             const responseTwo = data[1];
+            const responseThree = data[2];
             relatedData.push(responseOne.data);
             let containsDefault = false;
             responseTwo.data.results.forEach(result => {
@@ -44,13 +49,23 @@ class RelatedProducts extends Component {
             if (!containsDefault) {
               relatedStyles.push(responseTwo.data.results[0]);
             }
+            const ratings = Object.entries(responseThree.data.ratings);
+            let count = 0;
+            let ratingCount = 0;
+            ratings.forEach(review => {
+              count += review[0] * review[1];
+              ratingCount += review[1];
+            });
+            relatedReviews.push((count / ratingCount).toFixed(2))
+            console.log(relatedReviews,'reviews')
             return data;
           })
         )
         .then(() =>
           this.setState({
             relatedProductData: relatedData,
-            relatedProductStyles: relatedStyles
+            relatedProductStyles: relatedStyles,
+            relatedProductReviews: relatedReviews
           })
         );
     });
@@ -64,7 +79,8 @@ class RelatedProducts extends Component {
       let outfit = [...this.state.outfit];
       outfit.push({
         data: this.props.overallData.currentProduct,
-        style: this.props.overallData.productStyles
+        style: this.props.overallData.productStyles,
+        rating: this.props.overallData.averageRating
       });
       this.setState({
         outfit: outfit
@@ -87,11 +103,11 @@ class RelatedProducts extends Component {
       this.props.overallData.relatedProducts
     ) {
       let uniqueIds = [];
-        for(var value of this.props.overallData.relatedProducts){
-            if(uniqueIds.indexOf(value) === -1){
-                uniqueIds.push(value);
-            }
+      for (var value of this.props.overallData.relatedProducts) {
+        if (uniqueIds.indexOf(value) === -1) {
+          uniqueIds.push(value);
         }
+      }
       this.setState(
         {
           relatedProductsIds: uniqueIds,
@@ -127,6 +143,7 @@ class RelatedProducts extends Component {
             styles={this.state.relatedProductStyles}
             handleCardClick={this.props.handleCardClick}
             handleModalClick={this.handleModalClick}
+            reviews={this.state.relatedProductReviews}
           />
         </div>
         <div>
@@ -141,8 +158,6 @@ class RelatedProducts extends Component {
           />
         </div>
       </div>
-      
-      
     );
   }
 }

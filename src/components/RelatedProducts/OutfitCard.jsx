@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Link
-} from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const OutfitCard = props => {
   let containStyles = () => {
@@ -20,38 +17,63 @@ const OutfitCard = props => {
   };
   let renderPrice = () => {
     if (!props.style) {
-        return <div >Loading</div>
+      return <div>Loading</div>;
     } else {
-        if (props.style.sale_price === "0") {
-            let productPrice = Number(props.style.original_price).toFixed(2);
-            return <div >${productPrice}</div>
-        } else {
-            let original = <del>{Number(props.style.original_price).toFixed(2)}</del>
-            let sale = <ins style={{color:"red", margin: "0 5px 0 0"}}>{Number(props.style.sale_price).toFixed(2)}</ins>
+      if (props.style.sale_price === "0") {
+        let productPrice = Number(props.style.original_price).toFixed(2);
+        return <div>${productPrice}</div>;
+      } else {
+        let original = (
+          <del>{Number(props.style.original_price).toFixed(2)}</del>
+        );
+        let sale = (
+          <ins style={{ color: "red", margin: "0 5px 0 0" }}>
+            {Number(props.style.sale_price).toFixed(2)}
+          </ins>
+        );
 
-            return <div >${sale}  {original}</div>
-        }
+        return (
+          <div>
+            ${sale} {original}
+          </div>
+        );
+      }
     }
-}
+  };
+  let renderRatings = () => {
+    const starPercent = Math.round((props.rating / 5) * 100);
+    return (
+      <div className="star-ratings" style={{ fontSize: "200%" }}>
+        <div className="fill-ratings" style={{ width: `${starPercent}%` }}>
+          <p className="starSpan">★★★★★</p>
+        </div>
+        <div className="empty-ratings">
+          <p className="starSpan">★★★★★</p>
+        </div>
+      </div>
+    );
+  };
   return (
     <div
       className="productCard"
       // onClick={() => props.handleCardClick(props.data.id)}
     >
-      <button id="outfit-button"
+      <button
+        id="outfit-button"
         class="ui icon button"
         // onClick={() => props.removeClick(props.data)}
       >
         <i class="times circle outline icon"></i>
       </button>
-      <Link to={`/${props.data.id}`}>
-      {containStyles()}
-      </Link>
+      <Link to={`/${props.data.id}`}>{containStyles()}</Link>
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div>{props.data.name}</div>
+        <div style={{ fontWeight: "bold", fontSize: "larger" }}>
+          {props.data.name}
+        </div>
         {/* <div>${props.data.default_price}</div> */}
         {renderPrice()}
+        {renderRatings()}
       </div>
     </div>
   );

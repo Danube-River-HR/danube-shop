@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Link
 } from "react-router-dom";
+import { render } from "react-dom";
 
 const Card = props => {
   let defaultImg =
@@ -41,6 +42,19 @@ const Card = props => {
         }
     }
 }
+let renderRatings = () => {
+  const starPercent = Math.round((props.review / 5) * 100);
+  return (
+    <div className="star-ratings" style={{ fontSize: "200%" }}>
+      <div className="fill-ratings" style={{ width: `${starPercent}%` }}>
+        <p className="starSpan">★★★★★</p>
+      </div>
+      <div className="empty-ratings">
+        <p className="starSpan">★★★★★</p>
+      </div>
+    </div>
+  );
+};
   return (
     <div className="productCard">
       <Link to={`/${props.data.id}`}>
@@ -52,11 +66,11 @@ const Card = props => {
       />
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div>{props.data.name}</div>
+        <div style={{fontWeight: "bold", fontSize: "larger"}}>{props.data.name}</div>
         {renderPrice()}
+        {renderRatings()}
       </div>
     </div>
   );
 };
-
 export default Card;
