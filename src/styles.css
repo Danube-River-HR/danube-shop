@@ -340,7 +340,7 @@ h1 {
   flex-basis: unset;
   flex-grow: 1;
   width: 100%;
-  min-width: 70%;
+  min-width: 72%;
 }
 .ratingsParent {
   margin: 5px;
@@ -370,18 +370,12 @@ h1 {
 .reviewHeader {
   font-size: larger;
   font-weight: bold;
-  /* padding-left: 17px; */
   padding-bottom: 1vh;
 }
-/* .reviewEntryParent {
-  margin: 10px;
-  padding: 10px;
-  width: 800px;
-} */
+
 .ratingAndUser {
   padding-top: 20px;
   padding-bottom: 20px;
-  /* padding-right: ; */
   display: flex;
   justify-content: space-between;
   font-size: medium;
