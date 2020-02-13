@@ -22,6 +22,15 @@ class GalleryThumbnails extends Component {
                 )
             });
             return thumbnailsList;
+        } else {
+            return (
+                <ImageThumbnail 
+                        thumbnailURL="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/480px-Solid_white.svg.png"
+                        changeCurrentImage={this.props.changeCurrentImage}
+                        selectedThumbnailIndex={this.props.selectedThumbnailIndex}
+                        index="0"
+                        />
+            )
         }
     }
 
