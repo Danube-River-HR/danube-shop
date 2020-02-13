@@ -4,6 +4,9 @@ import axios from "axios";
 import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 
+//John's Edits
+import {Header} from "semantic-ui-react";
+
 class RelatedProducts extends Component {
   constructor(props) {
     super(props);
@@ -83,9 +86,15 @@ class RelatedProducts extends Component {
       prevProps.overallData.relatedProducts !==
       this.props.overallData.relatedProducts
     ) {
+      let uniqueIds = [];
+        for(var value of this.props.overallData.relatedProducts){
+            if(uniqueIds.indexOf(value) === -1){
+                uniqueIds.push(value);
+            }
+        }
       this.setState(
         {
-          relatedProductsIds: this.props.overallData.relatedProducts,
+          relatedProductsIds: uniqueIds,
           currentProduct: this.props.productData
         },
         () => {
@@ -108,7 +117,9 @@ class RelatedProducts extends Component {
     return (
       <div class="relatedProductContainer">
         <div>
-          RELATED PRODUCTS
+          <Header className="ui large header related-product-header">
+            Related Products
+          </Header>
           <ProductCarousel
             ids={this.state.relatedProductsIds}
             data={this.state.relatedProductData}
@@ -119,7 +130,9 @@ class RelatedProducts extends Component {
           />
         </div>
         <div>
-          YOUR OUTFIT
+          <Header className="ui large header related-product-header">
+            Your Outfit
+          </Header>
           <OutfitCarousel
             outfit={this.state.outfit}
             handleOutfitAddClick={this.handleOutfitAddClick}

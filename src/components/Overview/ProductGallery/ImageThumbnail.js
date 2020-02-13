@@ -4,10 +4,6 @@ import Img from 'react-image';
 class ImageThumbnail extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-                 
-        }
     }
 
     handleThumbnailClick = () => {

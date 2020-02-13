@@ -2,17 +2,8 @@
 import React from "react";
 import { Header } from "semantic-ui-react";
 import { connect } from "react-redux";
-import {
-  Route,
-  Switch,
-  useParams,
-  Link,
-  BrowserRouter as Router
-} from "react-router-dom";
 import { withRouter } from "react-router";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
-import Routing from "./routing";
-import queryString from "query-string";
 /* ----- ACTIONS ----- */
 
 import { fetchAllProductData } from "../redux/actions";

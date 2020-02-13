@@ -97,7 +97,9 @@ class RatingsAndReviews extends React.Component {
             <img src={spinner} />
           </div>
         ) : (
+          
           <div className="ratingsAndReviews">
+
             <Ratings
               avg={this.props.avgRating}
               metaData={this.state.metaData}

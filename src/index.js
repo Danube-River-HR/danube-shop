@@ -7,9 +7,8 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 import {
   Route,
+  Redirect,
   Switch,
-  useParams,
-  Link,
   BrowserRouter as Router
 } from "react-router-dom";
 
@@ -18,6 +17,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => <Redirect to="/1" />}
+        />
         <Route path="/:id" children={<App />} />
       </Switch>
     </Router>
