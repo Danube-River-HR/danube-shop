@@ -4,10 +4,6 @@ import ImageThumbnail from './ImageThumbnail';
 class GalleryThumbnails extends Component {
     constructor(props) {
         super(props)
-
-        this.state = {
-                 
-        }
     }
 
     renderGalleryThumbnails = () => {
