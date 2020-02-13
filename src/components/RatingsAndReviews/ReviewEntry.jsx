@@ -4,8 +4,6 @@ import PictureModal from "./PictureModal";
 
 var ReviewEntry = ({ review, addHelpful, report }) => {
   const starPercent = (review.rating / 5) * 100;
-  console.log("this is the rating", review.rating);
-  console.log(starPercent);
 
   return (
     <div style={{ borderStyle: "nothing" }} className="reviewEntryParent">
