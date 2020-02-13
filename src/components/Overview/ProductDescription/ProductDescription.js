@@ -1,6 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
+import TextAccordion from './TextAccordion';
 import SocialMedia from './SocialMedia';
+
+
 
 const ProductDescription = ({overallData}) => {
     const renderDescription = () => {
@@ -13,24 +16,30 @@ const ProductDescription = ({overallData}) => {
         else {return overallData.currentProduct.slogan}
     }
 
+    const renderFeatures = () => {
+        if (!overallData.currentProduct) {return "Loading"}
+        else {
+            let features = overallData.currentProduct.features;
+            let featuresText = '';
+            features.forEach(feature => {
+                featuresText += `- ${feature.feature}: ${feature.value}\n`
+            })
+            return featuresText;
+        }
+    }
+
+    // console.log('TESTING RENDER FEATURES:', renderFeatures())
+
     return (
-        <div className="ui items">
-            <div className="item">
-                <div className="content">
-                    <h4 className="header">{renderSlogan()}</h4>
-                    <div className="description">
-                        <p>{renderDescription()}</p>
-                    </div>
-                    <h5 className="header">Features</h5>
-                    <div>
-                        
-                    </div>
-                </div>
+        <>
+            <div className="product-slogan">
+                <h4>{renderSlogan()}</h4>
             </div>
-            <div className="social-media-container">
-                <SocialMedia />
-            </div>
-        </div>
+            <TextAccordion title="DESCRIPTION" text={renderDescription()}/>
+            <TextAccordion title="FEATURES" text={renderFeatures()}/>
+
+        </>
+        
     )
 }
 

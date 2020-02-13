@@ -4,6 +4,8 @@ import { Rating } from 'semantic-ui-react';
 
 import Styles from './Styles';
 import SizeAndStock from './SizeAndStock';
+import ProductDescription from '../ProductDescription/ProductDescription'
+import SocialMedia from '../ProductDescription/SocialMedia'
 
 class ProductCard extends React.Component {
     constructor(props) {
@@ -12,16 +14,16 @@ class ProductCard extends React.Component {
 
     renderPrice = () => {
         if (!this.props.selectedStyle) {
-            return <div className="description">Loading</div>
+            return <div className="price-wrapper">Loading</div>
         } else {
             if (this.props.selectedStyle.sale_price === "0") {
                 let productPrice = Number(this.props.selectedStyle.original_price).toFixed(2);
-                return <div className="description">${productPrice}</div>
+                return <div className="price-wrapper">${productPrice}</div>
             } else {
                 let original = <del>{Number(this.props.selectedStyle.original_price).toFixed(2)}</del>
-                let sale = <ins style={{color:"red"}}>{Number(this.props.selectedStyle.sale_price).toFixed(2)}</ins>
+                let sale = <ins style={{color:"red", margin: "0 5px 0 0"}}>{Number(this.props.selectedStyle.sale_price).toFixed(2)}</ins>
 
-                return <div className="description">${sale} {original}</div>
+                return <div className="price-wrapper">${sale}  {original}</div>
             }
         }
     }
@@ -43,15 +45,29 @@ class ProductCard extends React.Component {
         return (
             <div className="ui card">
                 <div className="content">
-                    {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"}
-                    <div className="meta"><span className="date">{productCategory}</span></div>
-                    <div className="header">{productName}</div>
+                    <div className="rating-wrapper">
+                        {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"}
+                        <div className="meta">Read All Reviews</div>
+                    </div>
+                    <div className="header-wrapper">
+                        <div className="header product-name">{productName}</div>
+                        <div className="meta product-category"><span className="date">{productCategory}</span></div>
+                    </div>
         
                     {this.renderPrice()}
-                </div>
-                <div className="content">
-                    <Styles />
-                    <SizeAndStock />
+
+                    <div className="options-wrapper">
+                        <Styles />
+                        <SizeAndStock />
+                    </div>
+
+                    <div className="description-wrapper">
+                        <ProductDescription />
+                    </div>
+
+                    <div className="social-media">
+                        <SocialMedia />
+                    </div>
                 </div>
             </div>
         )
