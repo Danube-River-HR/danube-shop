@@ -31,6 +31,7 @@ class ProductCard extends React.Component {
     render() {
         let productName;
         let productCategory;
+        let avg;
 
         if (!this.props.overallData.currentProduct) {
             productName = "Loading";
@@ -40,30 +41,29 @@ class ProductCard extends React.Component {
             productCategory = this.props.overallData.currentProduct.category;
         } 
         
+        if (!this.props.overallData.averageRating) {
+            avg = 0;
+        } else {
+            avg = this.props.overallData.averageRating;
+        }
 
-        // const starPercent = Math.round((avg / 5) * 100);
-        // <div className=“star-ratings” style={{fontSize: “200%“}}>
-        //                         <div className=“fill-ratings” style={{ width: `${starPercent}%` }}>
-        //                             <p className=“starSpan”>★★★★★</p>
-        //                         </div>
-        //                         <div className=“empty-ratings”>
-        //                             <p className=“starSpan”>★★★★★</p>
-        //                         </div>
-        //                 </div>
-
-        //                 <div></div>
+        let starPercent = Math.round((avg / 5) * 100);
         
         return (
             <div className="ui card">
                 <div className="content">
                     <div className="rating-wrapper">
-                        {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"}
-                        {/* <div className="star-ratings" style={{fontSize: "200%"}}>
-
-
-                        </div> */}
+                        {/* {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"} */}
                         
-
+                        <div className="star-ratings product-card-star" style={{fontSize: "100%"}}>
+                            <div className="fill-ratings" style={{width: `${starPercent}%`}}>
+                                <p className="starSpan">★★★★★</p>
+                            </div>
+                            <div className="empty-ratings">
+                                <p className="starSpan">★★★★★</p>
+                            </div>
+                        </div>
+                        
 
                         <div className="meta"><a href="#main-product-rating">Read All Reviews</a></div>
                     </div>
