@@ -15,6 +15,7 @@ html {
 /* ---------------------------------- Related Products ------------------------------- */
 
 
+
 /* John's Edits: adjusted padding to line up with overview better. */
 .relatedProductContainer{
   /* padding-left: 20%;
@@ -30,14 +31,27 @@ html {
 .itemCarousel {
   height: 350px;
 }
-#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig {
+#app
+  > div.relatedProductContainer
+  > div:nth-child(1)
+  > div
+  > div
+  > div.sc-bwzfXH.gwZiig {
   height: 350px;
 }
 
-#app > div.relatedProductContainer > div:nth-child(1) > div > div > div.sc-bwzfXH.gwZiig > div > div.sc-bxivhb.evPXcE > div{
- background-color: transparent;
-
+#app
+  > div.relatedProductContainer
+  > div:nth-child(1)
+  > div
+  > div
+  > div.sc-bwzfXH.gwZiig
+  > div
+  > div.sc-bxivhb.evPXcE
+  > div {
+  background-color: transparent;
 }
+
 .productCarousel {
   display: flex;
   /* box-sizing: border-box; */
@@ -67,7 +81,6 @@ html {
   overflow: hidden;
   flex-shrink: 0;
   margin: 10px 20px;
-  
 }
 .productCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.726);
@@ -76,8 +89,6 @@ html {
   width: 100%;
   height: 75%;
   position: relative;
-  object-fit: cover;
-  z-index: 1;
 }
 .cardInfo {
   position: relative;
@@ -164,10 +175,11 @@ html {
   margin: 0;
 }
 
-.ui.card>.content, .ui.cards>.card>.content {
+.ui.card > .content,
+.ui.cards > .card > .content {
   flex-grow: 1;
   border: none;
-  border-top: 1px solid rgba(34,36,38,.1);
+  border-top: 1px solid rgba(34, 36, 38, 0.1);
   background: 0 0;
   margin: 0;
   padding: 25px;
@@ -177,18 +189,17 @@ html {
 }
 
 .rating-wrapper {
-  display:flex;
+  display: flex;
   justify-content: space-between;
 }
 
 /* ----- SIZE AND QUALITY ----- */
 .ui.selection.dropdown {
   min-width: 10em;
-
 }
 
 .size-wrapper {
-  display:flex;
+  display: flex;
   justify-content: center;
 }
 
@@ -205,10 +216,10 @@ html {
   border: none;
   vertical-align: baseline;
   background: #e0e1e2 none;
-  color: rgba(0,0,0,.6);
-  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
   margin: 0;
-  padding: .78571429em 1.5em .78571429em;
+  padding: 0.78571429em 1.5em 0.78571429em;
   text-transform: none;
   text-shadow: none;
   font-weight: 700;
@@ -216,12 +227,14 @@ html {
   font-style: normal;
   text-align: center;
   text-decoration: none;
-  border-radius: .28571429rem;
-  box-shadow: 0 0 0 1px rgba(34,36,38,.15) inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+  border-radius: 0.28571429rem;
+  box-shadow: 0 0 0 1px rgba(34, 36, 38, 0.15) inset,
+    0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   -webkit-user-select: none;
   user-select: none;
-  transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;
-  will-change: '';
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
+  will-change: "";
   -webkit-tap-highlight-color: transparent;
   min-width: 10em;
 }
@@ -254,11 +267,10 @@ html {
   max-height: 650px;
   width: auto;
   height: 100%;
-  cursor: -moz-zoom-in; 
-  cursor: -webkit-zoom-in; 
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
   cursor: zoom-in;
 }
-
 
 .thumbnail-child {
   height: auto;
@@ -275,7 +287,7 @@ html {
 
 .arrow-child {
   height: 25px;
-  width: 25px
+  width: 25px;
 }
 
 .arrow.left.large {
@@ -307,9 +319,8 @@ html {
   margin: 0.5em;
 }
 
-
 .social-media {
-  display:flex;
+  display: flex;
   justify-content: center;
   cursor: pointer;
 }
@@ -325,26 +336,42 @@ html {
   margin: 15px 15px 7.5px 10px;
 }
 
-
 /* ---------------------------------- Ratings and Reviews ------------------------------- */
-
+.ratingsAndReviewsName {
+  margin: 20px;
+  padding: 20px;
+  /* padding-left: 200px; */
+  padding-top: 40px;
+  padding-bottom: 10px;
+  font-size: x-large;
+}
 .ratingsAndReviews {
   display: flex;
   justify-content: center;
 }
-.ratingsParent {
-  box-sizing: content-box;
-  flex-basis: unset;
-  flex-grow: 1;
-  width: 500px;
-}
+
 .reviewsParent {
-  margin: 10px;
-  padding: 10px;
+  margin: 5px;
+  padding: 5px;
+  padding-right: 0px;
   font-size: medium;
   box-sizing: content-box;
   flex-basis: unset;
   flex-grow: 1;
+  width: 100%;
+  min-width: 72%;
+}
+.ratingsParent {
+  margin: 5px;
+  padding: 5px;
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+  width: 100%;
+  /* max-width: 80%; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .reviewButtons {
   padding-top: 2vh;
@@ -362,18 +389,12 @@ html {
 .reviewHeader {
   font-size: larger;
   font-weight: bold;
-  /* padding-left: 17px; */
   padding-bottom: 1vh;
 }
-/* .reviewEntryParent {
-  margin: 10px;
-  padding: 10px;
-  width: 800px;
-} */
+
 .ratingAndUser {
   padding-top: 20px;
   padding-bottom: 20px;
-  /* padding-right: ; */
   display: flex;
   justify-content: space-between;
   font-size: medium;
@@ -425,4 +446,62 @@ html {
 #reviewEntryPic {
   display: flex;
   justify-content: center;
+}
+
+/*--------------------- Ratings --------------------*/
+
+.ratingsParentContainer {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  width: 80%;
+}
+.ratingDiagramParent {
+  width: 105%;
+}
+.rating {
+  margin-top: 9%;
+  padding-right: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 500%;
+  font-weight: bold;
+}
+.recommendPercent {
+  /* margin: 10px; */
+  /* padding: 10px; */
+  padding-bottom: 10%;
+}
+.ratingWrapper {
+  width: 100%;
+}
+.ratingBreakdown {
+  text-decoration: underline;
+  margin: 2px;
+  padding: 2px;
+  padding-left: 10px;
+}
+.ratingBar {
+  cursor: pointer;
+}
+
+/*---------- REVIEW STARS ----------*/
+.star-ratings {
+  position: relative;
+  font-size: 200%;
+  width: fit-content;
+  height: 7vh;
+}
+.fill-ratings {
+  top: 10%;
+  position: absolute;
+  color: #fbbd0a;
+  z-index: 1;
+  width: 30%;
+  overflow-x: hidden;
+}
+.empty-ratings {
+  top: 10%;
+  position: relative;
+  color: gray;
+  z-index: 0;
 }
