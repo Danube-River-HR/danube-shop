@@ -15,6 +15,7 @@ const ProductCarousel = props => {
           data={card}
           currentProduct={props.currentProduct}
           style={props.styles[index]}
+          review={props.reviews[index]}
           handleClick={props.handleClick}
           handleCardClick={props.handleCardClick}
         />

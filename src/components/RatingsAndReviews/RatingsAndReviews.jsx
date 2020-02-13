@@ -91,7 +91,7 @@ class RatingsAndReviews extends React.Component {
     return (
       <div>
         <div>
-          <div className="ratingsAndReviewsName">Ratings & Reviews</div>
+          <div className="ratingsAndReviewsName" id="main-product-rating">Ratings & Reviews</div>
         </div>
         {Object.entries(this.state.mainData).length === 0 ? (
           <div>
