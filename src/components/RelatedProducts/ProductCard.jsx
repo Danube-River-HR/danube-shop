@@ -1,5 +1,12 @@
 import React from "react";
 import ProductModal from "./ProductModal";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 const Card = props => {
   let defaultImg =
@@ -13,7 +20,7 @@ const Card = props => {
             "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
           }
           alt={"Loading"}
-          onClick={() => props.handleCardClick(props.data.id)}
+          // onClick={() => props.handleCardClick(props.data.id)}
         />
       ) : (
         <img
@@ -21,14 +28,16 @@ const Card = props => {
           alt={
             "https://www.alterenterprise.com/wp-content/uploads/2014/02/Image-not-available_1.jpg"
           }
-          onClick={() => props.handleCardClick(props.data.id)}
+          // onClick={() => props.handleCardClick(props.data.id)}
         />
       );
     }
   };
   return (
     <div className="productCard">
+      <Link to={`/${props.data.id}`}>
       {containStyles()}
+      </Link>
       <ProductModal
         cardData={props.data}
         currentProduct={props.currentProduct}
