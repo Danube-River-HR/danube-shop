@@ -1,10 +1,7 @@
 import React from "react";
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
+  Link
 } from "react-router-dom";
 
 const OutfitCard = props => {
@@ -21,6 +18,21 @@ const OutfitCard = props => {
       />
     );
   };
+  let renderPrice = () => {
+    if (!props.style) {
+        return <div >Loading</div>
+    } else {
+        if (props.style.sale_price === "0") {
+            let productPrice = Number(props.style.original_price).toFixed(2);
+            return <div >${productPrice}</div>
+        } else {
+            let original = <del>{Number(props.style.original_price).toFixed(2)}</del>
+            let sale = <ins style={{color:"red", margin: "0 5px 0 0"}}>{Number(props.style.sale_price).toFixed(2)}</ins>
+
+            return <div >${sale}  {original}</div>
+        }
+    }
+}
   return (
     <div
       className="productCard"
@@ -38,7 +50,8 @@ const OutfitCard = props => {
       <div className="cardInfo">
         <div>{props.data.category}</div>
         <div>{props.data.name}</div>
-        <div>${props.data.default_price}</div>
+        {/* <div>${props.data.default_price}</div> */}
+        {renderPrice()}
       </div>
     </div>
   );
