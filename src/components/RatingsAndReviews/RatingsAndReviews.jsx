@@ -89,9 +89,6 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={() => console.log(this.state.currentStarFilter)}>
-          Check Array
-        </button>
         <div>
           <div className="ratingsAndReviewsName">Ratings & Reviews</div>
         </div>
@@ -105,6 +102,7 @@ class RatingsAndReviews extends React.Component {
               avg={this.props.avgRating}
               metaData={this.state.metaData}
               changeStarFilter={this.changeStarFilter}
+              currentStarFilter={this.state.currentStarFilter}
             />
             <Reviews
               productName={this.props.productData.name}

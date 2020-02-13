@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 import ReviewModal from "./ReviewModal";
@@ -14,44 +14,31 @@ var Reviews = ({
   metaData,
   currentStarFilter
 }) => {
+  let filtered = [];
   let items = [];
-  let filter = currentStarFilter;
 
-  // useEffect(()=>{
-  //   filter =
-  // })
+  for (let i = 0; i < data.results.length; i++) {
+    if (currentStarFilter.length > 0) {
+      if (currentStarFilter.includes(data.results[i].rating))
+        filtered.push(data.results[i]);
+    } else filtered.push(data.results[i]);
+  }
 
   for (let i = 0; i < count; i++) {
-    if (data.results[i] === undefined) break;
-    if (currentStarFilter.length > 0) {
-      if (currentStarFilter.includes(data.results[i].rating)) {
-        console.log("hello");
-        items.push(
-          <ReviewEntry
-            key={data.results[i].review_id}
-            review={data.results[i]}
-            addHelpful={markHelpful}
-            report={reportReview}
-          />
-        );
-      }
-    } else {
-      items.push(
-        <ReviewEntry
-          key={data.results[i].review_id}
-          review={data.results[i]}
-          addHelpful={markHelpful}
-          report={reportReview}
-        />
-      );
-    }
+    if (filtered[i] === undefined) break;
+
+    items.push(
+      <ReviewEntry
+        key={filtered[i].review_id}
+        review={filtered[i]}
+        addHelpful={markHelpful}
+        report={reportReview}
+      />
+    );
   }
 
   return (
-    <div
-      // style={{ borderStyle: "solid", borderColor: "green" }}
-      className="reviewsParent"
-    >
+    <div className="reviewsParent">
       <div
         style={{ paddingLeft: "17px", paddingBottom: "1vh" }}
         className="reviewHeader"
@@ -73,8 +60,6 @@ var Reviews = ({
           productId={data.product}
           metaData={metaData}
         />
-
-        {/* <button class="ui basic button">Add a Review</button> */}
       </div>
     </div>
   );
