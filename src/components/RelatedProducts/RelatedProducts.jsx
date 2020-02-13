@@ -86,9 +86,15 @@ class RelatedProducts extends Component {
       prevProps.overallData.relatedProducts !==
       this.props.overallData.relatedProducts
     ) {
+      let uniqueIds = [];
+        for(var value of this.props.overallData.relatedProducts){
+            if(uniqueIds.indexOf(value) === -1){
+                uniqueIds.push(value);
+            }
+        }
       this.setState(
         {
-          relatedProductsIds: this.props.overallData.relatedProducts,
+          relatedProductsIds: uniqueIds,
           currentProduct: this.props.productData
         },
         () => {
