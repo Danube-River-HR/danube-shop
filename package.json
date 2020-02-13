@@ -13,6 +13,7 @@
     "nodemon": "^2.0.2",
     "query-string": "^6.10.1",
     "react": "^16.12.0",
+    "react-accessible-accordion": "^3.0.1",
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.19",
     "react-image": "^2.3.0",

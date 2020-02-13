@@ -10,7 +10,6 @@ class Overview extends React.Component {
             <div className="overview-container">
                 <ProductGallery />
                 <ProductCard />
-                <ProductDescription />
             </div>
         )
     }

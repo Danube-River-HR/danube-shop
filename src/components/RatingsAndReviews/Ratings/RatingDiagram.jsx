@@ -31,7 +31,7 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
                 <Progress
                   value={meta.ratings["5"] || 0}
                   total={total}
-                  size="small"
+                  size="tiny"
                   color="yellow"
                   onClick={() => changeStarFilter(5)}
                   className="ratingBar"
@@ -42,7 +42,7 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
                 <Progress
                   value={meta.ratings["4"] || 0}
                   total={total}
-                  size="small"
+                  size="tiny"
                   color="yellow"
                   className="ratingBar"
                   onClick={() => changeStarFilter(4)}
@@ -53,7 +53,7 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
                 <Progress
                   value={meta.ratings["3"] || 0}
                   total={total}
-                  size="small"
+                  size="tiny"
                   color="yellow"
                   className="ratingBar"
                   onClick={() => changeStarFilter(3)}
@@ -64,7 +64,7 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
                 <Progress
                   value={meta.ratings["2"] || 0}
                   total={total}
-                  size="small"
+                  size="tiny"
                   color="yellow"
                   className="ratingBar"
                   onClick={() => changeStarFilter(2)}
@@ -75,7 +75,7 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
                 <Progress
                   value={meta.ratings["1"] || 0}
                   total={total}
-                  size="small"
+                  size="tiny"
                   color="yellow"
                   className="ratingBar"
                   onClick={() => changeStarFilter(1)}
@@ -96,23 +96,23 @@ var RatingDiagram = ({ meta, changeStarFilter, currentStarFilter }) => {
             </div>
             <div className="ratingWrapper">
               <div>
-                <Progress value={0} total={total} size="small">
+                <Progress value={0} total={total} size="tiny">
                   5 Stars
                 </Progress>
                 <div className="spaceHolder"></div>
-                <Progress value={0} total={total} size="small">
+                <Progress value={0} total={total} size="tiny">
                   4 Stars
                 </Progress>
                 <div className="spaceHolder"></div>
-                <Progress value={0} total={total} size="small">
+                <Progress value={0} total={total} size="tiny">
                   3 Stars
                 </Progress>
                 <div className="spaceHolder"></div>
-                <Progress value={0} total={total} size="small">
+                <Progress value={0} total={total} size="tiny">
                   2 Stars
                 </Progress>
                 <div className="spaceHolder"></div>
-                <Progress value={0} total={total} size="small">
+                <Progress value={0} total={total} size="tiny">
                   1 Star
                 </Progress>
                 <div className="spaceHolder"></div>
