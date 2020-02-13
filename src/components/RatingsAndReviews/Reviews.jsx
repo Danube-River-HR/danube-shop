@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React from "react";
 import ReviewEntry from "./ReviewEntry";
 import DropdownInline from "./Dropdown";
 import ReviewModal from "./ReviewModal";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, Image, FormRadio, Modal } from "semantic-ui-react";
+import { Form, Button, Image, FormRadio } from "semantic-ui-react";
 import ReactFilestack from "filestack-react";
 import { apikey } from "./APIkey";
 import axios from "axios";

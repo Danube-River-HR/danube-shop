@@ -8,7 +8,7 @@ const PictureModal = ({ url }) => (
     size="small"
     style={{ width: "auto" }}
   >
-    <img src={`${url}`} />
+    <img src={`${url}`} alt="" />
   </Modal>
 );
 
