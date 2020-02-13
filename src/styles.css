@@ -288,6 +288,7 @@ html {
   flex-direction: column;
   overflow: auto;
   height: 650px;
+  width: 85px;
 }
 
 .arrow-child {
