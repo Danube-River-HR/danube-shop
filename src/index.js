@@ -1,15 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app";
-import 'semantic-ui-css/semantic.min.css';
+import "semantic-ui-css/semantic.min.css";
 import "./styles.css";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import {
+  Route,
+  Switch,
+  useParams,
+  Link,
+  BrowserRouter as Router
+} from "react-router-dom";
 
 var mountNode = document.getElementById("app");
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Switch>
+        <Route path="/:id" children={<App />} />
+      </Switch>
+    </Router>
   </Provider>,
   mountNode
 );

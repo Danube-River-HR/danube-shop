@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 const OutfitCard = props => {
   let containStyles = () => {
@@ -17,15 +24,17 @@ const OutfitCard = props => {
   return (
     <div
       className="productCard"
-      onClick={() => props.handleCardClick(props.data.id)}
+      // onClick={() => props.handleCardClick(props.data.id)}
     >
       <button id="outfit-button"
         class="ui icon button"
-        onClick={() => props.removeClick(props.data)}
+        // onClick={() => props.removeClick(props.data)}
       >
         <i class="times circle outline icon"></i>
       </button>
+      <Link to={`/${props.data.id}`}>
       {containStyles()}
+      </Link>
       <div className="cardInfo">
         <div>{props.data.category}</div>
         <div>{props.data.name}</div>
