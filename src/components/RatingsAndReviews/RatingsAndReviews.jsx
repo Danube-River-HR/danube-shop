@@ -76,6 +76,7 @@ class RatingsAndReviews extends React.Component {
         ) : (
           <div
             style={{ borderStyle: "solid", borderColor: "blue" }}
+            id="main-product-rating"
             className="ratingsAndReviews"
           >
             <Ratings

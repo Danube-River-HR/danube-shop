@@ -142,8 +142,8 @@ class SizeAndStock extends Component {
                     {this.renderSizeAndQuantityDropdown()}
                 </div>
                 <div className="cart-wrapper">
-                    <Button onClick={this.handleAddToCart}>Add To Cart</Button>
-                    <Button icon><Icon name="star outline"/></Button>
+                    <Button onClick={this.handleAddToCart} className="cart-button">Add To Cart</Button>
+                    <Button icon className="cart-button"><Icon name="star outline"/></Button>
                     {this.state.displayWarning ? <p>Please Pick a Size & Quantity</p> : null}
                 </div>
             </>

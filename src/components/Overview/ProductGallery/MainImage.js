@@ -5,6 +5,15 @@ import {Loader, Icon} from 'semantic-ui-react';
 class MainImage extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            pictures: []
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            pictures: this.props.thumbnails
+        })
     }
 
     handleArrowClick = (e) => {
@@ -13,8 +22,18 @@ class MainImage extends Component {
     }
 
     renderCurrentImage = () => {
-        if (this.props.thumbnails.length !== 0) {
-            return this.props.thumbnails[this.props.selectedThumbnailIndex].url;
+        if (this.props.thumbnails.length > 0) {
+            // return this.props.thumbnails[this.props.selectedThumbnailIndex].url;
+            return (
+                <Img 
+                src={[this.props.thumbnails[this.props.selectedThumbnailIndex].url, `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]}
+                // src={[this.state.pictures[this.props.selectedThumbnailIndex].url, `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]}
+                
+                className="image-child"
+                onClick={() => this.props.openExpandedView()}
+                />
+            
+            )
         } else {
             return null;
         }
@@ -47,12 +66,7 @@ class MainImage extends Component {
                     {this.renderLeftArrow()}
                 </div>
                 <div className="image-viewer">
-                <Img 
-                    src={[this.renderCurrentImage(), `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]}
-                    loader={Loader}
-                    className="image-child"
-                    onClick={() => this.props.openExpandedView()}
-                    />
+                    {this.renderCurrentImage()}
                 </div>
                 <Icon 
                     name="expand"

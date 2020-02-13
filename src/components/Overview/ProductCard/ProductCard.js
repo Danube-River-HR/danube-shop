@@ -41,13 +41,31 @@ class ProductCard extends React.Component {
         } 
         
 
+        // const starPercent = Math.round((avg / 5) * 100);
+        // <div className=“star-ratings” style={{fontSize: “200%“}}>
+        //                         <div className=“fill-ratings” style={{ width: `${starPercent}%` }}>
+        //                             <p className=“starSpan”>★★★★★</p>
+        //                         </div>
+        //                         <div className=“empty-ratings”>
+        //                             <p className=“starSpan”>★★★★★</p>
+        //                         </div>
+        //                 </div>
+
+        //                 <div></div>
         
         return (
             <div className="ui card">
                 <div className="content">
                     <div className="rating-wrapper">
                         {this.props.overallData.averageRating ? <Rating defaultRating={Math.ceil(this.props.overallData.averageRating)} maxRating={5} disabled /> : "Loading"}
-                        <div className="meta">Read All Reviews</div>
+                        {/* <div className="star-ratings" style={{fontSize: "200%"}}>
+
+
+                        </div> */}
+                        
+
+
+                        <div className="meta"><a href="#main-product-rating">Read All Reviews</a></div>
                     </div>
                     <div className="header-wrapper">
                         <div className="header product-name">{productName}</div>
