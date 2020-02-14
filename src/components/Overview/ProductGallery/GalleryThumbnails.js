@@ -7,7 +7,7 @@ class GalleryThumbnails extends Component {
     }
 
     renderGalleryThumbnails = () => {
-        if (this.props.thumbnails.length !== 0) {
+        if (this.props.thumbnails.length > 0) {
             let thumbnailsList = this.props.thumbnails.map((item, index) => {
                 return (
                     <ImageThumbnail 

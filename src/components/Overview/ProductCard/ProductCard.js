@@ -29,6 +29,7 @@ class ProductCard extends React.Component {
     }
 
     render() {
+        console.log('WHAT IS MY PROPS:', this.props);
         let productName;
         let productCategory;
         let avg;
