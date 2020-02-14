@@ -24,7 +24,7 @@ const ProductCarousel = props => {
   });
   return (
     
-    <div class="itemCarousel" style={{}}>
+    <div className="itemCarousel" style={{}}>
       <ItemsCarousel
         requestToChangeActive={setActiveItemIndex}
         activeItemIndex={activeItemIndex}

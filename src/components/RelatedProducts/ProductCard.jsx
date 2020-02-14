@@ -12,7 +12,7 @@ const Card = props => {
 
   let containStyles = () => {
     if (props.style !== undefined) {
-      return props.style.photos[0].url === null ? (
+      return props.style.photos[0].thumbnail_url === null ? (
         <img
           src={defaultImg}
           alt={"Loading"}
@@ -20,7 +20,7 @@ const Card = props => {
         />
       ) : (
         <img
-          src={props.style.photos[0].url}
+          src={props.style.photos[0].thumbnail_url}
           alt={"Loading"}
           // onClick={() => props.handleCardClick(props.data.id)}
         />
@@ -57,16 +57,18 @@ let renderRatings = () => {
 };
   return (
     <div className="productCard">
+      <div class="parentImg">
       <Link to={`/${props.data.id}`}>
       {containStyles()}
       </Link>
+      </div>
       <ProductModal
         cardData={props.data}
         currentProduct={props.currentProduct}
       />
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div style={{fontWeight: "bold", fontSize: "larger", margin: "2px 0px 2px 0px"}}>{props.data.name}</div>
+        <div style={{fontWeight: "bold", fontSize: "larger"}}>{props.data.name}</div>
         {renderPrice()}
         {renderRatings()}
       </div>

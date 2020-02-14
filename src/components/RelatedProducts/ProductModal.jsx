@@ -3,7 +3,7 @@ import { Button, Header, Image, Modal } from "semantic-ui-react";
 import "./ProductModal.css";
 
 
-const ModalModalExample = props => {
+const ProductModal = props => {
   let features = {};
   props.currentProduct.features.forEach(feature => {
     features[feature.feature] = {};
@@ -70,4 +70,4 @@ const ModalModalExample = props => {
   );
 };
 
-export default ModalModalExample;
+export default ProductModal;

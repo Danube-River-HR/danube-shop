@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 const OutfitCard = props => {
   let containStyles = () => {
     // console.log(props.style)
-    return props.style.photos[0].url !== null ? (
-      <img src={props.style.photos[0].url} alt={"Loading"} />
+    return props.style.photos[0].thumbnail_url !== null ? (
+      <img src={props.style.photos[0].thumbnail_url} alt={"Loading"} />
     ) : (
       <img
         src={
@@ -65,13 +65,19 @@ const OutfitCard = props => {
       >
         <i class="times circle outline icon"></i>
       </button>
-      <Link to={`/${props.data.id}`}>{containStyles()}</Link>
+      <div class="parentImg">
+        <Link to={`/${props.data.id}`}>{containStyles()}</Link>
+      </div>
       <div className="cardInfo">
         <div>{props.data.category}</div>
-        <div style={{ fontWeight: "bold", fontSize: "larger", margin: "2px 0px 2px 0px" }}>
+        <div
+          style={{
+            fontWeight: "bold",
+            fontSize: "larger"
+          }}
+        >
           {props.data.name}
         </div>
-        {/* <div>${props.data.default_price}</div> */}
         {renderPrice()}
         {renderRatings()}
       </div>

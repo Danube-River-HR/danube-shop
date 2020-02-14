@@ -4,7 +4,7 @@ import axios from "axios";
 import ProductCarousel from "./ProductCarousel";
 import OutfitCarousel from "./OutfitCarousel";
 import { Header } from "semantic-ui-react";
-import "./RelatedProducts.css"
+import "./RelatedProducts.css";
 
 class RelatedProducts extends Component {
   constructor(props) {
@@ -55,8 +55,7 @@ class RelatedProducts extends Component {
               count += review[0] * review[1];
               ratingCount += review[1];
             });
-            relatedReviews.push((count / ratingCount).toFixed(2))
-            console.log(relatedReviews,'reviews')
+            relatedReviews.push((count / ratingCount).toFixed(2));
             return data;
           })
         )
@@ -103,7 +102,10 @@ class RelatedProducts extends Component {
     ) {
       let uniqueIds = [];
       for (var value of this.props.overallData.relatedProducts) {
-        if (uniqueIds.indexOf(value) === -1) {
+        if (
+          uniqueIds.indexOf(value) === -1 &&
+          value !== this.props.overallData.currentProduct.id
+        ) {
           uniqueIds.push(value);
         }
       }
@@ -119,7 +121,6 @@ class RelatedProducts extends Component {
     }
   }
   componentDidMount() {
-    // this.setState({ currentProduct: this.props.productData });
     let outfit = JSON.parse(localStorage.getItem("outfit"));
     if (outfit !== null) {
       this.setState({
@@ -130,7 +131,7 @@ class RelatedProducts extends Component {
 
   render() {
     return (
-      <div class="relatedProductContainer">
+      <div className="relatedProductContainer">
         <div>
           <Header className="ui large header related-product-header">
             Related Products
