@@ -64,7 +64,7 @@ let renderRatings = () => {
       </div>
       <ProductModal
         cardData={props.data}
-        currentProduct={props.currentProduct}
+        currentProduct={props.currentProduct} 
       />
       <div className="cardInfo">
         <div>{props.data.category}</div>

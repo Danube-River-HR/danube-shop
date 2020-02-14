@@ -11,6 +11,7 @@
   bottom: 40%;
   font-size: 40px;
   background-color: transparent;
+  cursor: copy;
 }
 
 .addOutfitText {

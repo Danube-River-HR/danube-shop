@@ -46,7 +46,7 @@ const ProductModal = props => {
   return (
     <Modal
       trigger={
-        <Button id="modal-button">
+        <Button id="modal-button" style={{cursor: "help"}}>
           <i class="star outline icon"></i>
         </Button>
       }
