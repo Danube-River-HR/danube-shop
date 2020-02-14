@@ -1,6 +1,11 @@
-h1 {
+/* h1 {
   color: white;
   background-color: slategray;
+} */
+@font-face {
+  font-family: 'Roboto', sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+  font-display: optional;
 }
 
 #app {
@@ -12,6 +17,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.ui.huge.header {
+  min-height: 1em;
+  font-size: 3em;
+  font-family: 'Roboto', sans-serif;
+}
 
 /* ---------------------------------- Overview ------------------------------- */
 
@@ -129,6 +139,10 @@ html {
 .cart-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.cart-warning {
+  margin: 0 43px;
 }
 
 .ui.button.cart-button {
@@ -262,8 +276,8 @@ html {
 
 /* ---------------------------------- Ratings and Reviews ------------------------------- */
 .ratingsAndReviewsName {
-  margin: 20px;
-  padding: 20px;
+  margin: 20px 0;
+  padding: 20px 0px;
   /* padding-left: 200px; */
   padding-top: 40px;
   padding-bottom: 10px;
@@ -285,9 +299,22 @@ html {
   width: 100%;
   min-width: 72%;
 }
-.ratingsParent {
+/* .ratingsParent {
   margin: 5px;
   padding: 5px;
+  box-sizing: content-box;
+  flex-basis: unset;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+} */
+
+.ratingsParent {
+  margin: 0 5px 0 0;
+  padding: 0 10px 0 0;
   box-sizing: content-box;
   flex-basis: unset;
   flex-grow: 1;
@@ -296,7 +323,9 @@ html {
   display: flex;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
+
 .reviewButtons {
   padding-top: 2vh;
   padding-left: 2vh;
@@ -318,7 +347,6 @@ html {
 
 .ratingAndUser {
   padding-top: 20px;
-  padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
   font-size: medium;
@@ -373,30 +401,37 @@ html {
 }
 
 /*--------------------- Ratings --------------------*/
-
+.star-number-holder {
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  top: -13px;
+}
 .ratingsParentContainer {
   display: flex;
   justify-content: start;
   flex-direction: column;
-  width: 80%;
+  width: 100%;
 }
 .ratingDiagramParent {
   width: 105%;
 }
 .rating {
-  margin-top: 9%;
   padding-right: 20px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 500%;
   font-weight: bold;
 }
+
 .recommendPercent {
   /* margin: 10px; */
   /* padding: 10px; */
   padding-bottom: 10%;
 }
 .ratingWrapper {
-  width: 100%;
+  width: 85%;
 }
 .ratingBreakdown {
   text-decoration: underline;

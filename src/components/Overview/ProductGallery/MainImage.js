@@ -14,7 +14,6 @@ class MainImage extends Component {
 
     renderCurrentImage = () => {
         if (this.props.thumbnails.length > 0) {
-            console.log('WHAT IS MY THUMBNAILS ARRAY:', this.props.thumbnails);
             return (
                 <Img 
                 src={[this.props.thumbnails[this.props.selectedThumbnailIndex].url, `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]}

@@ -17,7 +17,6 @@ class GalleryThumbnails extends Component {
                         mainURL={item.url}
                         index={index}
                         key={index}
-                        
                         />
                 )
             });
