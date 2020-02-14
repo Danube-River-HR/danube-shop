@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import { Select, Button, Icon } from 'semantic-ui-react';
-import localStorage from 'store';
+import axios from 'axios';
 
 class SizeAndStock extends Component {
     constructor(props) {
@@ -9,13 +9,15 @@ class SizeAndStock extends Component {
         this.state = {
             selectedSize: null,
             currentProductId: null,
-            displayWarning: false
+            displayWarning: false,
+            inCart: [],
+            // newlyAddedToCart: {}
+            buttonText: "Add to Cart"
         }
     }
 
     componentDidMount() {
-        // localStorage.clearAll();
-        localStorage.set('cart', []);
+        this.fetchCart();
     }
 
     componentDidUpdate() {
@@ -23,12 +25,23 @@ class SizeAndStock extends Component {
         if (this.props.overallData.currentProduct !== undefined && this.state.currentProductId === null) {
                 this.setState({currentProductId: this.props.overallData.currentProduct.id})
         } else if (this.state.currentProductId !== null) {
-
             // When overallData.currentProduct CHANGES, RESET the localstate selectedSize and UPDATE currentProdId
             if (this.props.overallData.currentProduct.id !== this.state.currentProductId) {
-                this.setState({selectedSize: null, currentProductId: this.props.overallData.currentProduct.id})
+                this.setState({
+                    selectedSize: null, 
+                    currentProductId: this.props.overallData.currentProduct.id,
+                    buttonText: "Add to Cart"
+                })
             }
         }
+    }
+
+    fetchCart = () => {
+        let url = `http://3.134.102.30/cart/1234`;
+        axios.get(url)
+            .then(response => {
+                this.setState({inCart: response.data});
+            })
     }
 
     handleSizeSelect = (e) => {
@@ -45,15 +58,28 @@ class SizeAndStock extends Component {
         if (!this.state.selectedQuantity) {
             this.setState({displayWarning: true})
         } else {
-            let cart = localStorage.get('cart');
-
-            let newToCart = {
-                style: this.props.selectedStyle,
-                size: this.state.selectedSize,
-                quantity: this.state.selectedQuantity
-            };
-
-            localStorage.set('cart', [...cart, newToCart]);
+            let sku_idObj = {
+                XS: 0,
+                S: 1,
+                M: 2,
+                L: 3,
+                XL: 4,
+                XXL: 5
+            }
+            let url = `http://3.134.102.30/cart/`;
+            axios.post(url, {
+                user_token: 1234,
+                sku_id: sku_idObj[this.state.selectedSize]
+            })
+            .then(response => {
+                this.fetchCart();
+                // console.log('WHAT IS CART POST RESPONSE:', response);
+                // let addedSkuId = sku_idObj[this.state.selectedSize];
+                // let skuIdObj = {...this.state.newlyAddedToCart, [addedSkuId]: true}
+                // this.setState({newlyAddedToCart: skuIdObj})
+                this.setState({buttonText: "Added to Cart!"});
+            })
+            .catch(err => {console.log("Error adding to cart:", err)});
         }
     }
 
@@ -136,15 +162,18 @@ class SizeAndStock extends Component {
 
 
     render() {
+        console.log('WHAT IS LOCAL SIZE STOCK STATE:', this.state);
         return (
             <>
                 <div className="size-wrapper">
                     {this.renderSizeAndQuantityDropdown()}
                 </div>
                 <div className="cart-wrapper">
-                    <Button onClick={this.handleAddToCart} className="cart-button">Add To Cart</Button>
+                    <Button onClick={this.handleAddToCart} className="cart-button">{this.state.buttonText}</Button>
                     <Button icon className="cart-button"><Icon name="star outline"/></Button>
-                    {this.state.displayWarning ? <p>Please Pick a Size & Quantity</p> : null}
+                </div>
+                <div className="cart-warning">
+                    {this.state.displayWarning ? <p style={{color: "red"}}>Please Pick a Size & Quantity</p> : null}
                 </div>
             </>
         )

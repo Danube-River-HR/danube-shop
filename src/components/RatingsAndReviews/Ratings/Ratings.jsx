@@ -6,7 +6,7 @@ var Ratings = ({ avg, metaData, changeStarFilter, currentStarFilter }) => {
   return (
     <div className="ratingsParent">
       <div className="ratingsParentContainer">
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div className="star-number-holder">
           <div className="rating">{Number(avg).toFixed(1)}</div>
           <div className="star-ratings">
             <div className="fill-ratings" style={{ width: `${starPercent}%` }}>

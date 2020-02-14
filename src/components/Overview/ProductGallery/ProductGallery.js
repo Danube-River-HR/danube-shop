@@ -41,12 +41,13 @@ class ProductGallery extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        // If our prop loads and currentImage is empty, set a new url there.
+        // If our prop loads selectedStyle and this local state's thumbnailIndex is not set yet, apply initial index of 0
         if (this.props.selectedStyle !== null && this.state.selectedThumbnailIndex === -1) {
             this.setState({
                 thumbnails: this.props.selectedStyle.photos,
                 selectedThumbnailIndex: 0
             });
+        // If we are changing styles, set a new array of style photos and reset initial index back to 0
         } else if (this.props.selectedStyle !== null && this.state.selectedThumbnailIndex !== -1) {
             if (this.props.selectedStyle.style_id !== prevProps.selectedStyle.style_id) {
                 this.setState({
