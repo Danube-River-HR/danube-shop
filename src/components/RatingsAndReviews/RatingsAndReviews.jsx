@@ -70,8 +70,6 @@ class RatingsAndReviews extends React.Component {
             });
           });
       });
-
-    // .then(() => console.log(this.state.sorting));
   };
   /*******************************************************************************************/
 
@@ -81,7 +79,27 @@ class RatingsAndReviews extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.productData.id !== this.props.productData.id) {
-      this.getReviews(this.state.sorting);
+      let sort = this.state.sorting;
+      let count = 2;
+      axios
+        .get(
+          `http://3.134.102.30/reviews/${this.props.productData.id}/list?count=10000&sort=${sort}`
+        )
+        .then(response => {
+          axios
+            .get(
+              `http://3.134.102.30/reviews/${this.props.productData.id}/meta`
+            )
+            .then(response2 => {
+              this.setState({
+                mainData: response.data,
+                sorting: sort,
+                count: 2,
+                metaData: response2.data,
+                currentStarFilter: []
+              });
+            });
+        });
     }
   }
 
