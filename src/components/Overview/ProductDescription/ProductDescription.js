@@ -1,9 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import TextAccordion from './TextAccordion';
-import SocialMedia from './SocialMedia';
-
-
 
 const ProductDescription = ({overallData}) => {
     const renderDescription = () => {
@@ -28,8 +25,6 @@ const ProductDescription = ({overallData}) => {
         }
     }
 
-    // console.log('TESTING RENDER FEATURES:', renderFeatures())
-
     return (
         <>
             <div className="product-slogan">
@@ -37,9 +32,7 @@ const ProductDescription = ({overallData}) => {
             </div>
             <TextAccordion title="DESCRIPTION" text={renderDescription()}/>
             <TextAccordion title="FEATURES" text={renderFeatures()}/>
-
         </>
-        
     )
 }
 

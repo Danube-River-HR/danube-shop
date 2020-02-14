@@ -4,6 +4,7 @@ import Reviews from "./Reviews";
 import axios from "axios";
 import spinner from "./spinner.gif";
 
+
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
@@ -124,3 +125,5 @@ class RatingsAndReviews extends React.Component {
 }
 
 export default RatingsAndReviews;
+
+

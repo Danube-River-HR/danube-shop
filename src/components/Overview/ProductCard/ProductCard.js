@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { Rating } from 'semantic-ui-react';
 
 import Styles from './Styles';
 import SizeAndStock from './SizeAndStock';
@@ -29,7 +28,6 @@ class ProductCard extends React.Component {
     }
 
     render() {
-        console.log('WHAT IS MY PROPS:', this.props);
         let productName;
         let productCategory;
         let avg;

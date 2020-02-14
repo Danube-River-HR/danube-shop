@@ -8,7 +8,7 @@ var ReviewEntry = ({ review, addHelpful, report }) => {
   return (
     <div style={{ borderStyle: "nothing" }} className="reviewEntryParent">
       <div className="ratingAndUser">
-        <div className="star-ratings" style={{ fontSize: "120%" }}>
+        <div className="star-ratings" style={{ fontSize: "120%", height: "25px", bottom: "6px" }}>
           <div className="fill-ratings" style={{ width: `${starPercent}%` }}>
             <p className="starSpan">★★★★★</p>
           </div>

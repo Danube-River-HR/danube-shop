@@ -31,6 +31,7 @@ html {
 }
 
 /* ----- STYLE THUMBNAILS ----- */
+
 .stylename {
   display: flex;
   justify-content: center;
@@ -46,6 +47,7 @@ html {
   border-radius: 100%;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 }
 
 .thumbnail-container {
@@ -61,6 +63,7 @@ html {
 }
 
 /* ----- PRODUCT CARD TITLE ----- */
+
 .product-name {
   font-size: xx-large;
   height: 50px;
@@ -114,6 +117,8 @@ html {
   box-shadow: none;
   font-size: 1em;
   border-radius: 0;
+  overflow: auto;
+  max-height: 650px;
 }
 
 .rating-wrapper {
@@ -127,6 +132,7 @@ html {
 }
 
 /* ----- SIZE AND QUALITY ----- */
+
 .ui.selection.dropdown {
   min-width: 10em;
 }
@@ -177,6 +183,7 @@ html {
 }
 
 /* ----- PRODUCT GALLERY ----- */
+
 .gallery-container {
   display: flex;
 }
@@ -218,9 +225,13 @@ html {
 .thumbnail-wrapper {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden;
   height: 650px;
   width: 85px;
+}
+
+.thumbnail-wrapper:hover {
+  overflow: auto;
 }
 
 .arrow-child {
@@ -257,6 +268,10 @@ html {
   margin: 0.5em;
 }
 
+.accordion-title {
+  font-size: large;
+}
+
 .social-media {
   display: flex;
   justify-content: center;
@@ -271,7 +286,11 @@ html {
 }
 
 .product-slogan {
-  margin: 15px 15px 7.5px 10px;
+  margin: 20px 15px 7.5px 10px;
+}
+
+img.ril-image-current.ril__image {
+  cursor: cell;
 }
 
 /* ---------------------------------- Ratings and Reviews ------------------------------- */
@@ -350,6 +369,7 @@ html {
   display: flex;
   justify-content: space-between;
   font-size: medium;
+  height: 50px;
 }
 .reviewSummary {
   font-size: larger;
