@@ -70,7 +70,7 @@ const OutfitCard = props => {
         <Link to={`/${props.data.id}`}>{containStyles()}</Link>
       </div>
       <div className="cardInfo">
-        <div>{props.data.category}</div>
+        <div style={{padding: "5px 0 0 0"}}>{props.data.category}</div>
         <div
           style={{
             fontWeight: "bold",

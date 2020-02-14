@@ -67,7 +67,7 @@ let renderRatings = () => {
         currentProduct={props.currentProduct} 
       />
       <div className="cardInfo">
-        <div>{props.data.category}</div>
+        <div style={{padding: "5px 0 0 0"}}>{props.data.category}</div>
         <div style={{fontWeight: "bold", fontSize: "larger"}}>{props.data.name}</div>
         {renderPrice()}
         {renderRatings()}
