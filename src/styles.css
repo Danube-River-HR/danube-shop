@@ -280,7 +280,6 @@ html {
   display: flex;
   justify-content: center;
   cursor: pointer;
-  position: absolute;
   bottom: 1em;
   left: 50%;
   right: 50%;
