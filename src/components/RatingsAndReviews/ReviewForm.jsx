@@ -467,6 +467,9 @@ class ReviewForm extends Component {
                     <Image.Group size="tiny">
                       {this.state.placeholder.map(placeholder => (
                         <Image
+                          style={{
+                            boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.726)"
+                          }}
                           src={require("./placeholder.jpg")}
                           alt="https://www.pngkey.com/png/detail/395-3956030_plain-t-shirt-comments-short-sleeve-shirt-icon.png"
                         />
@@ -475,7 +478,12 @@ class ReviewForm extends Component {
                   ) : (
                     <Image.Group size="tiny">
                       {this.state.images.map(url => (
-                        <Image src={url} />
+                        <Image
+                          src={url}
+                          style={{
+                            boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.726)"
+                          }}
+                        />
                       ))}
                     </Image.Group>
                   )}
