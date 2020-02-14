@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Image, Modal } from "semantic-ui-react";
+import { Image, Modal } from "semantic-ui-react";
 
 const PictureModal = ({ url }) => (
   <Modal
@@ -8,7 +8,7 @@ const PictureModal = ({ url }) => (
     size="small"
     style={{ width: "auto" }}
   >
-    <img src={`${url}`} />
+    <img src={`${url}`} alt="" />
   </Modal>
 );
 

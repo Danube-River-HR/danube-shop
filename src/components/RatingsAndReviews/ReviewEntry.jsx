@@ -25,9 +25,9 @@ var ReviewEntry = ({ review, addHelpful, report }) => {
       <div className="reviewSummary">{review.summary}</div>
       <div className="reviewBody">{review.body}</div>
       {review.photos.length > 0 ? (
-        <Image.Group size="small">
+        <Image.Group size="small" style={{ cursor: "zoom-in" }}>
           {review.photos.map(pic => (
-            <PictureModal url={pic.url} />
+            <PictureModal key={pic.url} url={pic.url} />
           ))}
         </Image.Group>
       ) : null}
@@ -37,7 +37,7 @@ var ReviewEntry = ({ review, addHelpful, report }) => {
           ✓ I recommend this product
         </div>
       ) : null}
-      {review.response !== null ? <div>{review.response}</div> : null}
+      {review.response !== "null" ? <div>{review.response}</div> : null}
       <div className="helpfulParent">
         <div className="helpfulWord">Helpful?</div>
         <div className="yesButton" onClick={() => addHelpful(review.review_id)}>

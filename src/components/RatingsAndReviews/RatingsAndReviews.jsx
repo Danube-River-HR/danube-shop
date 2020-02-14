@@ -17,7 +17,8 @@ class RatingsAndReviews extends React.Component {
   }
   // **************************************************************************************************
   incrementCount = () => {
-    this.setState({ count: (this.state.count += 2) });
+    let count = this.state.count + 2;
+    this.setState({ count: count });
   };
 
   changeSorting = (e, data) => {
@@ -97,9 +98,7 @@ class RatingsAndReviews extends React.Component {
             <img src={spinner} />
           </div>
         ) : (
-          
           <div className="ratingsAndReviews">
-
             <Ratings
               avg={this.props.avgRating}
               metaData={this.state.metaData}
