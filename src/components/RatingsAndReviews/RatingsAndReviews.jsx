@@ -3,6 +3,7 @@ import Ratings from "./Ratings/Ratings";
 import Reviews from "./Reviews";
 import axios from "axios";
 
+
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
@@ -139,3 +140,5 @@ class RatingsAndReviews extends React.Component {
 }
 
 export default RatingsAndReviews;
+
+

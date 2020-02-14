@@ -21,8 +21,6 @@ class Styles extends Component {
                 this.props.selectStyle(this.props.overallData.productStyles.results[0]);
             }
         }
-        // console.log('SELECTED STYLE ID:', this.props.selectedStyle)
-        // console.log('SELECTED PREV STATE:', prevProps)
     }
 
     renderStyleThumbnails = () => {
@@ -68,7 +66,6 @@ class Styles extends Component {
 
                 <div className="styles-thumbnails-wrapper">
                     {this.renderStyleThumbnails()}
-    
                 </div>
             </div>
         )

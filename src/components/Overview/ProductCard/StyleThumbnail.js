@@ -21,7 +21,7 @@ class StyleThumbnail extends Component {
             } else {
                 return null;
             }
-        } 
+        }
     }
 
     render() {
@@ -29,8 +29,7 @@ class StyleThumbnail extends Component {
             <div className="thumbnail-container">
                 <Img 
                     className="style-thumbnail"
-                    src={this.props.url} 
-  
+                    src={[this.props.url, `https://www.quantabiodesign.com/wp-content/uploads/No-Photo-Available.jpg`]} 
                     onClick={this.handleStyleClick}
                     />
                                 

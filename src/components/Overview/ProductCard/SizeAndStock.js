@@ -12,7 +12,8 @@ class SizeAndStock extends Component {
             displayWarning: false,
             inCart: [],
             // newlyAddedToCart: {}
-            buttonText: "Add to Cart"
+            buttonText: "Add to Cart",
+            selectedQuantity: null
         }
     }
 
@@ -45,7 +46,10 @@ class SizeAndStock extends Component {
     }
 
     handleSizeSelect = (e) => {
-        this.setState({selectedSize: e.target.getElementsByTagName("span")[0].textContent});
+        this.setState({
+            selectedSize: e.target.getElementsByTagName("span")[0].textContent,
+            selectedQuantity: 1
+        });
     }
 
     handleQuantitySelect = (e) => {
@@ -97,7 +101,7 @@ class SizeAndStock extends Component {
               }
         } else if (selectedStyle.skus.null === null) {
             sizeToStock = {
-                "N/A": 0
+                "N/A": 5
             }
         } else {
             sizeToStock = selectedStyle.skus;
@@ -155,14 +159,17 @@ class SizeAndStock extends Component {
         return (
             <div>
                 <Select placeholder="Size" options={sizeOptions} onChange={this.handleSizeSelect}/>
-                <Select placeholder="Quantity" options={quantityOptions} onChange={this.handleQuantitySelect} />
+                <Select 
+                    placeholder={this.state.selectedQuantity ? this.state.selectedQuantity : "Quantity"} 
+                    options={quantityOptions} 
+                    onChange={this.handleQuantitySelect}
+                    />
             </div>
         )
     }
 
 
     render() {
-        console.log('WHAT IS LOCAL SIZE STOCK STATE:', this.state);
         return (
             <>
                 <div className="size-wrapper">
