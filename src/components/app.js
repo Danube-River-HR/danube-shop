@@ -67,7 +67,7 @@ class App extends React.Component {
       <>
         <Header size="huge">Danube</Header>
 
-        <Overview />
+        {/* <Overview /> */}
 
         <RelatedProducts
           productData={this.props.overallData.currentProduct}
