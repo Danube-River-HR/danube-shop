@@ -19,13 +19,7 @@ class ReviewForm extends Component {
     this.state = {
       gaveReview: 0,
       uploadCounter: 0,
-      placeholder: [
-        placeholder,
-        placeholder,
-        placeholder,
-        placeholder,
-        placeholder
-      ],
+      placeholder: [1, 2, 3, 4, 5],
       images: [],
       rateValue: "",
       recValue: "",
@@ -396,7 +390,10 @@ class ReviewForm extends Component {
                   {this.state.images.length === 0 ? (
                     <Image.Group size="tiny">
                       {this.state.placeholder.map(placeholder => (
-                        <Image src={require("./placeholder.jpg")} />
+                        <Image
+                          src={require("./placeholder.jpg")}
+                          alt="https://www.pngkey.com/png/detail/395-3956030_plain-t-shirt-comments-short-sleeve-shirt-icon.png"
+                        />
                       ))}
                     </Image.Group>
                   ) : (
