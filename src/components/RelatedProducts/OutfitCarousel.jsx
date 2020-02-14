@@ -30,16 +30,7 @@ const Carousel = props => {
     );
   });
   return (
-    // <div className="productCarousel">
-    //   <div className="productCard">
-    //     <button class="ui icon button" onClick={props.handleOutfitAddClick}>
-    //       <i class="plus square outline icon"></i>
-    //     </button>
-    //     Add to outfit
-    //   </div>
-    //   {cards}
-    // </div>
-    <div class="itemCarousel">
+    <div className="itemCarousel">
       <ItemsCarousel
         requestToChangeActive={setActiveItemIndex}
         activeItemIndex={activeItemIndex}
@@ -53,10 +44,10 @@ const Carousel = props => {
         chevronWidth={chevronWidth}
       >
         <div className="productCard">
-          <button id="addOutfit" class="ui icon button" onClick={props.handleOutfitAddClick}>
-            <i class="plus square outline icon"></i>
+          <button id="addOutfit" className="ui icon button" onClick={props.handleOutfitAddClick}>
+            <i className="plus square outline icon"></i>
           </button>
-          <div class="addOutfitText">Add to outfit</div>
+          <div className="addOutfitText">Add to outfit</div>
         </div>
         {cards}
       </ItemsCarousel>
