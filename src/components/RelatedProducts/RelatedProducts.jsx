@@ -83,6 +83,7 @@ class RelatedProducts extends Component {
       this.setState({
         outfit: outfit
       });
+      localStorage.setItem("outfit", JSON.stringify(outfit));
     }
   };
   handleOutfitRemoveClick = e => {
