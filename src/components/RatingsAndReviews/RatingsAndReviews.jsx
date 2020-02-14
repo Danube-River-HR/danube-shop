@@ -2,7 +2,6 @@ import React from "react";
 import Ratings from "./Ratings/Ratings";
 import Reviews from "./Reviews";
 import axios from "axios";
-import spinner from "./spinner.gif";
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -81,7 +80,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.productData.id != this.props.productData.id) {
+    if (prevProps.productData.id !== this.props.productData.id) {
       this.getReviews(this.state.sorting);
     }
   }
@@ -91,13 +90,11 @@ class RatingsAndReviews extends React.Component {
     return (
       <div>
         <div>
-          <div className="ratingsAndReviewsName" id="main-product-rating">Ratings & Reviews</div>
-        </div>
-        {Object.entries(this.state.mainData).length === 0 ? (
-          <div>
-            <img src={spinner} />
+          <div className="ratingsAndReviewsName" id="main-product-rating">
+            Ratings & Reviews
           </div>
-        ) : (
+        </div>
+        {Object.entries(this.state.mainData).length === 0 ? null : (
           <div className="ratingsAndReviews">
             <Ratings
               avg={this.props.avgRating}

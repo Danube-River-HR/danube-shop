@@ -53,7 +53,9 @@ var Reviews = ({
           <button onClick={addTwo} class="ui secondary basic button">
             More Reviews
           </button>
-        ) : null}
+        ) : (
+          <div style={{ width: "15.7%" }}></div>
+        )}
 
         <ReviewModal
           productName={productName}
