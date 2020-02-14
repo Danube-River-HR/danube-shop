@@ -62,6 +62,7 @@ const OutfitCard = props => {
         id="outfit-button"
         class="ui icon button"
         onClick={() => props.removeClick(props.data)}
+        style={{cursor: "not-allowed"}}
       >
         <i class="times circle outline icon"></i>
       </button>
