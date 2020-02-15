@@ -32,7 +32,8 @@ npm run test
 
 👤 **Gabriel Ng, John Lee, Mantas Ivaskevicius**
 
-* Github: [@gabrieln715, johncyprus, MantasIK](https://github.com/gabrieln715, johncyprus, MantasIK)
+* Github: [@gabrieln715, @johncyprus, @MantasIK]
+(https://github.com/gabrieln715, https://github.com/johncyprus, https://github.com/MantasIK)
 
 ## Show your support
 
