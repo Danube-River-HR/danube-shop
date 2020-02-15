@@ -1,6 +1,9 @@
 {
   "name": "danube-greenfield2",
   "version": "0.1.0",
+  "description": "Hack Reactor Front End Captone by team Danube. A single-page, e-commerce web application that utilizes front-end techniques and technologies to interact with an external API.",
+  "authors": "Gabriel Ng, John Lee, Mantas Ivaskevicius",
+  "homepage": "https://github.com/Danube-River-HR/project-greenfield2",
   "private": true,
   "dependencies": {
     "@brainhubeu/react-carousel": "^1.10.62",
