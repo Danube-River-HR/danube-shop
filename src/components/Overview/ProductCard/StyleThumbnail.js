@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import Img from 'react-image';
 
 import {selectStyle} from '../../../redux/actions/index';
