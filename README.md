@@ -19,7 +19,7 @@ npm install
 This project makes use of the Filestack external api for certail review features.
 Register at https://www.filestack.com/ and after receiving your api key place it
 inside the APIkey_example.js which can be found under src/components/RatingsAndReviews.
-Rename APIkey_example.js to APIkey,js and you;re ready to go!
+Rename APIkey_example.js to APIkey.js and you're ready to go!
 
 ## Usage
 
