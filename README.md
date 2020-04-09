@@ -6,9 +6,7 @@
   </a>
 </p>
 
-> &#34;Hack Reactor Front End Captone by team Danube. A single-page, e-commerce web application that utilizes front-end techniques and technologies to interact with an external API.&#34;
-
-### 🏠 [Homepage](https://github.com/Danube-River-HR/project-greenfield2)
+> &#34;A single-page, e-commerce web application that utilizes front-end techniques and technologies to interact with an external API.&#34;
 
 ## Install
 
