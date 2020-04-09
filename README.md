@@ -38,7 +38,4 @@ npm run test
 * Github: [@gabrieln715, @johncyprus, @MantasIK]
 (https://github.com/gabrieln715, https://github.com/johncyprus, https://github.com/MantasIK)
 
-## Show your support
-
-Give a ⭐️ if this project helped you!
 
