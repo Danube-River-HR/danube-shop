@@ -11,7 +11,7 @@
 ![image of overview](./preview/Overview.gif)
 
 
-![image of overall](./preview.Overall.gif)
+![image of overall](./preview/Overall.gif)
 
 ## Install
 
