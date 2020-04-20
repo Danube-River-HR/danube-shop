@@ -8,7 +8,10 @@
 
 > &#34;A single-page, e-commerce web application that utilizes front-end techniques and technologies to interact with an external API.&#34;
 
-![image of preview](./preview/Greenfield-Overview.gif)
+![image of overview](./preview/Overview.gif)
+
+
+![image of overall](./preview.Overall.gif)
 
 ## Install
 
