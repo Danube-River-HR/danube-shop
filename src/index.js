@@ -9,7 +9,7 @@ import {
   Route,
   Redirect,
   Switch,
-  BrowserRouter as Router
+  BrowserRouter as Router,
 } from "react-router-dom";
 
 var mountNode = document.getElementById("app");
@@ -17,11 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <Redirect to="/1" />}
-        />
+        <Route exact path="/" render={() => <Redirect to="/1" />} />
         <Route path="/:id" children={<App />} />
       </Switch>
     </Router>
