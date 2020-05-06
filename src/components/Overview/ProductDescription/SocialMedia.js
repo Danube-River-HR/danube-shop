@@ -1,46 +1,10 @@
 import React, { Component } from "react";
-import { Button } from "semantic-ui-react";
 import {
-  EmailShareButton,
   FacebookShareButton,
-  InstapaperShareButton,
-  LineShareButton,
-  LinkedinShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  OKShareButton,
   PinterestShareButton,
-  PocketShareButton,
-  RedditShareButton,
-  TelegramShareButton,
-  TumblrShareButton,
   TwitterShareButton,
-  ViberShareButton,
-  VKShareButton,
-  WhatsappShareButton,
-  WorkplaceShareButton
 } from "react-share";
-import {
-  EmailIcon,
-  FacebookIcon,
-  InstapaperIcon,
-  LineIcon,
-  LinkedinIcon,
-  LivejournalIcon,
-  MailruIcon,
-  OKIcon,
-  PinterestIcon,
-  PocketIcon,
-  RedditIcon,
-  TelegramIcon,
-  TumblrIcon,
-  TwitterIcon,
-  ViberIcon,
-  VKIcon,
-  WeiboIcon,
-  WhatsappIcon,
-  WorkplaceIcon
-} from "react-share";
+import { FacebookIcon, PinterestIcon, TwitterIcon } from "react-share";
 
 class SocialMedia extends Component {
   constructor(props) {
@@ -52,9 +16,6 @@ class SocialMedia extends Component {
   render() {
     return (
       <>
-        {/* <Button circular color='facebook' icon='facebook' />
-                 <Button circular color='twitter' icon='twitter' />
-                 <Button circular color='pinterest' icon='pinterest' /> */}
         <FacebookShareButton
           url="http://3.136.27.91:3000/"
           title="Check out this amazing clothing store!"

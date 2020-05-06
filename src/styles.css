@@ -1,10 +1,6 @@
-/* h1 {
-  color: white;
-  background-color: slategray;
-} */
 @font-face {
-  font-family: 'Roboto', sans-serif;
-  src: url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+  font-family: "Roboto", sans-serif;
+  src: url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
   font-display: optional;
 }
 
@@ -20,7 +16,7 @@ html {
 .ui.huge.header {
   min-height: 1em;
   font-size: 3em;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .btn {
   background-color: transparent;
@@ -207,8 +203,8 @@ html {
   justify-content: center;
   width: 100%;
   height: 100%;
-  border: 1.5px solid rgba(34,36,38,.15);
-  border-radius: .28571429rem;
+  border: 1.5px solid rgba(34, 36, 38, 0.15);
+  border-radius: 0.28571429rem;
 }
 
 .image-child {
@@ -304,7 +300,6 @@ img.ril-image-current.ril__image {
 .ratingsAndReviewsName {
   margin: 20px 0;
   padding: 20px 0px;
-  /* padding-left: 200px; */
   padding-top: 40px;
   padding-bottom: 10px;
   font-size: x-large;
@@ -325,18 +320,6 @@ img.ril-image-current.ril__image {
   width: 100%;
   min-width: 72%;
 }
-/* .ratingsParent {
-  margin: 5px;
-  padding: 5px;
-  box-sizing: content-box;
-  flex-basis: unset;
-  flex-grow: 1;
-  width: 100%;
-  max-width: 80%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-} */
 
 .ratingsParent {
   margin: 0 5px 0 0;
@@ -345,7 +328,6 @@ img.ril-image-current.ril__image {
   flex-basis: unset;
   flex-grow: 1;
   width: 100%;
-  /* max-width: 80%; */
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -453,8 +435,6 @@ img.ril-image-current.ril__image {
 }
 
 .recommendPercent {
-  /* margin: 10px; */
-  /* padding: 10px; */
   padding-bottom: 10%;
 }
 .ratingWrapper {

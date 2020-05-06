@@ -1,53 +1,28 @@
-/* ----- DEPENDENCIES ----- */
+/* ----- Dependencies ----- */
 import React from "react";
 import { Header } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
-/* ----- ACTIONS ----- */
-
+/* ----- Actions ----- */
 import { fetchAllProductData } from "../redux/actions";
-
-/* ----- COMPONENTS ----- */
-
+/* ----- Components ----- */
 import Overview from "./Overview/Overview.js";
 import RatingsAndReviews from "./RatingsAndReviews/RatingsAndReviews";
-
-/***************************************************************************/
 
 class App extends React.Component {
   constructor() {
     super();
-
-    // this.state = {
-    //   currentProductId: 1
-    // };
-
-    // let { id } = useParams();
-    // console.log(id,'id');
   }
 
-  // handleCardClick = e => {
-  //   let id = this.props.match.params.id
-  //   console.log(id,'id');
-
-  //   this.setState(
-  //     {
-  //       currentProductId: id
-  //     },
-  //     () => {
-  //       this.updateProduct(this.state.currentProductId);
-  //     }
-  //   );
-  // };
-
-  updateProduct = id => {
+  updateProduct = (id) => {
     this.props.fetchAllProductData(id);
   };
 
   componentDidMount() {
     this.updateProduct(this.props.match.params.id);
   }
+
   componentDidUpdate(prevProps) {
     if (Object.entries(prevProps.overallData).length > 0 && this.props) {
       if (
@@ -90,12 +65,12 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    overallData: state.overallData
+    overallData: state.overallData,
   };
 }
 
 export default withRouter(
   connect(mapStateToProps, {
-    fetchAllProductData
+    fetchAllProductData,
   })(App)
 );
